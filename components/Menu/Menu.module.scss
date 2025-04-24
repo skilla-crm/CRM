@@ -1,0 +1,265 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 250px;
+    height: 100vh;
+    max-height: 100vh;
+    background-color: #091336;
+    padding: 20px 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    z-index: 6;
+    position: relative;
+ 
+
+}
+
+.overlay {
+    position: absolute;
+    z-index: 7;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.25s ease-in-out;
+    border-right: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(9, 19, 54, 0.50);
+    opacity: 0;
+    visibility: hidden;
+
+    &_open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    margin-right: 16px;
+
+    &_small {
+        position: absolute;
+        top: 12px;
+        right: 8px;
+    }
+}
+
+.header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.profile {
+    position: relative;
+    width: 1fr;
+    margin: 12px 12px 12px 0;
+    padding: 12px 8px 12px 20px;
+    background-color: rgba(255, 255, 255, 0.10);
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+        height: 112px;
+        width: auto;
+        background-size: contain;
+    }
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: #ECECEC;
+}
+
+.name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.company {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.date {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    color: #A6B1BC;
+}
+
+.button {
+    &_pro {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        height: 40px;
+        background-color: #C4CEFF;
+        border-radius: 4px;
+        color: #002CFB;
+        transition: all 0.15s ease-in-out;
+        cursor: pointer;
+
+        p {
+            font-size: 14px !important;
+            font-weight: 500;
+            line-height: 140%;
+            transition: all 0.15s ease-in-out;
+        }
+
+        svg path {
+            transition: all 0.15s ease-in-out;
+        }
+
+        &:hover {
+            background-color: #002CFB;
+
+            p {
+                color: #FFF;
+            }
+
+            svg path {
+                stroke: #FFF;
+            }
+        }
+    }
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 4px;
+    width: 100%;
+    height: 100%;
+    max-height: calc(100% - 402px);
+    flex-shrink: 0;
+    overflow: hidden;
+    min-width: 100%;
+    margin: 0;
+    position: relative;
+
+    &_maxheight2 {
+        max-height: calc(100% - 460px);
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 4px;
+    padding-bottom: 52px;
+}
+
+.link {
+    width: calc(100% - 12px);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 8px 8px 20px;
+    margin-right: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 0.56);
+    border-radius: 0px 4px 4px 0px;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+
+    svg path {
+        transition: all 0.15s ease-in-out;
+    }
+
+    &:hover {
+        background-color: #222B4A;
+        color: #FFF;
+
+        svg path {
+            fill: #FFF;
+        }
+    }
+
+    &_active {
+        background-color: #222B4A;
+        color: #FFF;
+
+        svg path {
+            fill: #FFF;
+        }
+    }
+
+    &_list {
+        position: relative;
+
+    }
+
+    &_sub {
+        padding-left: 50px;
+        flex-shrink: 0;
+    }
+}
+
+.arrow {
+    margin-left: auto;
+    transition: all 0.2s ease-in-out;
+
+    &_up {
+        transform: rotate(180deg);
+    }
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    /*    visibility: hidden; */
+    transition: all 0.2s ease-in-out;
+
+    &_open {
+        max-height: 258px;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+

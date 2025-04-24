@@ -1,0 +1,159 @@
+.root {
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+}
+
+.copy {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #ADBFDF;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover {
+        color: #fff;
+
+        svg path {
+            transition: all 0.15s;
+            fill: #fff;
+        }
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+
+    transition: all 0.15s;
+
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        color: #ADBFDF;
+    }
+
+    &:hover {
+        p {
+            transition: all 0.2s;
+            color: #fff;
+        }
+
+        svg path {
+            transition: all 0.2s;
+            fill: #fff;
+        }
+    }
+
+    &_active {
+        p {
+            transition: all 0.2s;
+            color: #fff;
+        }
+
+        svg path {
+            transition: all 0.2s;
+            fill: #fff;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.list {
+    position: absolute;
+    overflow: hidden;
+    top: 24px;
+    width: 100%;
+    max-height: 0;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid #ffffff00;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 3;
+    background: #091336;
+
+    &_open {
+        border: 1px solid #FFF;
+        max-height: 242px;
+        /* min-height: 40px; */
+    }
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: all 0.15s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.10);
+    }
+}
+
+.left {
+    width: calc(100% - 44px);
+    flex-shrink: 40;
+    height: 58px;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+
+
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+
+    span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14px;
+        color: #71869D;
+    }
+}
+
+.bottom {
+    position: relative;
+}
+
+.save {
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.15s;
+
+    &_vis {
+        opacity: 1;
+    }
+}
+
+.arrow {
+    flex-shrink: 0;
+    transition: all 0.2s ease-in-out;
+
+    &_up {
+        transform: rotate(180deg);
+    }
+}
