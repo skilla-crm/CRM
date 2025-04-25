@@ -15,7 +15,5 @@ export default async function Orders() {
     </div>
 
 
-
-
   );
 }
