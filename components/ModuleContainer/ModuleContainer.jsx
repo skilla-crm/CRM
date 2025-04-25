@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from "react";
 
-const ModuleContainer = ({ src, srcCss, id }) => {
+export const ModuleContainer = ({ src, srcCss, id }) => {
   console.log('монтировался')
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ModuleContainer = ({ src, srcCss, id }) => {
       if (script.parentNode) {
         document?.body?.removeChild(script);
       }
-      
+
       if (link.parentNode) {
         document?.head?.removeChild(link);
       }
@@ -36,4 +36,4 @@ const ModuleContainer = ({ src, srcCss, id }) => {
   )
 };
 
-export default ModuleContainer;
+/* export default ModuleContainer; */

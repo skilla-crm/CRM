@@ -1,6 +1,11 @@
 
 import { cookies } from 'next/headers'
-import ModuleContainer from "@/components/ModuleContainer/ModuleContainer";
+import dynamic from 'next/dynamic'
+
+const DynamicModuleContainer = dynamic(() =>
+  import('@/components/ModuleContainer/ModuleContainer')
+    .then((module) => module.ModuleContainer)
+)
 
 export default async function Orders() {
   const cookieStore = await cookies()

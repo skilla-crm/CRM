@@ -4,6 +4,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: #f1f4f9;
 }
 
 
@@ -206,6 +207,8 @@ textarea {
   /* 2 */
 }
 
+
+
 /* Interactive
    ========================================================================== */
 
@@ -259,6 +262,7 @@ template {
   }
 }
 
+
 .ScrollbarsCustom-Track:has(.dragging) {
   width: 7px !important;
 }
@@ -268,7 +272,7 @@ template {
 }
 
 .ScrollbarsCustom-Content {
-  width: 100%;
+  width: 100% !important;
   display: flex;
   flex-direction: column;
   gap: 4px;
