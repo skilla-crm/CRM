@@ -11,7 +11,7 @@ import settings from '@/public/icons/menu/settings.svg'
 
 
 export const menuItem = [
-    { id: 1, name: 'Дашборд', icon: dashbord, link: 'https://lk.skilla.ru/director/' },
+    { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
     { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublink: 'order_detail' },
     {
         id: 3,
