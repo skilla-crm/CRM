@@ -14,13 +14,8 @@ export default async function Orders() {
   const ispro = cookieStore.get('ispro')
 
   return (
-
     <div id="root_list_workers" ispro={ispro?.value} role={role?.value} token={token?.value}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_WORKERS}  srcCss={process.env.REACT_APP_URL_WORKERS_CSS} id={'workers-page'}/>
     </div>
-
-
-
-
   );
 }

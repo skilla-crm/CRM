@@ -5,7 +5,7 @@ import s from './Iframe.module.scss'
 import classNames from 'classnames'
 
 const Iframe = ({ src, id }) => {
-    
+
     const [load, setLoad] = useState(true)
 
     const handleLoad = () => {
@@ -13,7 +13,12 @@ const Iframe = ({ src, id }) => {
     }
     return (
         <div className={classNames(s.window, !load && s.window_anim)}>
-            <iframe className={s.iframe} src={src} id={id} onLoa onLoadStart={handleLoad} onLoad={handleLoad}></iframe>
+            <iframe
+                className={s.iframe}
+                src={src}
+                id={id}
+                onLoad={handleLoad}
+            ></iframe>
         </div>
 
     );

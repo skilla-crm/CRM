@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/app/actions';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
 import s from './Menu.module.scss';
 import Link from 'next/link';
@@ -20,9 +21,10 @@ import CompanyProfile from '../CompanyProfile/CompanyProfile';
 
 const Menu = () => {
     const path = usePathname();
+    const router = useRouter()
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false)
     const refProfie = useRef()
-    console.log(refProfie)
+    console.log(path)
 
     const handleOpenCompanyProfile = () => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
@@ -93,6 +95,8 @@ const Menu = () => {
                                 id={el.id}
                                 key={el.id}
                                 href={el.link}
+                                onClick={() => {path === el.link ? router.push('/orders') : null }}
+
                                 className={classNames(s.link,
                                     (path === el.link || (el.sublink && path.includes(el.sublink)))
 

@@ -44,7 +44,7 @@ export const menuItem = [
     },
 
 
-    { id: 5, name: 'Банк', icon: bank, link: 'https://lk.skilla.ru/payments/' },
+    { id: 5, name: 'Банк', icon: bank, link: '/payments' },
 
     {
         id: 6,
@@ -52,7 +52,7 @@ export const menuItem = [
         icon: report,
         link: '/clients',
         submenu: [
-            { id: 1, name: 'Итоги компании', link: '/results' },
+            { id: 1, name: 'Итоги компании', link: '/company-results' },
             { id: 2, name: 'Звонки', link: '/calls' },
             { id: 3, name: 'Уведомления', link: '/notifications' },
             { id: 4, name: 'События', link: '/logs' },

@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 
 export const ModuleContainer = ({ src, srcCss, id }) => {
-  console.log('монтировался')
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -35,5 +34,3 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
   )
 };
-
-/* export default ModuleContainer; */

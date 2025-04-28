@@ -6,10 +6,6 @@ export default async function Сounterparties() {
   const id = 'root_counterparties'
 
   return (
-
     <Iframe src={src} id={id}/>
-
-
-
   );
 }

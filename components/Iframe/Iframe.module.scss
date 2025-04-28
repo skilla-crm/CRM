@@ -1,5 +1,6 @@
 .window {
-    width: calc(100% + 240px);
+    width: calc(100%);
+    overflow: hidden;
     height: 100vh;
     position: relative;
     opacity: 0;
@@ -13,8 +14,9 @@
 .iframe {
     position: absolute;
     left: -242px;
-    top: 0;
-    width: 100%;
-    height: calc(100%);
+    top: -65px;
+    width: calc(100% + 240px);
+    height: calc(100% + 64px);
     overflow: hidden;
+    border: none;
 }
