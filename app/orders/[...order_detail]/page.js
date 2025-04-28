@@ -9,7 +9,7 @@ const DynamicModuleContainer = dynamic(() =>
 )
 
 export default async function Orders() {
-  revalidatePath('/', 'layout')
+  revalidatePath('/orders')
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')

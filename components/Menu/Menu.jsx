@@ -18,13 +18,17 @@ import { menuItem } from '@/constants/menu';
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 
+ 
+
+
 
 const Menu = () => {
     const path = usePathname();
     const router = useRouter()
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false)
     const refProfie = useRef()
-    console.log(path)
+   
+    console.log(window.location, path)
 
     const handleOpenCompanyProfile = () => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
@@ -95,8 +99,11 @@ const Menu = () => {
                                 id={el.id}
                                 key={el.id}
                                 href={el.link}
-                                onClick={() => {path === el.link ? router.push('/orders') : null }}
-
+                               /*  onClick={() => el.link === '/orders' ? 
+                                    history.pushState(null, null, '/orders') 
+                                    : 
+                                    null
+                                } */
                                 className={classNames(s.link,
                                     (path === el.link || (el.sublink && path.includes(el.sublink)))
 
