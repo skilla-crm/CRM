@@ -17,7 +17,7 @@ export const menuItem = [
         id: 3,
         name: 'Контрагенты',
         icon: counterparties,
-        link: 'https://lk.skilla.ru/clients/',
+        link: '/counterparties',
 
         /* submenu: [
             { id: 1, name: 'Все заказчики', link: 'https://lk.skilla.ru/clients/' },
@@ -54,14 +54,14 @@ export const menuItem = [
         submenu: [
             { id: 1, name: 'Итоги компании', link: '/results' },
             { id: 2, name: 'Звонки', link: '/calls' },
-            { id: 3, name: 'Уведомления', link: '/logs' },
-            { id: 4, name: 'События', link: 'https://lk.skilla.ru/logs/' },
+            { id: 3, name: 'Уведомления', link: '/notifications' },
+            { id: 4, name: 'События', link: '/logs' },
            
         ]
     },
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: '?purchase' },
     { id: 8, name: 'Поддержка', icon: support, link: '/support' },
-    { id: 9, name: 'Настройки', icon: settings, link: 'https://lk.skilla.ru/director/settings/' },
+    { id: 9, name: 'Настройки', icon: settings, link: '/settings' },
 
 ]

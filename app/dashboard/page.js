@@ -1,18 +1,15 @@
 
-import { cookies } from 'next/headers'
 import Iframe from '@/components/Iframe/Iframe'
 
 export default async function Orders() {
-  const cookieStore = await cookies()
-  const token = cookieStore.get('token')
-  const role = cookieStore.get('role')
-  const ispro = cookieStore.get('ispro')
+  const src = process.env.REACT_APP_URL_DASHBOARD;
+  const id = 'root_dashboard'
 
   return (
-    
-      <Iframe/>
-   
-    
+
+    <Iframe src={src} id={id}/>
+
+
 
   );
 }

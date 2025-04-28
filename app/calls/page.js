@@ -1,20 +1,24 @@
-
 import { cookies } from 'next/headers'
-import ModuleContainer from "@/components/ModuleContainer/ModuleContainer";
+import dynamic from 'next/dynamic'
 
-export default async function Orders() {
+const DynamicModuleContainer = dynamic(() =>
+  import('@/components/ModuleContainer/ModuleContainer')
+    .then((module) => module.ModuleContainer)
+)
+
+
+export default async function Calls() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
+  const id = 'root_calls'
 
   return (
 
-    <div id="root_orders_dir" ispro={ispro?.value} role={role?.value} token={token?.value}>
-      <ModuleContainer src={process.env.REACT_APP_URL_ORDERS}  srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={'orders-page'}/>
+    <div id={id} ispro={ispro?.value} role={role?.value} token={token?.value}>
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_CALLS} srcCss={process.env.REACT_APP_URL_RECON_CALLS} id={id} />
     </div>
-
-
 
 
   );
