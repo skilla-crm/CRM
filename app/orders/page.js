@@ -8,12 +8,10 @@ const DynamicModuleContainer = dynamic(() =>
 )
 
 export default async function Orders() {
-
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
-  console.log(token, role, ispro)
 
   return (
 

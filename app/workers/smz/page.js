@@ -7,7 +7,7 @@ const DynamicModuleContainer = dynamic(() =>
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Orders() {
+export default async function Smz() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
