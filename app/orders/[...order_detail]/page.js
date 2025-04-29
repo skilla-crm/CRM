@@ -1,7 +1,6 @@
 
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
-import { revalidatePath } from 'next/cache'
 
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
@@ -9,7 +8,6 @@ const DynamicModuleContainer = dynamic(() =>
 )
 
 export default async function Orders() {
-  revalidatePath('/orders')
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')

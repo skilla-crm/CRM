@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
+import useSWR from 'swr'
+import { useCookies } from 'next-client-cookies';
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/app/actions';
 import { usePathname } from 'next/navigation';
@@ -12,23 +14,25 @@ import cat from '@/public/images/cat.jpg';
 import ProfileLogo from '@/public/icons/profileLogo.svg';
 import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
-
 import { menuItem } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
-
- 
-
-
+import { fetchWithToken } from '@/app/api/api';
+const urlMenu = `https://api2.skilla.ru/api/menu`
 
 const Menu = () => {
-    const path = usePathname();
     const router = useRouter()
+    const cookies = useCookies();
+    const token = cookies.get('token')
+    const { data: menuData } = useSWR(urlMenu, url => fetchWithToken(url, token))
+    const path = usePathname();
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false)
     const refProfie = useRef()
-   
-    console.log(window.location, path)
+    const user = menuData?.user;
+    const company = menuData?.partnership;
+    console.log(company)
+
 
     const handleOpenCompanyProfile = () => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
@@ -68,23 +72,28 @@ const Menu = () => {
                 <div onClick={handleOpenCompanyProfile} className={s.profile}>
                     <ProfileLogo className={s.logo_small} />
                     <div className={s.avatar}>
-                        <Image src={cat} alt='аватар пользователя' />
+                        <img src={user?.avatar !== ''
+                            ? `https://lk.skilla.ru/images/persons/chat/${user?.avatar}`
+                            :
+                            cat} alt='аватар пользователя' />
                     </div>
 
                     <div className={s.block}>
-                        <p className={s.name}>Константин</p>
-                        <p className={s.company}>Все компании</p>
+                        <p className={s.name}>{user?.name}</p>
+                        <p className={s.company}>{company?.name}</p>
                     </div>
 
                     <p className={s.date}>Пятница, 14 февраля</p>
 
-                    <button onMouseEnter={(e) => {
+                    {company?.is_pro === 1 && <button onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
-                    }} className={s.button_pro}>
+                        router.push('/pay')
+                    }} className={s.button_pro}
+                    >
                         <IconLightning />
                         <p>Повысить до PRO</p>
-                    </button>
+                    </button>}
 
 
                 </div>
@@ -99,11 +108,11 @@ const Menu = () => {
                                 id={el.id}
                                 key={el.id}
                                 href={el.link}
-                               /*  onClick={() => el.link === '/orders' ? 
-                                    history.pushState(null, null, '/orders') 
-                                    : 
-                                    null
-                                } */
+                                /*  onClick={() => el.link === '/orders' ? 
+                                     history.pushState(null, null, '/orders') 
+                                     : 
+                                     null
+                                 } */
                                 className={classNames(s.link,
                                     (path === el.link || (el.sublink && path.includes(el.sublink)))
 
