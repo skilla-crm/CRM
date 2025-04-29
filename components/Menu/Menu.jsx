@@ -31,7 +31,7 @@ const Menu = () => {
     const refProfie = useRef()
     const user = menuData?.user;
     const company = menuData?.partnership;
-    console.log(company)
+    console.log(cookies)
 
 
     const handleOpenCompanyProfile = () => {

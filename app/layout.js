@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import { CookiesProvider } from 'next-client-cookies/server';
 import "./globals.scss";
 import s from './layout.module.scss';
 //components
@@ -15,18 +16,20 @@ const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 
 export default async function RootLayout({ children }) {
 
   return (
-    <html lang="ru">
+    <CookiesProvider>
+      <html lang="ru">
 
-      <body className={inter.className}>
+        <body className={inter.className}>
 
-        <main className={s.main}>
-          <Menu />
-          <div className={s.container}>
-            {children}
-          </div>
-        </main>
+          <main className={s.main}>
+            <Menu />
+            <div className={s.container}>
+              {children}
+            </div>
+          </main>
 
-      </body>
-    </html>
+        </body>
+      </html>
+    </CookiesProvider>
   );
 }
