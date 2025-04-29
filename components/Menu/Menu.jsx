@@ -11,6 +11,7 @@ import s from './Menu.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import cat from '@/public/images/cat.jpg';
+import logo from '@/public/images/skilla.png';
 import ProfileLogo from '@/public/icons/profileLogo.svg';
 import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
@@ -31,7 +32,7 @@ const Menu = () => {
     const refProfie = useRef()
     const user = menuData?.user;
     const company = menuData?.partnership;
-    console.log(cookies)
+    console.log(menuData, token)
 
 
     const handleOpenCompanyProfile = () => {
@@ -65,7 +66,14 @@ const Menu = () => {
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
 
                 <div className={s.header}>
-                    <img className={s.logo} src={`https://lk.skilla.ru/documents/brands/35/logo_new.png`} />
+                    {company?.brand_type === 0 ?
+                        <Image className={s.logo} src={logo}></Image>
+                        :
+                        <img className={s.logo}
+                            src={`https://lk.skilla.ru/documents/brands/${company?.brand_type}/logo_new.png`}
+                        />
+                    }
+
                 </div>
 
 
@@ -85,7 +93,7 @@ const Menu = () => {
 
                     <p className={s.date}>Пятница, 14 февраля</p>
 
-                    {company?.is_pro === 1 && <button onClick={(e) => {
+                    {company?.is_pro === 0 && <button onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
                         router.push('/pay')
@@ -126,7 +134,7 @@ const Menu = () => {
                     </div>
 
                 </Scrollbar>
-                <FunctionBlock />
+                <FunctionBlock company={company} />
             </div>
         </>
 

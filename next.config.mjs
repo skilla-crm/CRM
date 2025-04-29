@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    basePath: '/new',
     reactStrictMode: true,
     webpack(config) {
         config.module.rules.push({
@@ -7,9 +8,9 @@ const nextConfig = {
             use: ['@svgr/webpack'],
         },
         );
-
         return config;
     },
 };
+
 
 export default nextConfig;
