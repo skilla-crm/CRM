@@ -10,7 +10,7 @@ export default async function CreateOrder() {
 
   return (
 
-    <div id="root_order-create" ispro={ispro.value} role={role.value} token={token.value}>
+    <div id="root_order-create" ispro={ispro.value} role={role.value} token={`Bearer ${token?.value}`}>
       <ModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={'create-page'}/>
     </div>
 

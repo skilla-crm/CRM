@@ -15,7 +15,7 @@ export default async function Orders() {
   const id = 'root_company-results'
 
   return (
-    <div id={id} ispro={ispro?.value} role={role?.value} token={token?.value}>
+    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_RESULT}  srcCss={process.env.REACT_APP_URL_RESULT_CSS} id={id}/>
     </div>
   );

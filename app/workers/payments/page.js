@@ -15,7 +15,7 @@ export default async function Orders() {
 
   return (
 
-    <div id="root_payments" ispro={ispro?.value} role={role?.value} token={token?.value}>
+    <div id="root_payments" ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_PAYMENTS}  srcCss={process.env.REACT_APP_URL_PAYMENTS_CSS} id={'payments-page'}/>
     </div>
 

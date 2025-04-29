@@ -26,7 +26,7 @@ const Menu = () => {
     const router = useRouter()
     const cookies = useCookies();
     const token = cookies.get('token')
-    const { data: menuData } = useSWR(urlMenu, url => fetchWithToken(url, token))
+    const { data: menuData } = useSWR(urlMenu, url => fetchWithToken(url, `Bearer ${token}`))
     const path = usePathname();
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false)
     const refProfie = useRef()

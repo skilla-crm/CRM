@@ -14,7 +14,7 @@ export default async function Orders() {
   const ispro = cookieStore.get('ispro')
 
   return (
-    <div id="root_smz" ispro={ispro?.value} role={role?.value} token={token?.value}>
+    <div id="root_smz" ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_SMZ}  srcCss={process.env.REACT_APP_URL_SMZ_CSS} id={'smz-page'}/>
     </div>
   );

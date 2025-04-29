@@ -13,11 +13,11 @@ export default async function Orders() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
-  console.log(cookieStore)
+  console.log(token, role, ispro)
 
   return (
 
-    <div id="root_orders_dir" ispro={ispro?.value} role={role?.value} token={token?.value}>
+    <div id="root_orders_dir" ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={'orders-page'} />
     </div>
 
