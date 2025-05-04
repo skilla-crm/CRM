@@ -9,10 +9,9 @@
     padding: 20px 0;
     flex-shrink: 0;
     box-sizing: border-box;
-    z-index: 6;
+    z-index: 26;
     position: relative;
- 
-
+    overflow: hidden;
 }
 
 .overlay {
@@ -68,7 +67,7 @@
     gap: 12px;
     cursor: pointer;
     flex-shrink: 0;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.25s ease-in-out;
 
     &:hover {
         background-color: rgba(255, 255, 255, 0.15);
@@ -170,7 +169,7 @@
     gap: 4px;
     width: 100%;
     height: 100%;
-    max-height: calc(100% - 402px);
+    max-height: calc(100% - 368px);
     flex-shrink: 0;
     overflow: hidden;
     min-width: 100%;
@@ -178,7 +177,12 @@
     position: relative;
 
     &_maxheight2 {
-        max-height: calc(100% - 460px);
+        max-height: calc(100% - 422px);
+    }
+
+    &_block {
+        opacity: 0.5;
+        pointer-events: none;
     }
 }
 
@@ -251,6 +255,7 @@
 .list {
     display: flex;
     flex-direction: column;
+    margin-top: 4px;
     gap: 4px;
     max-height: 0;
     opacity: 0;

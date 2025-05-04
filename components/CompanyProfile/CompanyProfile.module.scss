@@ -6,9 +6,9 @@
     padding: 20px;
     color: #fff;
     background: #091336;
-    z-index: 5;
+    z-index: 23;
     top: 0;
-    left: -140px;
+    left: -150px;
     transition: all 0.25s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -17,6 +17,24 @@
     &_open {
         left: 250px;
 
+    }
+}
+
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 22;
+    transition: all 0.25s ease-in-out;
+    background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
+
+    &_open {
+        visibility: visible;
+        background-color: rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -70,7 +88,7 @@
     display: flex;
     flex-direction: column;
 
-    button {
+    a {
         height: 40px;
         flex-shrink: 0;
         padding: 0 10px;
@@ -162,6 +180,7 @@
     }
 
     sup {
+        opacity: 0;
         font-size: 12px;
         font-weight: 400;
         line-height: 14px;
@@ -169,6 +188,7 @@
         margin-left: 6px;
         position: relative;
         top: -4px;
+        transition: all 0.15s;
     }
 
     svg {
@@ -181,6 +201,10 @@
         background-color: rgba(255, 255, 255, 0.10);
 
         svg {
+            opacity: 1;
+        }
+
+        sup {
             opacity: 1;
         }
     }

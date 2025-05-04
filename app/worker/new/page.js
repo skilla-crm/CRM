@@ -7,18 +7,16 @@ const DynamicModuleContainer = dynamic(() =>
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Orders() {
+export default async function WorkerNew() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
+  const id = 'rworker'
 
   return (
-
-    <div id="root_orders_dir" ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS}  srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={'orders-detail'}/>
+    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_WORKERS} srcCss={process.env.REACT_APP_URL_WORKERS_CSS} id={id} />
     </div>
-
-
   );
 }

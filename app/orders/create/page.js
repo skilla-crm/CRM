@@ -1,21 +1,26 @@
 import { cookies } from 'next/headers'
-import ModuleContainer from "@/components/ModuleContainer/ModuleContainer";
+import dynamic from 'next/dynamic'
 
+const DynamicModuleContainer = dynamic(() =>
+  import('@/components/ModuleContainer/ModuleContainer')
+    .then((module) => module.ModuleContainer)
+)
 
-export default async function CreateOrder() {
+export default async function Create() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
+const id = "root_order-create"
 
   return (
 
-    <div id="root_order-create" ispro={ispro.value} role={role.value} token={`Bearer ${token?.value}`}>
-      <ModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={'create-page'}/>
+    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={id} />
     </div>
-
-
 
 
   );
 }
+
+

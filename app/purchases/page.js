@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers'
 import ModuleContainer from "@/components/ModuleContainer/ModuleContainer";
 
-export default async function Orders() {
+export default async function Purchases() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')

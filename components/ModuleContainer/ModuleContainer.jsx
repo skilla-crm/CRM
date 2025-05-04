@@ -1,7 +1,8 @@
 'use client'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const ModuleContainer = ({ src, srcCss, id }) => {
+  const [anim, setAnim] = useState(false)
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -12,6 +13,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
     link.href = srcCss;
     link.rel = 'stylesheet';
     link.type = 'text/css';
+    link.onload = () => setAnim(true)
 
     document.head.appendChild(link);
 

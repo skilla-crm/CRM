@@ -1,4 +1,7 @@
 import s from './FunctionBlock.module.scss';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
@@ -6,61 +9,121 @@ require('dayjs/locale/ru')
 import Chewron from '@/public/icons/menu/iconChewron.svg';
 import Plus from '@/public/icons/menu/iconPlus.svg';
 import Wallet from '@/public/icons/menu/iconWallet.svg';
-import { useEffect, useState } from 'react';
+import Info from '@/public/icons/iconInfo.svg';
+import Docs from '@/public/icons/docs.svg';
+import LoadDocs from '@/public/icons/loadDocs.svg';
+import Purchase from '@/public/icons/purchase.svg';
+import Worker from '@/public/icons/worker.svg';
+import Customer from '@/public/icons/customer.svg';
 
-const FunctionBlock = ({ company }) => {
+
+const FunctionBlock = ({ company, isLoading }) => {
     return (
         <div className={s.root}>
             <div className={s.blur}></div>
             <div className={s.container}>
-                <Subscription company={company} />
+                <Subscription company={company} isLoading={isLoading} />
                 <MultiFunctionButton />
             </div>
         </div>
     )
 };
 
-const Subscription = ({ company }) => {
+const Subscription = ({ company, isLoading }) => {
     const [payState, setPayState] = useState('');
-    const isBlocked = company?.is_blocked;
-    const dateNow = dayjs("2026-11-06").locale('ru')
-    const dayNow = dayjs("2026-11-06").locale('ru')
+    const router = useRouter()
+    const dateNow = dayjs().locale('ru')
+    const dayNow = dayjs().date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
-    console.log(paidTo, dateNow, paidTo.diff(dateNow, 'day'))
+    const dayDiff = paidTo.diff(dateNow, 'day');
+
 
     useEffect(() => {
-        if (paidTo.diff(dateNow) < 0) {
+        if (dayDiff < 0 && company?.paid_to) {
             setPayState('button')
             return
         }
 
-        if(paidTo.diff(dateNow) > 0) {
-
+        if (dayDiff >= 0 && dayNow < 6 && dayDiff < 25) {
+            setPayState('info')
+        } else {
+            setPayState('')
         }
     }, [company])
 
+    const handleOpenPayPage = () => {
+        router.push('/pay')
+    }
+
 
     return (
-        <div className={s.subscription}>
-            <button className={classNames(s.button, s.button_red)}>
-                <Wallet />
-                <p>Продлить подписку</p>
-            </button>
+        <div className={classNames(s.block, payState === '' && s.block_hidden)}>
+            <div onClick={handleOpenPayPage} className={classNames(s.subscription, s.subscription_2, payState === 'info' && !isLoading && s.subscription_vis)}>
+                <Info />
+                <div className={s.text}>
+                    <p>Подписка истекает</p>
+                    <p>{dayjs(paidTo).format('D MMMM')}</p>
+                </div>
+            </div>
+            <div className={classNames(s.subscription, payState === 'button' && !isLoading && s.subscription_vis)}>
+                <Link href={'/pay'} className={classNames(s.button, s.button_red)}>
+                    <Wallet />
+                    <p>Продлить подписку</p>
+                </Link>
+            </div>
         </div>
+
     )
 }
 
 const MultiFunctionButton = () => {
+    const [openMenu, setOpenMenu] = useState(false)
+    const listRef = useRef()
+    const buttonRef = useRef()
+
+    const handleOpenMenu = () => {
+        openMenu ? setOpenMenu(false) : setOpenMenu(true)
+    }
+
+    const handleCloseMenu = () => {
+        setOpenMenu(false)
+    }
+
+    const closeModal = (e) => {
+        e.stopPropagation()
+        if (listRef.current && !listRef.current.contains(e.target) && !buttonRef.current.contains(e.target)) {
+            setOpenMenu(false)
+            return
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', closeModal);
+        return () => document.removeEventListener('mousedown', closeModal);
+    }, []);
+
     return (
         <div className={s.multi}>
-            <button className={s.button}>
+            <Link href={'/orders/create'} className={s.button}>
                 <Plus />
                 <p>Новый заказ</p>
-            </button>
+            </Link>
 
-            <div className={classNames(s.button, s.button_menu)}>
+            <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open)}>
                 <Chewron />
             </div>
+
+            <ul ref={listRef} className={classNames(s.menu, openMenu && s.menu_open)}>
+                {/*  <Link onClick={handleCloseMenu} href={''}><li><Docs/> Создать УПД</li></Link>
+                <Link onClick={handleCloseMenu} href={''}><li><Docs/> Выставить счет</li></Link>
+                <Link onClick={handleCloseMenu} href={''}><li><Docs/> Создать акт-сверки</li></Link> */}
+                {/* <div></div> */}
+                {/* <Link onClick={handleCloseMenu} href={''}><li><LoadDocs/> Загрузить выписку</li></Link> */}
+                <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
+                {/* <div></div> */}
+                <Link onClick={handleCloseMenu} href={'/worker/new'}><li><Worker /> Добавить исполнителя</li></Link>
+                {/* <Link onClick={handleCloseMenu} href={''}><li><Customer/> Добавить заказчика</li></Link> */}
+            </ul>
         </div>
     )
 }

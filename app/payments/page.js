@@ -5,7 +5,6 @@ export default async function Payments() {
     const id = 'root_payments'
 
     return (
-
         <Iframe src={src} id={id} />
 
 

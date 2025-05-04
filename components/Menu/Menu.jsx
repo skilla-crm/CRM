@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
-import useSWR from 'swr'
-import { useCookies } from 'next-client-cookies';
+
+import dayjs from 'dayjs';
+require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/app/actions';
 import { usePathname } from 'next/navigation';
@@ -19,48 +20,76 @@ import { menuItem } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
-import { fetchWithToken } from '@/app/api/api';
-const urlMenu = `https://api2.skilla.ru/api/menu`
 
-const Menu = () => {
+
+
+const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
+    const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
+    const [dopBlockState, setDopBlock] = useState(false);
     const router = useRouter()
-    const cookies = useCookies();
-    const token = cookies.get('token')
-    const { data: menuData } = useSWR(urlMenu, url => fetchWithToken(url, `Bearer ${token}`))
     const path = usePathname();
-    const [openCompanyProfile, setOpenCompanyProfile] = useState(false)
-    const refProfie = useRef()
     const user = menuData?.user;
     const company = menuData?.partnership;
-    console.log(menuData, token)
-
-
-    const handleOpenCompanyProfile = () => {
-        openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
-    }
+    const persons = menuData?.persons;
+    const city = menuData?.city;
+    const phone = menuData?.phone;
+    const email = menuData?.email;
+    const isBlocked = company?.is_blocked;
+    const partnershipDate = menuData?.date;
+    const dateNow = dayjs(partnershipDate).locale('ru')
+    const dayNow = dayjs(partnershipDate).date()
+    const paidTo = dayjs(company?.paid_to).locale('ru');
+    const dayDiff = paidTo.diff(dateNow, 'day');
 
     useEffect(() => {
         create()
     }, [])
 
-    const closeModal = (e) => {
-        e.stopPropagation()
-        if (refProfie.current && !refProfie.current.contains(e.target)) {
-            setOpenCompanyProfile(false)
+
+    useEffect(() => {
+        if ((dayDiff < 0 && company?.paid_to) || (dayDiff > 0 && dayNow < 6 && dayDiff < 25)) {
+            setDopBlock(true)
+
+        } else {
+            setDopBlock(false)
+        }
+    }, [company])
+
+    const handleOpenCompanyProfile = () => {
+        openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
+    }
+
+    const handleBack = (link) => {
+        if (path.includes(link)) {
+            window.history.back()
             return
         }
     }
 
-    useEffect(() => {
-        document.addEventListener('mousedown', closeModal);
-        return () => document.removeEventListener('mousedown', closeModal);
-    }, []);
+
+
+  
 
     return (
         <>
-            <div ref={refProfie}>
-                <CompanyProfile open={openCompanyProfile} />
-            </div>
+            
+          
+                <CompanyProfile
+                    open={openCompanyProfile}
+                    setOpen={setOpenCompanyProfile}
+                    user={user}
+                    company={company}
+                    persons={persons}
+                    city={city}
+                    phone={phone}
+                    email={email}
+                    partnerships={menuData?.partnerships_contract_to}
+                    partnershipsDop={menuData?.partnerships_connect_to}
+                    isLoading={isLoading}
+                    activeCompany={activeCompany}
+                    setActiveCompany={setActiveCompany}
+                    details={menuData?.partnerships_details}
+                />
 
             <div className={s.menu}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
@@ -88,10 +117,10 @@ const Menu = () => {
 
                     <div className={s.block}>
                         <p className={s.name}>{user?.name}</p>
-                        <p className={s.company}>{company?.name}</p>
+                        <p className={s.company}>{activeCompany?.name}</p>
                     </div>
 
-                    <p className={s.date}>Пятница, 14 февраля</p>
+                    <p className={s.date}>{dateNow.format('dddd, D MMMM').slice(0,1).toUpperCase()}{dateNow.format('dddd, D MMMM').slice(1)}</p>
 
                     {company?.is_pro === 0 && <button onClick={(e) => {
                         e.stopPropagation();
@@ -106,24 +135,19 @@ const Menu = () => {
 
                 </div>
 
-                <Scrollbar className={classNames(s.navigation, s.navigation_maxheight2)}>
+                <Scrollbar className={classNames(s.navigation, dopBlockState && s.navigation_maxheight2, isBlocked === 1 && s.navigation_block)}>
                     <div className={s.container}>
                         {menuItem.map(el => {
                             if (el.submenu) {
                                 return <SubMenu el={el} key={el.id} />
                             }
                             return <Link
+                                onClick={() => handleBack(el.sublink)}
                                 id={el.id}
                                 key={el.id}
                                 href={el.link}
-                                /*  onClick={() => el.link === '/orders' ? 
-                                     history.pushState(null, null, '/orders') 
-                                     : 
-                                     null
-                                 } */
                                 className={classNames(s.link,
                                     (path === el.link || (el.sublink && path.includes(el.sublink)))
-
                                     && s.link_active)}
                             >
                                 <el.icon />
@@ -134,7 +158,7 @@ const Menu = () => {
                     </div>
 
                 </Scrollbar>
-                <FunctionBlock company={company} />
+                <FunctionBlock company={company} isLoading={isLoading} />
             </div>
         </>
 

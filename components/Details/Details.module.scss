@@ -75,11 +75,10 @@
 
 .list {
     position: absolute;
-    overflow: hidden;
+
     top: 24px;
     width: 100%;
-    max-height: 0;
-    height: fit-content;
+    height: 0;
     display: flex;
     flex-direction: column;
     border-radius: 4px;
@@ -91,9 +90,9 @@
 
     &_open {
         border: 1px solid #FFF;
-        max-height: 242px;
-        /* min-height: 40px; */
     }
+
+  
 }
 
 .item {
@@ -119,17 +118,27 @@
 
 
     p {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
         font-size: 14px;
         font-weight: 400;
         line-height: 18px;
     }
 
     span {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
         font-size: 12px;
         font-weight: 400;
         line-height: 14px;
         color: #71869D;
     }
+
+
 }
 
 .bottom {
@@ -147,6 +156,20 @@
     &_vis {
         opacity: 1;
     }
+
+    &_load {
+        svg {
+            path {
+                animation: download;
+                animation-duration: 0.2s;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+                animation-fill-mode: backwards;
+            }
+        }
+    }
+
+
 }
 
 .arrow {
@@ -155,5 +178,16 @@
 
     &_up {
         transform: rotate(180deg);
+    }
+}
+
+
+@keyframes download {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-2px);
     }
 }
