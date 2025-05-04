@@ -2,7 +2,6 @@ import { Inter } from 'next/font/google'
 
 import { CookiesProvider } from 'next-client-cookies/server';
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import "./globals.scss";
 import s from './layout.module.scss';
 //components

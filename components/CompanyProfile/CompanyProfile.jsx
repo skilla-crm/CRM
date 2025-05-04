@@ -14,7 +14,7 @@ import AvatarDefault from '@/public/images/AvatarDefault.png';
 import CompanyList from '../CompanyList/CompanyList';
 import Details from '../Details/Details';
 
-const CompanyProfile = ({ open, setOpen, user, company, partnerships, persons, city,
+const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
     phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details }) => {
     const [allCompanies, setAllCompanies] = useState([]);
     const refProfie = useRef()
@@ -45,7 +45,7 @@ const CompanyProfile = ({ open, setOpen, user, company, partnerships, persons, c
 
     const closeModal = (e) => {
         e.stopPropagation()
-        if (refProfie.current && !refProfie.current.contains(e.target)) {
+        if (refProfie.current && !refProfie.current.contains(e.target) && !hiddenButtonRef.current.contains(e.target)) {
             setOpen(false)
             return
         }
@@ -59,7 +59,7 @@ const CompanyProfile = ({ open, setOpen, user, company, partnerships, persons, c
     return (
         <>
             <div className={classNames(s.overlay, open && s.overlay_open)}></div>
-            <div ref={refProfie} className={classNames(s.root, open && s.root_open)}>
+            <div ref={refProfie} className={classNames(s.root, open && !hiddenMenu && s.root_open, hiddenMenu && s.root_2, hiddenMenu && open && s.root_open2)}>
 
 
                 <div className={s.header}>

@@ -16,16 +16,19 @@ import logo from '@/public/images/skilla.png';
 import ProfileLogo from '@/public/icons/profileLogo.svg';
 import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
+import Chewron from '@/public/icons/iconChewronForward.svg';
+//constants
 import { menuItem } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 
 
-
 const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
+    const hiddenButtonRef = useRef()
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
+    const [hiddenMenu, setHiddenMenu] = useState(false)
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
@@ -67,60 +70,66 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     }
 
 
+    const handleHidenMenu = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        hiddenMenu ? setHiddenMenu(false) : setHiddenMenu(true)
+    }
 
-  
+
 
     return (
-        <>
-            
-          
-                <CompanyProfile
-                    open={openCompanyProfile}
-                    setOpen={setOpenCompanyProfile}
-                    user={user}
-                    company={company}
-                    persons={persons}
-                    city={city}
-                    phone={phone}
-                    email={email}
-                    partnerships={menuData?.partnerships_contract_to}
-                    partnershipsDop={menuData?.partnerships_connect_to}
-                    isLoading={isLoading}
-                    activeCompany={activeCompany}
-                    setActiveCompany={setActiveCompany}
-                    details={menuData?.partnerships_details}
-                />
+        <div className={s.root}>
+            <CompanyProfile
+                open={openCompanyProfile}
+                setOpen={setOpenCompanyProfile}
+                hiddenMenu={hiddenMenu}
+                hiddenButtonRef={hiddenButtonRef}
+                user={user}
+                company={company}
+                persons={persons}
+                city={city}
+                phone={phone}
+                email={email}
+                partnerships={menuData?.partnerships_contract_to}
+                partnershipsDop={menuData?.partnerships_connect_to}
+                isLoading={isLoading}
+                activeCompany={activeCompany}
+                setActiveCompany={setActiveCompany}
+                details={menuData?.partnerships_details}
+            />
 
-            <div className={s.menu}>
+            <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
-
                 <div className={s.header}>
                     {company?.brand_type === 0 ?
-                        <Image className={s.logo} src={logo}></Image>
+                        <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={logo}></Image>
                         :
-                        <img className={s.logo}
+                        <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
                             src={`https://lk.skilla.ru/documents/brands/${company?.brand_type}/logo_new.png`}
                         />
                     }
 
+                    <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && s.button_hide_active)}>
+                        <Chewron />
+                    </button>
                 </div>
 
-
-                <div onClick={handleOpenCompanyProfile} className={s.profile}>
-                    <ProfileLogo className={s.logo_small} />
-                    <div className={s.avatar}>
+                <div onClick={handleOpenCompanyProfile} className={classNames(s.profile, hiddenMenu && s.profile_hidden)}>
+                    <ProfileLogo className={classNames(s.logo_small, hiddenMenu && s.logo_hidden)} />
+                    <div className={classNames(s.avatar, hiddenMenu && s.avatar_hidden)}>
                         <img src={user?.avatar !== ''
                             ? `https://lk.skilla.ru/images/persons/chat/${user?.avatar}`
                             :
                             cat} alt='аватар пользователя' />
                     </div>
 
-                    <div className={s.block}>
+                    <div className={classNames(s.block, hiddenMenu && s.block_hidden)}>
                         <p className={s.name}>{user?.name}</p>
                         <p className={s.company}>{activeCompany?.name}</p>
                     </div>
 
-                    <p className={s.date}>{dateNow.format('dddd, D MMMM').slice(0,1).toUpperCase()}{dateNow.format('dddd, D MMMM').slice(1)}</p>
+                    <p className={classNames(s.date, hiddenMenu && s.date_hidden)}>{dateNow.format('dddd, D MMMM').slice(0, 1).toUpperCase()}{dateNow.format('dddd, D MMMM').slice(1)}</p>
 
                     {company?.is_pro === 0 && <button onClick={(e) => {
                         e.stopPropagation();
@@ -133,7 +142,18 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                     </button>}
 
 
+                    <div className={classNames(s.profile_small, hiddenMenu && s.profile_small_vis)}>
+                        <ProfileLogo />
+                        <div className={s.block_small}>
+                            <p className={s.date}>{dateNow.format('D.MM')}</p>
+                            <p className={s.date}>{dateNow.format('dd').slice(0, 1).toUpperCase()}{dateNow.format('dd').slice(1)}</p>
+                        </div>
+
+
+                    </div>
                 </div>
+
+
 
                 <Scrollbar className={classNames(s.navigation, dopBlockState && s.navigation_maxheight2, isBlocked === 1 && s.navigation_block)}>
                     <div className={s.container}>
@@ -160,7 +180,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                 </Scrollbar>
                 <FunctionBlock company={company} isLoading={isLoading} />
             </div>
-        </>
+        </div>
 
     )
 };

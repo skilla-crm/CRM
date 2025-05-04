@@ -1,3 +1,7 @@
+.root {
+    position: relative;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -11,7 +15,12 @@
     box-sizing: border-box;
     z-index: 26;
     position: relative;
-    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+    /*  overflow: hidden; */
+
+    &_hidden {
+        width: 64px;
+    }
 }
 
 .overlay {
@@ -38,11 +47,17 @@
     height: 40px;
     width: auto;
     margin-right: 16px;
+    transition: all 0.25s ease-in-out;
 
     &_small {
         position: absolute;
         top: 12px;
         right: 8px;
+        transition: all 0.25s ease-in-out;
+    }
+
+    &_hidden {
+        opacity: 0;
     }
 }
 
@@ -53,11 +68,14 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    position: relative;
 }
 
 .profile {
     position: relative;
+    overflow: hidden;
     width: 1fr;
+    height: 214px;
     margin: 12px 12px 12px 0;
     padding: 12px 8px 12px 20px;
     background-color: rgba(255, 255, 255, 0.10);
@@ -69,8 +87,32 @@
     flex-shrink: 0;
     transition: all 0.25s ease-in-out;
 
+    &_hidden {
+        margin-right: 0;
+    }
+
     &:hover {
         background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &_small {
+        position: absolute;
+        top: 0;
+        right: -64px;
+        height: 100%;
+        width: 64px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.25s ease-in-out;
+
+        &_vis {
+            opacity: 1;
+           right: 0; 
+        }
     }
 }
 
@@ -82,11 +124,18 @@
     justify-content: center;
     border-radius: 50%;
     overflow: hidden;
+    transition: all 0.25s ease-in-out;
 
     img {
-        height: 112px;
+        height: 101%;
         width: auto;
         background-size: contain;
+    }
+
+    &_hidden {
+        width: 0;
+        height: 0;
+        opacity: 0;
     }
 }
 
@@ -95,6 +144,19 @@
     flex-direction: column;
     gap: 2px;
     color: #ECECEC;
+    transition: all 0.25s ease-in-out;
+
+    &_small {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+
+    &_hidden {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 .name {
@@ -113,6 +175,7 @@
     font-weight: 400;
     line-height: 18px;
     overflow: hidden;
+    text-wrap: nowrap;
     text-overflow: ellipsis;
 }
 
@@ -121,6 +184,15 @@
     font-weight: 400;
     line-height: 14px;
     color: #A6B1BC;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    transition: all 0.25s ease-in-out;
+
+    &_hidden {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 .button {
@@ -270,3 +342,29 @@
     }
 }
 
+.button_hide {
+    position: absolute;
+    z-index: 7;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #002CFB;
+    transition: all 0.15s;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+
+    &_active {
+        right: 18px;
+        transform: rotate(180deg);
+    }
+
+    &:hover {
+        background-color: #0024CB;
+    }
+
+}
