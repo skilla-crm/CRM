@@ -14,6 +14,7 @@ export default async function Orders() {
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
   const id = "root_orders_dir"
+  console.log(token)
  
 
   return (

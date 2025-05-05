@@ -14,7 +14,7 @@ export function Providers({ children }) {
     const activeCompanyId = cookies.get('active-company')
     const { data: menuData, isLoading } = useSWR(urlMenu, url => fetchWithToken(url, token))
     const [activeCompany, setActiveCompany] = useState({});
-    console.log(activeCompanyId)
+    console.log(token, activeCompany)
 
     useEffect(() => {
         const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)

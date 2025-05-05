@@ -5,7 +5,6 @@ import { cookies } from 'next/headers'
 import "./globals.scss";
 import s from './layout.module.scss';
 //components
-
 import { Providers } from './providers';
 
 
@@ -19,17 +18,12 @@ const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 
 
 
 export default async function RootLayout({ children }) {
-
-
- 
-
-
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
 
- /*  if (!token) {
+  if (!token) {
     redirect('https://lk.skilla.ru/login/')
-  } */
+  }
 
   return (
     <CookiesProvider>
