@@ -22,18 +22,14 @@ export default async function RootLayout({ children }) {
   const token = cookieStore.get('token')
 
   if (!token) {
-    redirect('https://lk.skilla.ru/login/')
+    redirect('https://lk.skilla.ru/login')
   }
 
   return (
     <CookiesProvider>
       <html lang="ru">
-
         <body className={inter.className}>
-
           <main className={s.main}>
-
-
             <Providers>{children}</Providers>
           </main>
 

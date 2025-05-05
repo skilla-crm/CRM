@@ -1,5 +1,6 @@
 import s from './CompanyProfile.module.scss';
 import { useState, useEffect, useRef } from 'react';
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import classNames from 'classnames';
 import Scrollbar from 'react-scrollbars-custom';
@@ -38,10 +39,11 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
         setOpen(false)
     }
 
-
     const handleLogOut = () => {
-        console.log('вышел')
+        redirect('https://lk.skilla.ru/login/logout.php')
     }
+
+
 
     const closeModal = (e) => {
         e.stopPropagation()
@@ -119,10 +121,10 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     </Link>
                 </div>
 
-                <Link href='https://lk.skilla.ru/login/logout.php' className={s.logout} onClick={handleLogOut}>
+                <button className={s.logout} onClick={handleLogOut}>
                     <Logout />
                     <p>Выйти</p>
-                </Link>
+                </button>
             </div>
         </>
 
@@ -130,9 +132,14 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 };
 
 const Worker = ({ el }) => {
+
+    const handleAuthWorker = (e) => {
+        const id = e.currentTarget.id
+        redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
+    }
+
     return (
-        <Link href={`/auth/?id=${el.id}`}>
-            <div className={s.worker}>
+            <div id={el.id} onClick={handleAuthWorker} className={s.worker}>
                 <div className={s.avatar}>
                     {el.avatar_mini !== '' ?
                         <img src={`https://lk.skilla.ru/images/persons/chat/${el?.avatar_mini}`} alt='аватар'></img>
@@ -145,8 +152,6 @@ const Worker = ({ el }) => {
                 <Forward />
                 {/* <Done /> */}
             </div>
-        </Link>
-
     )
 }
 

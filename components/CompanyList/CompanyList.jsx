@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { useCookies } from 'next-client-cookies';
 import s from './CompanyList.module.scss';
-import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import Arrow from '@/public/icons/menu/arrow.svg';
 
 
@@ -28,6 +28,12 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
         setActiveCompany(item)
         cookies.set('active-company', item.id)
         setOpen(false)
+    }
+
+    const handleAuthCompany = (e) => {
+        const id = e.currentTarget.id;
+        redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
+
     }
 
     useEffect(() => {
@@ -56,12 +62,11 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
                     </li>
                 })}
                 {partnerships?.map((el) => {
-                    return <Link key={el.id} href={`/auth/?id=${el.dir_id}`}>
-                        <li className={s.item}>
+                    return <li id={el.dir_id} key={el.id} onClick={handleAuthCompany} className={s.item}>
                             <p>{el.name}</p>
                             <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
                         </li>
-                    </Link>
+                   
                 })}
             </ul>
         </div>
