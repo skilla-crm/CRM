@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-
+import { redirect } from 'next/navigation'
 import { CookiesProvider } from 'next-client-cookies/server';
 import { cookies } from 'next/headers'
 import "./globals.scss";
