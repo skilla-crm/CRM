@@ -57,7 +57,7 @@ const Subscription = ({ company, isLoading, hiddenMenu }) => {
 
 
     return (
-        <div className={classNames(s.block, (payState === '' || hiddenMenu) && s.block_hidden)}>
+        <div className={classNames(s.block, payState === '' && s.block_hidden, hiddenMenu && s.block_hidden2)}>
             <div onClick={handleOpenPayPage} className={classNames(s.subscription, s.subscription_2, payState === 'info' && !isLoading && s.subscription_vis)}>
                 <Info />
                 <div className={s.text}>
@@ -106,7 +106,7 @@ const MultiFunctionButton = ({ hiddenMenu }) => {
         <div className={s.multi}>
             <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                 <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
-                <p>Новый заказ</p>
+                <p className={s.add_text}>Новый заказ</p>
             </Link>
 
             <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open, hiddenMenu && s.button_menu_hidden)}>

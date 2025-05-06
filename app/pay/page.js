@@ -12,7 +12,10 @@ export default async function Pay() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
-  const id="root_payment"
+  const id = "root_payment"
+
+
+ 
 
   return (
 

@@ -1,5 +1,6 @@
 
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 
@@ -14,6 +15,11 @@ export default async function OrderCreate() {
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
   const id = "root_purchases"
+  const isBlocked = cookieStore.get('is_blocked')
+
+  if (isBlocked?.value === '1') {
+    redirect('/pay')
+  }
 
   return (
 

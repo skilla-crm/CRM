@@ -1,6 +1,7 @@
 'use client'
 import s from './layout.module.scss';
 import useSWR from 'swr'
+import { usePathname } from 'next/navigation'
 import { useCookies } from 'next-client-cookies';
 import { MenuContext } from "@/contexts/MenuContext";
 import { useEffect, useState } from "react";
@@ -9,16 +10,20 @@ import { fetchWithToken } from '@/app/api/api';
 const urlMenu = `https://api2.skilla.ru/api/menu`
 
 export function Providers({ children }) {
+
     const cookies = useCookies();
     const token = cookies.get('token')
     const activeCompanyId = cookies.get('active-company')
     const { data: menuData, isLoading } = useSWR(urlMenu, url => fetchWithToken(url, token))
     const [activeCompany, setActiveCompany] = useState({});
 
-  /*   useEffect(() => {
-        const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)
-        active && setActiveCompany(active)
-    }, [activeCompanyId, menuData]) */
+
+
+
+    /*   useEffect(() => {
+          const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)
+          active && setActiveCompany(active)
+      }, [activeCompanyId, menuData]) */
 
     return (
         <>

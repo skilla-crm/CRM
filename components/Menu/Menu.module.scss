@@ -16,7 +16,7 @@
     z-index: 26;
     position: relative;
     transition: all 0.25s ease-in-out;
-    overflow-x: hidden;
+   
 
     &_hidden {
         width: 64px;
@@ -221,13 +221,14 @@
         background-color: #C4CEFF;
         border-radius: 4px;
         color: #002CFB;
-        transition: all 0.15s ease-in-out;
+        transition: opacity 0.15s ease-in-out, transform 0.25s ease-in-out;
         cursor: pointer;
 
         p {
             font-size: 14px !important;
             font-weight: 500;
             line-height: 140%;
+            text-wrap: nowrap;
             transition: all 0.15s ease-in-out;
         }
 
@@ -245,6 +246,11 @@
             svg path {
                 stroke: #FFF;
             }
+        }
+
+        &_hidden {
+            opacity: 0;
+            transform: translateX(-200px);
         }
     }
 }
@@ -264,7 +270,11 @@
     position: relative;
 
     &_maxheight2 {
-        max-height: calc(100% - 422px);
+        max-height: calc(100% - 438px);
+    }
+
+    &_maxheight3 {
+        max-height: calc(100% - 478px);
     }
 
     &_block {

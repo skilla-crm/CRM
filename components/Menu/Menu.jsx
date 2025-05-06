@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/app/actions';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
 import s from './Menu.module.scss';
@@ -30,9 +30,10 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const hidemenu = cookies.get('hidemenu')
     const avatar_mini = cookies.get('avatar_mini')
     const name = cookies.get('name')
-    const partnershipName = cookies.get('partnership_name')
     const date = cookies.get('date')
     const brand = cookies.get('brand')
+    const ispro = cookies.get('is_pro')
+    const isBlockedCookies = cookies.get('is_blocked');
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
@@ -54,9 +55,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-    /* useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
     useEffect(() => {
@@ -125,7 +126,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div className={s.header}>
-                    {brand === '0' ?
+                    {(brand === '0' || !brand) ?
                         <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
                         :
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
@@ -139,7 +140,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                 <div onClick={handleOpenCompanyProfile} className={classNames(s.profile, hiddenMenu && s.profile_hidden)}>
                     <ProfileLogo className={classNames(s.logo_small, hiddenMenu && s.logo_hidden)} />
                     <div className={classNames(s.avatar, hiddenMenu && s.avatar_hidden)}>
-                        {avatar_mini === '' ?
+                        {(!avatar_mini || avatar_mini === '') ?
                             <Image src={AvatarDefault} alt='логотип'></Image>
                             :
                             <img src={`https://lk.skilla.ru/images/persons/chat/${avatar_mini}`} alt='аватар пользователя' />
@@ -152,19 +153,19 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                         {<p className={classNames(s.company, !isLoading && s.company_vis)}>
                             {activeCompany?.name && activeCompany?.name}
                             {!activeCompany?.name && partnershipsDop?.length > 0 && 'Все компании'}
-                            {partnershipsDop?.length === 0 && decodeURI(partnershipName)}
+                            {partnershipsDop?.length === 0 && company?.name}
                         </p>}
 
-                        {partnershipsDop?.length === 0 && <p className={s.company}>{company?.name}</p>}
+
                     </div>
 
                     <p className={classNames(s.date, hiddenMenu && s.date_hidden)}>{dateNow.format('dddd, D MMMM').slice(0, 1).toUpperCase()}{dateNow.format('dddd, D MMMM').slice(1)}</p>
 
-                    {company?.is_pro === 0 && <button onClick={(e) => {
+                    {ispro === '0' && <button onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
                         router.push('/pay')
-                    }} className={s.button_pro}
+                    }} className={classNames(s.button_pro, hiddenMenu && s.button_pro_hidden)}
                     >
                         <IconLightning />
                         <p>Повысить до PRO</p>
@@ -184,7 +185,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
 
 
-                <Scrollbar className={classNames(s.navigation, dopBlockState && s.navigation_maxheight2, isBlocked === 1 && s.navigation_block)}>
+                <Scrollbar className={classNames(s.navigation, dopBlockState && s.navigation_maxheight2,
+                    ispro && s.navigation_maxheight3,
+                    (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block)}>
                     <div className={s.container}>
                         {menuItem.map(el => {
                             if (el.submenu) {

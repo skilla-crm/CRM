@@ -35,7 +35,14 @@
     &_hidden {
         height: 0;
         opacity: 0;
-      /*   margin-left: -200px; */
+        /*   margin-left: -200px; */
+    }
+
+    &_hidden2 {
+      
+        opacity: 0;
+        transform: translateX(-240px);
+       
     }
 
     p {
@@ -85,14 +92,14 @@
     border-radius: 4px 0px 0px 4px;
     cursor: pointer;
     transition: all 0.15s;
+    overflow: hidden;
 
     &:hover {
         background-color: #0024cb;
     }
 
     p {
-        width: 102px;
-        margin-left: 22px;
+
         font-size: 16px;
         font-weight: 500;
         line-height: 22px;
@@ -101,6 +108,8 @@
         text-wrap: nowrap;
         transition: all 0.25s ease-in-out;
     }
+
+
 
     &_hidden {
         margin-left: -6px;
@@ -111,7 +120,7 @@
         border-radius: 4px;
 
         p {
-           transform: translateX(-100px);
+            transform: translateX(-100px);
             opacity: 0;
         }
 
@@ -159,6 +168,15 @@
             background-color: #cb0c0c;
         }
     }
+}
+
+.add_text {
+
+    width: 102px;
+    margin-left: 22px;
+
+    transition: all 0.25s ease-in-out;
+
 }
 
 .icon {
