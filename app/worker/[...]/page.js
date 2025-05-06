@@ -12,11 +12,11 @@ export default async function Worker() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
-  const id = 'rworker'
+  const id = 'root_worker'
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_WORKERS} srcCss={process.env.REACT_APP_URL_WORKERS_CSS} id={id} />
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_WORKER} srcCss={process.env.REACT_APP_URL_WORKER_CSS} id={id} />
     </div>
   );
 }

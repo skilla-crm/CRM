@@ -67,7 +67,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                 <div className={s.header}>
                     <p className={s.name}>{user?.name} {user?.surname}</p>
                     <p className={s.text}>Руководитель</p>
-                    <CompanyList
+                    {allCompanies?.length > 0 && <CompanyList
                         company={company}
                         allCompanies={allCompanies}
                         partnerships={partnerships}
@@ -75,6 +75,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                         activeCompany={activeCompany}
                         setActiveCompany={setActiveCompany}
                     />
+                    }
                 </div>
 
                 <Details
@@ -139,19 +140,19 @@ const Worker = ({ el }) => {
     }
 
     return (
-            <div id={el.id} onClick={handleAuthWorker} className={s.worker}>
-                <div className={s.avatar}>
-                    {el.avatar_mini !== '' ?
-                        <img src={`https://lk.skilla.ru/images/persons/chat/${el?.avatar_mini}`} alt='аватар'></img>
-                        :
-                        <Image src={AvatarDefault} alt='аватар' />
-                    }
+        <div id={el.id} onClick={handleAuthWorker} className={s.worker}>
+            <div className={s.avatar}>
+                {el.avatar_mini !== '' ?
+                    <img src={`https://lk.skilla.ru/images/persons/chat/${el?.avatar_mini}`} alt='аватар'></img>
+                    :
+                    <Image src={AvatarDefault} alt='аватар' />
+                }
 
-                </div>
-                <p>{el.name} {el.surname}<sup>{el.position === 'supervisor' ? el.id : ''}</sup></p>
-                <Forward />
-                {/* <Done /> */}
             </div>
+            <p>{el.name} {el.surname}<sup>{el.position === 'supervisor' ? el.id : ''}</sup></p>
+            <Forward />
+            {/* <Done /> */}
+        </div>
     )
 }
 

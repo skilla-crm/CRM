@@ -25,8 +25,9 @@ const Iframe = ({ src, id }) => {
         setLoad(false)
     }
     return (
-        <div className={classNames(s.window, !load && s.window_anim)}>
+        <div className={classNames(s.window,/*  !load && */ s.window_anim)}>
             <iframe
+             loading="eager"
                 className={s.iframe}
                 src={`${src}${link}`}
                 id={id}

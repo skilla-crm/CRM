@@ -21,9 +21,9 @@ export default async function RootLayout({ children }) {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
 
-  if (!token) {
+/*   if (!token) {
     redirect('https://lk.skilla.ru/login')
-  }
+  } */
 
   return (
     <CookiesProvider>

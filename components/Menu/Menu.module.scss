@@ -16,7 +16,7 @@
     z-index: 26;
     position: relative;
     transition: all 0.25s ease-in-out;
-    /*  overflow: hidden; */
+    overflow-x: hidden;
 
     &_hidden {
         width: 64px;
@@ -44,7 +44,7 @@
 }
 
 .logo {
-    height: 40px;
+    height: 34px;
     width: auto;
     margin-right: 16px;
     transition: all 0.25s ease-in-out;
@@ -57,6 +57,7 @@
     }
 
     &_hidden {
+        transform: translateX(-100px);
         opacity: 0;
     }
 }
@@ -75,7 +76,7 @@
     position: relative;
     overflow: hidden;
     width: 1fr;
-    height: 214px;
+    min-height: 214px;
     margin: 12px 12px 12px 0;
     padding: 12px 8px 12px 20px;
     background-color: rgba(255, 255, 255, 0.10);
@@ -111,7 +112,7 @@
 
         &_vis {
             opacity: 1;
-           right: 0; 
+            right: 0;
         }
     }
 }
@@ -124,6 +125,7 @@
     justify-content: center;
     border-radius: 50%;
     overflow: hidden;
+    flex-shrink: 0;
     transition: all 0.25s ease-in-out;
 
     img {
@@ -133,7 +135,7 @@
     }
 
     &_hidden {
-   /*      width: 0;
+        /*      width: 0;
         height: 0; */
         opacity: 0;
     }
@@ -154,7 +156,7 @@
     }
 
     &_hidden {
-        transform: scale(0);
+        /*  transform: scale(0); */
         opacity: 0;
     }
 }
@@ -171,12 +173,25 @@
 }
 
 .company {
+    width: 210px;
+    flex-shrink: 0;
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
     overflow: hidden;
-    text-wrap: nowrap;
+   /*  text-wrap: nowrap; */
     text-overflow: ellipsis;
+    min-height: 18px;
+    max-height:0;
+    height: max-content;
+
+    opacity: 0;
+    transition: all 0.15s;
+
+    &_vis {
+        opacity: 1;
+        max-height: 36px;
+    }
 }
 
 .date {
@@ -190,7 +205,7 @@
     transition: all 0.25s ease-in-out;
 
     &_hidden {
-        transform: scale(0);
+        /*   transform: scale(0); */
         opacity: 0;
     }
 }
@@ -282,6 +297,14 @@
     transition: all 0.15s ease-in-out;
     cursor: pointer;
 
+     p {
+        text-wrap: nowrap;
+     }
+
+    svg {
+        flex-shrink: 0;
+    }
+
     svg path {
         transition: all 0.15s ease-in-out;
     }
@@ -313,14 +336,29 @@
         padding-left: 50px;
         flex-shrink: 0;
     }
+
+    &_hidden {
+        width: 100%;
+        margin-right: 0;
+    }
 }
 
 .arrow {
     margin-left: auto;
     transition: all 0.2s ease-in-out;
+    overflow: hidden;
+
+    svg {
+        flex-shrink: 0;
+    }
 
     &_up {
         transform: rotate(180deg);
+    }
+
+    &_right {
+        opacity: 0;
+        width: 0;
     }
 }
 
@@ -344,7 +382,8 @@
 
 .button_hide {
     position: absolute;
-    z-index: 7;
+    z-index: 27;
+    top: 28px;
     right: -15px;
     width: 30px;
     height: 30px;
@@ -365,6 +404,17 @@
 
     &:hover {
         background-color: #0024CB;
+    }
+
+}
+
+.point {
+    text-wrap: nowrap;
+    overflow: hidden;
+    transition: all 0.25s;
+
+    &_hidden {
+        opacity: 0;
     }
 
 }

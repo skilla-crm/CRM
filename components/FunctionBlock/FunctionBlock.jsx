@@ -17,19 +17,19 @@ import Worker from '@/public/icons/worker.svg';
 import Customer from '@/public/icons/customer.svg';
 
 
-const FunctionBlock = ({ company, isLoading }) => {
+const FunctionBlock = ({ company, isLoading, hiddenMenu }) => {
     return (
         <div className={s.root}>
             <div className={s.blur}></div>
             <div className={s.container}>
-                <Subscription company={company} isLoading={isLoading} />
-                <MultiFunctionButton />
+                <Subscription company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
+                <MultiFunctionButton hiddenMenu={hiddenMenu} />
             </div>
         </div>
     )
 };
 
-const Subscription = ({ company, isLoading }) => {
+const Subscription = ({ company, isLoading, hiddenMenu }) => {
     const [payState, setPayState] = useState('');
     const router = useRouter()
     const dateNow = dayjs().locale('ru')
@@ -57,7 +57,7 @@ const Subscription = ({ company, isLoading }) => {
 
 
     return (
-        <div className={classNames(s.block, payState === '' && s.block_hidden)}>
+        <div className={classNames(s.block, (payState === '' || hiddenMenu) && s.block_hidden)}>
             <div onClick={handleOpenPayPage} className={classNames(s.subscription, s.subscription_2, payState === 'info' && !isLoading && s.subscription_vis)}>
                 <Info />
                 <div className={s.text}>
@@ -76,7 +76,7 @@ const Subscription = ({ company, isLoading }) => {
     )
 }
 
-const MultiFunctionButton = () => {
+const MultiFunctionButton = ({ hiddenMenu }) => {
     const [openMenu, setOpenMenu] = useState(false)
     const listRef = useRef()
     const buttonRef = useRef()
@@ -104,12 +104,12 @@ const MultiFunctionButton = () => {
 
     return (
         <div className={s.multi}>
-            <Link href={'/orders/create'} className={s.button}>
-                <Plus />
+            <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
                 <p>Новый заказ</p>
             </Link>
 
-            <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open)}>
+            <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open, hiddenMenu && s.button_menu_hidden)}>
                 <Chewron />
             </div>
 

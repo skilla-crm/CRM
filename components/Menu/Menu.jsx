@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
-
+import { useCookies } from 'next-client-cookies';
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
@@ -26,27 +26,36 @@ import CompanyProfile from '../CompanyProfile/CompanyProfile';
 
 const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const hiddenButtonRef = useRef()
+    const cookies = useCookies();
+    const hidemenu = cookies.get('hidemenu')
+    const avatar_mini = cookies.get('avatar_mini')
+    const name = cookies.get('name')
+    const date = cookies.get('date')
+    const brand = cookies.get('brand')
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
-    const [hiddenMenu, setHiddenMenu] = useState(false)
+    const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
     const router = useRouter()
     const path = usePathname();
+
     const user = menuData?.user;
     const company = menuData?.partnership;
+    const partnerships = menuData?.partnerships_contract_to;
+    const partnershipsDop = menuData?.partnerships_connect_to;
     const persons = menuData?.persons;
     const city = menuData?.city;
     const phone = menuData?.phone;
     const email = menuData?.email;
     const isBlocked = company?.is_blocked;
     const partnershipDate = menuData?.date;
-    const dateNow = dayjs(partnershipDate).locale('ru')
-    const dayNow = dayjs(partnershipDate).date()
+    const dateNow = dayjs(date).locale('ru')
+    const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
- /*    useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
     useEffect(() => {
@@ -73,13 +82,24 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const handleHidenMenu = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        hiddenMenu ? setHiddenMenu(false) : setHiddenMenu(true)
+        if (hiddenMenu) {
+            setHiddenMenu(false)
+            cookies.set('hidemenu', '0')
+        } else {
+            setHiddenMenu(true)
+            cookies.set('hidemenu', '1')
+        }
     }
 
 
 
     return (
         <div className={s.root}>
+
+            <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && s.button_hide_active)}>
+                <Chewron />
+            </button>
+
             <CompanyProfile
                 open={openCompanyProfile}
                 setOpen={setOpenCompanyProfile}
@@ -91,8 +111,8 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                 city={city}
                 phone={phone}
                 email={email}
-                partnerships={menuData?.partnerships_contract_to}
-                partnershipsDop={menuData?.partnerships_connect_to}
+                partnerships={partnerships}
+                partnershipsDop={partnershipsDop}
                 isLoading={isLoading}
                 activeCompany={activeCompany}
                 setActiveCompany={setActiveCompany}
@@ -102,31 +122,34 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div className={s.header}>
-                    {company?.brand_type === 0 ?
-                        <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={logo}></Image>
+                    {brand === '0' ?
+                        <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={logo} alt='логотип'></Image>
                         :
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
-                            src={`https://lk.skilla.ru/documents/brands/${company?.brand_type}/logo_new.png`}
+                            src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
                         />
                     }
 
-                    <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && s.button_hide_active)}>
-                        <Chewron />
-                    </button>
+
                 </div>
 
                 <div onClick={handleOpenCompanyProfile} className={classNames(s.profile, hiddenMenu && s.profile_hidden)}>
                     <ProfileLogo className={classNames(s.logo_small, hiddenMenu && s.logo_hidden)} />
                     <div className={classNames(s.avatar, hiddenMenu && s.avatar_hidden)}>
-                        <img src={user?.avatar !== ''
-                            ? `https://lk.skilla.ru/images/persons/chat/${user?.avatar}`
+                        <img src={avatar_mini
+                            ? `https://lk.skilla.ru/images/persons/chat/${avatar_mini}`
                             :
                             cat} alt='аватар пользователя' />
                     </div>
 
                     <div className={classNames(s.block, hiddenMenu && s.block_hidden)}>
-                        <p className={s.name}>{user?.name}</p>
-                        <p className={s.company}>{activeCompany?.name}</p>
+                        <p className={s.name}>{name ? decodeURI(name) : ''}</p>
+                        {<p className={classNames(s.company, !isLoading && s.company_vis)}>
+                            {activeCompany?.name && activeCompany?.name}
+                            {!activeCompany?.name && partnershipsDop?.length > 0 && 'Все компании'}
+                        </p>}
+
+                        {partnershipsDop?.length === 0 && <p className={s.company}>{company?.name}</p>}
                     </div>
 
                     <p className={classNames(s.date, hiddenMenu && s.date_hidden)}>{dateNow.format('dddd, D MMMM').slice(0, 1).toUpperCase()}{dateNow.format('dddd, D MMMM').slice(1)}</p>
@@ -159,7 +182,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                     <div className={s.container}>
                         {menuItem.map(el => {
                             if (el.submenu) {
-                                return <SubMenu el={el} key={el.id} />
+                                return <SubMenu el={el} key={el.id} hiddenMenu={hiddenMenu} setHiddenMenu={setHiddenMenu} />
                             }
                             return <Link
                                 onClick={() => handleBack(el.sublink)}
@@ -168,29 +191,39 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                                 href={el.link}
                                 className={classNames(s.link,
                                     (path === el.link || (el.sublink && path.includes(el.sublink)))
-                                    && s.link_active)}
+                                    && s.link_active, hiddenMenu && s.link_hidden)}
                             >
                                 <el.icon />
-                                {el.name}
+
+                                <p className={classNames(s.point, hiddenMenu && s.point_hidden)}>{el.name}</p>
 
                             </Link>
                         })}
                     </div>
 
                 </Scrollbar>
-                <FunctionBlock company={company} isLoading={isLoading} />
+                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
             </div>
         </div>
 
     )
 };
 
-const SubMenu = ({ el }) => {
+const SubMenu = ({ el, hiddenMenu, setHiddenMenu }) => {
     const path = usePathname();
     const [open, setOpen] = useState(false);
 
+    useEffect(() => {
+        hiddenMenu && setOpen(false)
+    }, [hiddenMenu])
+
     const handleOpen = () => {
-        open ? setOpen(false) : setOpen(true)
+        if (open) {
+            setOpen(false)
+        } else {
+            setHiddenMenu(false)
+            setOpen(true)
+        }
     }
 
     useEffect(() => {
@@ -199,10 +232,10 @@ const SubMenu = ({ el }) => {
 
     return (
         <div className={s.link_list}>
-            <div onClick={handleOpen} className={classNames(s.link)}>
+            <div onClick={handleOpen} className={classNames(s.link, hiddenMenu && s.link_hidden)}>
                 <el.icon />
-                {el.name}
-                <Arrow className={classNames(s.arrow, open && s.arrow_up)} />
+                <p className={classNames(s.point, hiddenMenu && s.point_hidden)}>{el.name}</p>
+                <Arrow className={classNames(s.arrow, open && s.arrow_up, hiddenMenu && s.arrow_right)} />
             </div>
 
             <ul className={classNames(s.list, open && s.list_open)}>
@@ -217,7 +250,7 @@ const SubMenu = ({ el }) => {
                             && s.link_active)}
                     >
 
-                        {item.name}
+                        <p className={classNames(s.point, hiddenMenu && s.point_hidden)}>{item.name}</p>
 
                     </Link>
                 })}

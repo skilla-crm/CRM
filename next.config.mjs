@@ -13,7 +13,7 @@ const nextConfig = {
                 source: '/orders/order_detail',
                 destination: '/orders',
                 permanent: true,
-            }
+            },
         ]
     },
     reactStrictMode: true,
