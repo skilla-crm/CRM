@@ -15,6 +15,10 @@ export default async function Edit() {
   const ispro = cookieStore.get('ispro')
   const isBlocked = cookieStore.get('is_blocked')
 
+  if (!token) {
+    redirect('https://lk.skilla.ru/login')
+  }
+
   if (isBlocked?.value === '1') {
     redirect('/pay')
   }

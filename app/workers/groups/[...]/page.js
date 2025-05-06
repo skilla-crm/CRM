@@ -8,7 +8,7 @@ const DynamicModuleContainer = dynamic(() =>
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Orders() {
+export default async function Groups() {
   const id = "root_groups"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
@@ -16,9 +16,15 @@ export default async function Orders() {
   const ispro = cookieStore.get('ispro')
   const isBlocked = cookieStore.get('is_blocked')
 
+  if (!token) {
+    redirect('https://lk.skilla.ru/login')
+  }
+
   if (isBlocked?.value === '1') {
     redirect('/pay')
   }
+
+
 
   return (
 

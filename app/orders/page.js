@@ -17,6 +17,10 @@ export default async function Orders() {
   const ispro = cookieStore.get('is_pro')
   const isBlocked = cookieStore.get('is_blocked')
 
+  if (!token) {
+    redirect('https://lk.skilla.ru/login')
+  }
+
   if (isBlocked?.value === '1') {
     redirect('/pay')
   }
