@@ -277,6 +277,10 @@
         max-height: calc(100% - 478px);
     }
 
+    &_maxheight4 {
+        max-height: calc(100% - 408px);
+    }
+
     &_block {
         opacity: 0.5;
         pointer-events: none;

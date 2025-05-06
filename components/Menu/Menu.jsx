@@ -186,7 +186,8 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
 
                 <Scrollbar className={classNames(s.navigation, dopBlockState && s.navigation_maxheight2,
-                    ispro && s.navigation_maxheight3,
+                    (ispro === '0' && !dopBlockState) && s.navigation_maxheight3,
+                    (ispro === '0' && dopBlockState) && s.navigation_maxheight4,
                     (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block)}>
                     <div className={s.container}>
                         {menuItem.map(el => {
