@@ -11,8 +11,8 @@ import classNames from 'classnames';
 import s from './Menu.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import cat from '@/public/images/cat.jpg';
-import logo from '@/public/images/skilla.png';
+import AvatarDefault from '@/public/images/AvatarDefault.png';
+import Logo from '@/public/images/skilla.png';
 import ProfileLogo from '@/public/icons/profileLogo.svg';
 import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
@@ -30,6 +30,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const hidemenu = cookies.get('hidemenu')
     const avatar_mini = cookies.get('avatar_mini')
     const name = cookies.get('name')
+    const partnershipName = cookies.get('partnership_name')
     const date = cookies.get('date')
     const brand = cookies.get('brand')
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
@@ -53,7 +54,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
@@ -84,9 +85,11 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         e.stopPropagation()
         if (hiddenMenu) {
             setHiddenMenu(false)
+            cookies.remove('hidemenu')
             cookies.set('hidemenu', '0')
         } else {
             setHiddenMenu(true)
+            cookies.remove('hidemenu')
             cookies.set('hidemenu', '1')
         }
     }
@@ -123,7 +126,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div className={s.header}>
                     {brand === '0' ?
-                        <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={logo} alt='логотип'></Image>
+                        <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
                         :
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
                             src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
@@ -136,10 +139,12 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                 <div onClick={handleOpenCompanyProfile} className={classNames(s.profile, hiddenMenu && s.profile_hidden)}>
                     <ProfileLogo className={classNames(s.logo_small, hiddenMenu && s.logo_hidden)} />
                     <div className={classNames(s.avatar, hiddenMenu && s.avatar_hidden)}>
-                        <img src={avatar_mini
-                            ? `https://lk.skilla.ru/images/persons/chat/${avatar_mini}`
+                        {avatar_mini === '' ?
+                            <Image src={AvatarDefault} alt='логотип'></Image>
                             :
-                            cat} alt='аватар пользователя' />
+                            <img src={`https://lk.skilla.ru/images/persons/chat/${avatar_mini}`} alt='аватар пользователя' />
+                        }
+
                     </div>
 
                     <div className={classNames(s.block, hiddenMenu && s.block_hidden)}>
@@ -147,6 +152,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                         {<p className={classNames(s.company, !isLoading && s.company_vis)}>
                             {activeCompany?.name && activeCompany?.name}
                             {!activeCompany?.name && partnershipsDop?.length > 0 && 'Все компании'}
+                            {partnershipsDop?.length === 0 && decodeURI(partnershipName)}
                         </p>}
 
                         {partnershipsDop?.length === 0 && <p className={s.company}>{company?.name}</p>}

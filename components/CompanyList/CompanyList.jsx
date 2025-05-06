@@ -18,7 +18,13 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
         return acc;
     }, []).map((el) => { return el.city });
 
-    console.log(cities)
+    useEffect(() => {
+        if (partnershipsDop && company && partnershipsDop?.length === 0) {
+            setActiveCompany(company)
+            return
+        }
+
+    }, [company, partnershipsDop])
 
     const handleOpen = () => {
         open ? setOpen(false) : setOpen(true)
@@ -58,56 +64,56 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
             </div>
 
             <ul ref={listRef} style={{ maxHeight: open ? `${allCompanies?.length * 44 + 44 + 40 + 4 + cities?.length * 30}px` : '0' }} className={classNames(s.list, open && s.list_open)}>
-            {/*  <p className={s.city}>{company?.city}</p> */}
+                {/*  <p className={s.city}>{company?.city}</p> */}
 
-            {partnershipsDop?.length > 0 && <li onClick={() => handleChoseActiveCompany({})} className={classNames(s.item, s.item_2, !activeCompany?.id && s.item_active)}>
-                <p>Все компании</p>
-                <div className={classNames(s.done_2, !activeCompany?.id && s.done_active)}>
-                    <Done />
-                </div>
-            </li>}
-
-            <li onClick={() => handleChoseActiveCompany(company)} className={classNames(s.item, activeCompany?.id === company?.id && s.item_active)}>
-                <div className={s.block}>
-                    <p>{company?.name}</p>
-                    <span>ИНН {company?.inn} {company?.kpp !== '' && 'КПП'} {company?.kpp}</span>
-                </div>
-                <div className={classNames(s.done, activeCompany?.id === company?.id && s.done_active)}>
-                    <Done />
-                </div>
-            </li>
-
-            {partnershipsDop?.map((el) => {
-                return <li onClick={() => handleChoseActiveCompany(el)} key={el.id} className={classNames(s.item, activeCompany?.id === el.id && s.item_active)}>
-                    <div className={s.block}>
-                        <p>{el.name}</p>
-                        <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
-                    </div>
-                    <div className={classNames(s.done, activeCompany?.id === el.id && s.done_active)}>
+                {partnershipsDop?.length > 0 && <li onClick={() => handleChoseActiveCompany({})} className={classNames(s.item, s.item_2, !activeCompany?.id && s.item_active)}>
+                    <p>Все компании</p>
+                    <div className={classNames(s.done_2, !activeCompany?.id && s.done_active)}>
                         <Done />
                     </div>
+                </li>}
 
+                <li onClick={() => handleChoseActiveCompany(company)} className={classNames(s.item, activeCompany?.id === company?.id && s.item_active)}>
+                    <div className={s.block}>
+                        <p>{company?.name}</p>
+                        <span>ИНН {company?.inn} {company?.kpp !== '' && 'КПП'} {company?.kpp}</span>
+                    </div>
+                    <div className={classNames(s.done, activeCompany?.id === company?.id && s.done_active)}>
+                        <Done />
+                    </div>
                 </li>
-            })}
-            {partnershipsDop?.length > 0 && <div className={s.separator}></div>}
-            {cities?.map((el, i) => {
-                return <div key={i} className={s.block_city}>
-                    <p className={s.city}>{el}</p>
 
-                    {partnerships?.filter((item) => item.city === el)?.map((el) => {
-                        return <li id={el.dir_id} key={el.id} onClick={handleAuthCompany} className={s.item}>
-                            <div className={s.block}>
-                                <p>{el.name}</p>
-                                <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
-                            </div>
+                {partnershipsDop?.map((el) => {
+                    return <li onClick={() => handleChoseActiveCompany(el)} key={el.id} className={classNames(s.item, activeCompany?.id === el.id && s.item_active)}>
+                        <div className={s.block}>
+                            <p>{el.name}</p>
+                            <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
+                        </div>
+                        <div className={classNames(s.done, activeCompany?.id === el.id && s.done_active)}>
+                            <Done />
+                        </div>
 
-                        </li>
+                    </li>
+                })}
+                {partnershipsDop?.length > 0 && <div className={s.separator}></div>}
+                {cities?.map((el, i) => {
+                    return <div key={i} className={s.block_city}>
+                        <p className={s.city}>{el}</p>
 
-                    })}
-                </div>
-            })}
+                        {partnerships?.filter((item) => item.city === el)?.map((el) => {
+                            return <li id={el.dir_id} key={el.id} onClick={handleAuthCompany} className={s.item}>
+                                <div className={s.block}>
+                                    <p>{el.name}</p>
+                                    <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
+                                </div>
 
-        </ul>
+                            </li>
+
+                        })}
+                    </div>
+                })}
+
+            </ul>
         </div >
     )
 }
