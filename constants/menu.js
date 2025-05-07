@@ -61,7 +61,7 @@ export const menuItem = [
     },
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: '?purchase' },
-    { id: 8, name: 'Поддержка', icon: support, link: '/support' },
+    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     { id: 9, name: 'Настройки', icon: settings, link: '/settings' },
 
 ]

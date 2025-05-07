@@ -14,9 +14,6 @@ export default async function Pay() {
   const ispro = cookieStore.get('ispro')
   const id = "root_payment"
 
-
- 
-
   return (
 
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>

@@ -25,6 +25,10 @@ const nextConfig = {
         );
         return config;
     },
+
+   /*  experimental: {
+        nextScriptWorkers: true,
+    }, */
 };
 
 

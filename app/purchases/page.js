@@ -1,6 +1,5 @@
 
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 
@@ -15,11 +14,6 @@ export default async function Purchases() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-  const isBlocked = cookieStore.get('is_blocked')
-
-  if (isBlocked?.value === '1') {
-    redirect('/pay')
-  }
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`} isskilla="0">

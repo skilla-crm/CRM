@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 const DynamicModuleContainer = dynamic(() =>
@@ -14,11 +13,6 @@ export default async function Calls() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('ispro')
-  const isBlocked = cookieStore.get('is_blocked')
-
-  if (isBlocked?.value === '1') {
-    redirect('/pay')
-  }
 
   return (
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@qwik.dev/partytown": "^0.11.0",
     "axios": "^1.9.0",
     "classnames": "^2.5.1",
     "cookie": "^1.0.2",
@@ -25,7 +26,9 @@
     "swr": "^2.3.3"
   },
   "devDependencies": {
+    "@builder.io/partytown": "^0.10.3",
     "@eslint/eslintrc": "^3",
+    "@nuxtjs/partytown": "^1.6.0",
     "@svgr/webpack": "^8.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1"
