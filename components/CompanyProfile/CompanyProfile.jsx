@@ -29,7 +29,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     positions?.sort()
 
     useEffect(() => {
-        if (!isLoading) {
+        if (!isLoading && window.onload) {
             setAllCompanies([...partnershipsDop, ...partnerships])
         }
     }, [partnerships, partnershipsDop, isLoading])
@@ -96,6 +96,8 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                                     {el === 'operator' && 'Менеджер по работе с клиентами'}
                                     {el === 'mainoperator' && 'Контакт-центр'}
                                     {el === 'accountant' && 'Бухгалтер'}
+                                    {el === 'hr' && 'HR'}
+                                    {el === 'hr-assist' && 'Ассистент HR'}
                                 </span>
                                 <div className={s.workers}>
                                     {(persons?.filter(item => item.position === el)).map((el) => {

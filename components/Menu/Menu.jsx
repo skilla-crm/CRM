@@ -1,10 +1,12 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
 import { useCookies } from 'next-client-cookies';
+import useSWR from 'swr'
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/app/actions';
+import { fetchWithToken } from '@/app/api/api';
 import { redirect, usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
@@ -22,7 +24,7 @@ import { menuItem } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
-
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const hiddenButtonRef = useRef()
@@ -33,13 +35,15 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const date = cookies.get('date')
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
+    const token = cookies.get('token')
     const isBlockedCookies = cookies.get('is_blocked');
+    const { data: menuEvents, isLoading: isLoadingEvents } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
+    const [eventsLinks, setEventsLinks] = useState([])
     const router = useRouter()
     const path = usePathname();
-
     const user = menuData?.user;
     const company = menuData?.partnership;
     const partnerships = menuData?.partnerships_contract_to;
@@ -49,7 +53,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const phone = menuData?.phone;
     const email = menuData?.email;
     const isBlocked = company?.is_blocked;
-    const partnershipDate = menuData?.date;
+
     const dateNow = dayjs(date).locale('ru')
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
@@ -58,6 +62,20 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     useEffect(() => {
         create()
     }, [])
+
+    useEffect(() => {
+        if (menuEvents?.orders) {
+            setEventsLinks(prevState => [...prevState, '/orders'])
+        }
+
+        if (menuEvents?.purchases) {
+            setEventsLinks(prevState => [...prevState, '/purchases'])
+        }
+
+        if (menuEvents?.wiki) {
+            setEventsLinks((prevState) => [...prevState, '/support/faq'])
+        }
+    }, [menuEvents])
 
 
     useEffect(() => {
@@ -185,14 +203,25 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
 
 
-                <Scrollbar className={classNames(s.navigation, dopBlockState && s.navigation_maxheight2,
+                <Scrollbar className={classNames(
+                    s.navigation,
+                    dopBlockState && s.navigation_maxheight2,
                     (ispro === '0' && !dopBlockState) && s.navigation_maxheight3,
                     (ispro === '0' && dopBlockState) && s.navigation_maxheight4,
-                    (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block)}>
+                    (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block,
+                )}>
                     <div className={s.container}>
                         {menuItem.map(el => {
+                            const eventsSub = eventsLinks.some(link => link.includes(el?.link))
                             if (el.submenu) {
-                                return <SubMenu el={el} key={el.id} hiddenMenu={hiddenMenu} setHiddenMenu={setHiddenMenu} />
+                                return <SubMenu
+                                    el={el}
+                                    key={el.id}
+                                    hiddenMenu={hiddenMenu}
+                                    setHiddenMenu={setHiddenMenu}
+                                    eventsLinks={eventsLinks}
+                                    isLoading={isLoading}
+                                />
                             }
                             return <Link
                                 onClick={() => handleBack(el.sublink)}
@@ -200,8 +229,11 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                                 key={el.id}
                                 href={el.link}
                                 className={classNames(s.link,
-                                    (path === el.link || (el.sublink && path.includes(el.sublink)))
-                                    && s.link_active, hiddenMenu && s.link_hidden)}
+                                    eventsSub && s.link_events,
+                                    isLoading && s.link_events_hidden,
+                                    eventsSub && path === el.link && s.link_events_active,
+                                    (path === el.link || (el.sublink && path.includes(el.sublink))) && s.link_active,
+                                    hiddenMenu && s.link_hidden)}
                             >
                                 <el.icon />
 
@@ -219,9 +251,34 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     )
 };
 
-const SubMenu = ({ el, hiddenMenu, setHiddenMenu }) => {
+const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading }) => {
     const path = usePathname();
     const [open, setOpen] = useState(false);
+    const [events, setEvents] = useState(false);
+    const [active, setActive] = useState(false);
+
+    useEffect(() => {
+        if (eventsLinks.some(link => link.includes(el?.link))) {
+            setEvents(true)
+        } else {
+            setEvents(false)
+        }
+    }, [eventsLinks, el])
+
+    useEffect(() => {
+        if (el.submenu.some(link => path === link.link) && !hiddenMenu) {
+            setOpen(true)
+            return
+        }
+    }, [path, el, hiddenMenu])
+
+    useEffect(() => {
+        if (el.submenu.some(link => path.includes(link.link)) && !open && !isLoading) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [path, el, open, isLoading])
 
     useEffect(() => {
         hiddenMenu && setOpen(false)
@@ -242,21 +299,30 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu }) => {
 
     return (
         <div className={s.link_list}>
-            <div onClick={handleOpen} className={classNames(s.link, hiddenMenu && s.link_hidden)}>
+            <div onClick={handleOpen} className={classNames(
+                s.link,
+                events && s.link_events,
+                open && s.link_events_hidden,
+                hiddenMenu && s.link_hidden,
+                active && s.link_active,
+                events && active && s.link_events_active,
+            )}>
                 <el.icon />
                 <p className={classNames(s.point, hiddenMenu && s.point_hidden)}>{el.name}</p>
                 <Arrow className={classNames(s.arrow, open && s.arrow_up, hiddenMenu && s.arrow_right)} />
             </div>
 
-            <ul className={classNames(s.list, open && s.list_open)}>
+            <ul style={{ maxHeight: open ? `${el.submenu.length * 44}px` : 0 }} className={classNames(s.list, open && s.list_open)}>
                 {el.submenu.map(item => {
+                    const eventsSub = eventsLinks.some(link => link.includes(item?.link))
                     return <Link
                         id={item.id}
                         key={item.id}
                         href={item.link}
                         className={classNames(s.link, s.link_sub,
+                            eventsSub && s.link_events,
+                            eventsSub && path === item.link && s.link_events_active,
                             (path === item.link || (el.sublink && path.includes(el.sublink)))
-
                             && s.link_active)}
                     >
 

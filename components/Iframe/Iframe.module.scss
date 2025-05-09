@@ -20,3 +20,14 @@
     overflow: hidden;
     border: none;
 }
+
+.sceleton {
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.15s ease-in-out;
+
+    &_hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

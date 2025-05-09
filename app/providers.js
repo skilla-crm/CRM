@@ -1,24 +1,45 @@
+
+
 'use client'
 import s from './layout.module.scss';
 import useSWR from 'swr'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useCookies } from 'next-client-cookies';
 import { MenuContext } from "@/contexts/MenuContext";
 import { useEffect, useState } from "react";
 import Menu from "@/components/Menu/Menu";
 import { fetchWithToken } from '@/app/api/api';
-const urlMenu = `https://api2.skilla.ru/api/menu`
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL 
 
 export function Providers({ children }) {
-
+    const router = useRouter()
     const cookies = useCookies();
     const token = cookies.get('token')
     const activeCompanyId = cookies.get('active-company')
-    const { data: menuData, isLoading } = useSWR(urlMenu, url => fetchWithToken(url, token))
+    const { data: menuData, isLoading } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
     const [activeCompany, setActiveCompany] = useState({});
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            window.onfocus = function () {
+                const getCookieDocument = () => {
+                    let cookie = document.cookie.split('; ').find(row => row.startsWith('token' + '='));
+                    return cookie ? cookie.split('=')[1] : null;
+                  }
 
+                  const cookieDocument = getCookieDocument()
+                  if(!cookieDocument) {
+                    router.push('https://lk.skilla.ru/login')
+                    return
+                  }
 
+                  if(cookieDocument === token) {
+                    router.push('https://lk.skilla.ru/')
+                    return
+                  }
+            };
+        }
+    }, [isLoading])
 
     /*   useEffect(() => {
           const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)

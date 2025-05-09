@@ -8,8 +8,7 @@ import { Providers } from './providers';
 
 
 export const metadata = {
-  title: "Скилла работа",
-  description: "Скилла работа",
+  title: "Скилла работа"
 };
 
 const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 'swap' })

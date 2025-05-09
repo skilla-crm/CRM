@@ -16,7 +16,7 @@
     z-index: 26;
     position: relative;
     transition: all 0.25s ease-in-out;
-   
+
 
     &_hidden {
         width: 64px;
@@ -179,10 +179,10 @@
     font-weight: 400;
     line-height: 18px;
     overflow: hidden;
-   /*  text-wrap: nowrap; */
+    /*  text-wrap: nowrap; */
     text-overflow: ellipsis;
     min-height: 18px;
-    max-height:0;
+    max-height: 0;
     height: max-content;
 
     opacity: 0;
@@ -274,7 +274,7 @@
     }
 
     &_maxheight3 {
-        max-height: calc(100% - 478px);
+        max-height: calc(100% - 440px);
     }
 
     &_maxheight4 {
@@ -309,14 +309,17 @@
     color: rgba(255, 255, 255, 0.56);
     border-radius: 0px 4px 4px 0px;
     transition: all 0.15s ease-in-out;
+    overflow: hidden;
     cursor: pointer;
 
-     p {
+    p {
         text-wrap: nowrap;
-     }
+        z-index: 2;
+    }
 
     svg {
         flex-shrink: 0;
+        z-index: 2;
     }
 
     svg path {
@@ -330,11 +333,19 @@
         svg path {
             fill: #FFF;
         }
+
+        .arrow {
+            opacity: 1;
+        }
     }
 
     &_active {
         background-color: #222B4A;
         color: #FFF;
+
+        .arrow {
+            opacity: 1;
+        }
 
         svg path {
             fill: #FFF;
@@ -355,9 +366,65 @@
         width: 100%;
         margin-right: 0;
     }
+
+    &_events {
+        position: relative;
+        transition: all 0.15s ease-in-out;
+
+        &::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            border-left: 4px solid #FFD500;
+            background: linear-gradient(90deg, #3E412A 3%, #091336 19%);
+            transition: all 0.2s ease-in-out;
+        }
+        
+
+        &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            opacity: 0;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            border-left: 4px solid #FFD500;
+            background: #2F342E;
+            transition: all 0.2s ease-in-out;
+        }
+
+        &:hover::after {
+            opacity: 0.8;
+          }
+
+          &_hidden {
+            &::before {
+                opacity: 0;
+            }
+
+            &:hover::after {
+                opacity: 0;
+              }
+          }
+
+          &_active {
+            &::after {
+                opacity: 0.8;
+            }
+          }
+    }
 }
 
 .arrow {
+    opacity: 0;
     margin-left: auto;
     transition: all 0.2s ease-in-out;
     overflow: hidden;
@@ -367,6 +434,7 @@
     }
 
     &_up {
+        opacity: 1;
         transform: rotate(180deg);
     }
 
@@ -384,11 +452,10 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    /*    visibility: hidden; */
+       visibility: hidden;
     transition: all 0.2s ease-in-out;
 
     &_open {
-        max-height: 258px;
         visibility: visible;
         opacity: 1;
     }

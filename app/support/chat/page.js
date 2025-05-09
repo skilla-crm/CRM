@@ -2,6 +2,10 @@
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 
+export const metadata = {
+  title: "Чат"
+};
+
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
     .then((module) => module.ModuleContainer)

@@ -45,6 +45,7 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
+  font-size: inherit;
   /* 1 */
 
   /* 1 */
@@ -302,4 +303,24 @@ template {
 }
 
 
+::-webkit-scrollbar-track {
+  background-color: rgba(212, 223, 243, 0) !important;
+}
 
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  background-color: #71869d2e;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #71869d6d;
+  transition: background-color 0.25s;
+}
+
+::-webkit-scrollbar {
+ width: 6px;
+}
