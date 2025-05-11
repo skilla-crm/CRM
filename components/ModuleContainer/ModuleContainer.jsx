@@ -11,10 +11,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   console.log(searchParamsType, path, searchParamsDate)
 
   useEffect(() => {
-    if(path === '/orders') {
-      router.push(path)
-      return
-    }
+   
 
     if(path === '/orders/create') {
       router.push(path)
@@ -39,6 +36,11 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
     if(searchParamsDate && id === 'root_order-create') {
       router.push(`${path}?date=${searchParamsDate}`)
+      return
+    }
+
+    if(path === '/orders') {
+      router.push(path)
       return
     }
 
