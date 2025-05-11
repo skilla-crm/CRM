@@ -1,6 +1,6 @@
 import s from './CompanyProfile.module.scss';
 import { useState, useEffect, useRef } from 'react';
-import { redirect } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import classNames from 'classnames';
 import Scrollbar from 'react-scrollbars-custom';
@@ -10,14 +10,19 @@ import Wallet from '@/public/icons/iconWallet.svg';
 import Logout from '@/public/icons/logout.svg';
 import Forward from '@/public/icons/iconBackForward.svg';
 import Done from '@/public/icons/iconDone.svg';
+import IsLogo from '@/public/icons/skillaIs.svg';
+import IconClose from '@/public/icons/iconClose.svg';
 import AvatarDefault from '@/public/images/AvatarDefault.png';
 //components
 import CompanyList from '../CompanyList/CompanyList';
 import Details from '../Details/Details';
+import dayjs from 'dayjs';
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
     phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details }) => {
+    const path = usePathname();
     const [allCompanies, setAllCompanies] = useState([]);
+    const [openModal, setOpenModal] = useState(false)
     const refProfie = useRef()
     const positions = persons?.reduce((acc, curr) => {
         if (acc.findIndex(el => el.position === curr.position) === -1) {
@@ -39,15 +44,17 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
         setOpen(false)
     }
 
+    const handleOpenModal = () => {
+        setOpenModal(true)
+    }
+
     const handleLogOut = () => {
         redirect('https://lk.skilla.ru/login/logout.php')
     }
 
-
-
     const closeModal = (e) => {
         e.stopPropagation()
-        if (refProfie.current && !refProfie.current.contains(e.target) && !hiddenButtonRef.current.contains(e.target)) {
+        if (refProfie.current && !refProfie.current.contains(e.target) && !hiddenButtonRef.current.contains(e.target) && !openModal) {
             setOpen(false)
             return
         }
@@ -56,7 +63,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     useEffect(() => {
         document.addEventListener('mousedown', closeModal);
         return () => document.removeEventListener('mousedown', closeModal);
-    }, []);
+    }, [openModal]);
 
     return (
         <>
@@ -114,11 +121,11 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                 </Scrollbar>
 
                 <div className={s.bottom}>
-                    <Link href='/support/faq' onClick={handleClose}>
+                    <button className={classNames(s.button, openModal && s.link_active)} onClick={handleOpenModal}>
                         <Dashboard />
                         <p>О Скилла IS</p>
-                    </Link>
-                    <Link href='/pay' onClick={handleClose}>
+                    </button>
+                    <Link href='/pay' onClick={handleClose} className={classNames(path.includes('/pay') && s.link_active)}>
                         <Wallet />
                         <p>Оплата услуг</p>
                     </Link>
@@ -129,6 +136,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     <p>Выйти</p>
                 </button>
             </div>
+            <Modal openModal={openModal} setOpenModal={setOpenModal} />
         </>
 
     )
@@ -154,6 +162,47 @@ const Worker = ({ el }) => {
             <p>{el.name} {el.surname}<sup>{el.position === 'supervisor' ? el.id : ''}</sup></p>
             <Forward />
             {/* <Done /> */}
+        </div>
+    )
+}
+
+const Modal = ({ openModal, setOpenModal }) => {
+    const refModal = useRef()
+    const year = dayjs().format('YYYY')
+    const handleClose = () => {
+        setOpenModal(false)
+    }
+    const closeModal = (e) => {
+        e.stopPropagation()
+        if (refModal.current && !refModal.current.contains(e.target) && openModal) {
+            setOpenModal(false)
+            return
+        }
+    }
+
+    useEffect(() => {
+       
+        document.addEventListener('click', closeModal);
+        return () => document.removeEventListener('click', closeModal);
+    }, [openModal]);
+
+    return (
+        <div className={classNames(s.modal, openModal && s.modal_open)}>
+            <div ref={refModal} className={s.container}>
+                <div onClick={handleClose} className={s.close}>
+                    <IconClose />
+                </div>
+                <IsLogo />
+
+                <p>Skilla © 2013-{year} Копирование информации запрещено<br></br>
+                    Skilla — зарегистрированный товарный знак<br></br>
+                    Номер свидетельства 771589
+                </p>
+
+                <a target='_blank' href='https://skilla.ru/svidetelstvo.html'>Свидетельство о регистрации программы для ЭВM</a>
+
+                <span>Версия 4.0</span>
+            </div>
         </div>
     )
 }

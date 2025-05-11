@@ -31,40 +31,35 @@
   border-bottom: 1px solid #e9edf3;
 }
 
-.container {
-  height: 404px;
-  padding-top: 45px;
+.subheader {
+  height: 45px;
+
+}
+
+
+.column {
   display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}
+
+.string {
+  height: 45px;
+  padding: 0 20px 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.string2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
-
-.graph {
-  width: 860px;
-  height: 320px;
-  position: relative;
-  border-radius: 4px;
-  margin-top: 12px;
-  margin-left: 24px;
-}
-
-.block {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  margin-right: 24px;
-}
-
-.indicator {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-end;
-}
-
 
 .items {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-

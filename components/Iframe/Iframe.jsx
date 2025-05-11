@@ -6,6 +6,9 @@ import classNames from 'classnames'
 import { MenuContext } from "@/contexts/MenuContext";
 //components
 import SkeletonDashboard from '../Skeletons/SkeletonDashboard/SkeletonDashboard';
+import SkeletonСounterparties from '../Skeletons/SkeletonСounterparties/SkeletonСounterparties';
+import SkeletonSettings from '../Skeletons/SkeletonSettings/SkeletonSettings';
+import SkeletonLogs from '../Skeletons/SkeletonLogs/SkeletonLogs';
 
 const Iframe = ({ src, id }) => {
     const { activeCompanyId } = useContext(MenuContext);
@@ -26,7 +29,7 @@ const Iframe = ({ src, id }) => {
     useEffect(() => {
         setTimeout(() => {
             setAnim(true)
-        })
+        }, 50)
     }, [])
 
 
@@ -42,6 +45,9 @@ const Iframe = ({ src, id }) => {
         <div className={classNames(s.window, anim && s.window_anim)}>
             <div className={classNames(s.sceleton, !load && s.sceleton_hidden)}>
                 {id === 'root_dashboard' && <SkeletonDashboard />}
+                {id === 'root_counterparties' && <SkeletonСounterparties />}
+                {id === 'root_settings' && <SkeletonSettings />}
+                {id === 'root_logs' && <SkeletonLogs />}
             </div>
 
             <iframe

@@ -2,6 +2,7 @@
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 
+
 export const metadata = {
   title: "Заказы"
 };
@@ -13,6 +14,7 @@ const DynamicModuleContainer = dynamic(() =>
 )
 
 export default async function Orders() {
+
   const id = "root_orders_dir"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')

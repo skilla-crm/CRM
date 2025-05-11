@@ -52,10 +52,10 @@ export const menuItem = [
         icon: report,
         link: '/clients',
         submenu: [
-            { id: 1, name: 'Итоги компании', link: '/company-results' },
-            { id: 2, name: 'Звонки', link: '/calls' },
-            { id: 3, name: 'Уведомления', link: '/notifications' },
-            { id: 4, name: 'События', link: '/logs' },
+            { id: 1, name: 'Итоги компании', link: '/reports/company-results' },
+            { id: 2, name: 'Звонки', link: '/reports/calls' },
+            { id: 3, name: 'Уведомления', link: '/reports/notifications' },
+            { id: 4, name: 'События', link: '/reports/logs' },
            
         ]
     },

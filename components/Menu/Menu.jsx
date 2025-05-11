@@ -7,7 +7,7 @@ require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/app/actions';
 import { fetchWithToken } from '@/app/api/api';
-import { redirect, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
 import s from './Menu.module.scss';
@@ -53,7 +53,6 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const phone = menuData?.phone;
     const email = menuData?.email;
     const isBlocked = company?.is_blocked;
-
     const dateNow = dayjs(date).locale('ru')
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
@@ -90,8 +89,8 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const handleOpenCompanyProfile = () => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
     }
-
     const handleBack = (link) => {
+       
         if (path.includes(link)) {
             window.history.back()
             return
