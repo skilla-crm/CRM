@@ -33,7 +33,7 @@ export function Providers({ children }) {
                     return
                   }
 
-                  if(cookieDocument === token) {
+                  if(cookieDocument !== token) {
                     router.push('https://lk.skilla.ru/')
                     return
                   }

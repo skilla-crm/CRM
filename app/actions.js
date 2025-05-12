@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers'
 /* 350|AzgciLV9wnUGymn4vpCMuG8gGWJRtcvEHfZuNgi7 */
 export async function create() {
-    const cookieStore = await cookies()
+   /*  const cookieStore = await cookies()
     cookieStore.set('token', "2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg")
     cookieStore.set('role', "director")
     cookieStore.set('avatar_mini', "7648_mini.jpg")
@@ -11,5 +11,5 @@ export async function create() {
     cookieStore.set('date', "2025-05-05") 
     cookieStore.set('brand', "0")
     cookieStore.set('is_pro', "0")
-    cookieStore.set('is_blocked', "0")
+    cookieStore.set('is_blocked', "0") */
 }

@@ -58,9 +58,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-    useEffect(() => {
+   /*  useEffect(() => {
         create()
-    }, [])
+    }, []) */
 
     useEffect(() => {
         if (menuEvents?.orders) {
