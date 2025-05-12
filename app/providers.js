@@ -29,15 +29,15 @@ export function Providers({ children }) {
                 }
             
 
-                const cookieDocument = getCookieDocument().replace('%', '|')
-                console.log(cookieDocument, token)
+                const cookieDocument = getCookieDocument().replace('%7C', '|')
+                console.log(cookieDocument, token, cookieDocument === token)
 
                 if (!cookieDocument) {
                     router.push('https://lk.skilla.ru/login')
                     return
                 }
 
-                  if(cookieDocument !== token) {
+                  if(cookieDocument && cookieDocument !== token) {
                     router.push('https://lk.skilla.ru/')
                     return
                   }
