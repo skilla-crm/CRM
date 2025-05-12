@@ -296,7 +296,8 @@
 }
 
 .link {
-    width: calc(100% - 12px);
+    width: 238px !important;
+    flex-shrink: 0;
     height: 40px;
     display: flex;
     align-items: center;

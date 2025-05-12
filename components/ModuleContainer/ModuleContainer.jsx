@@ -11,35 +11,45 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   console.log(searchParamsType, path, searchParamsDate)
 
   useEffect(() => {
-   
 
-    if(path === '/orders/create') {
+
+    if (path === '/orders/create') {
       router.push(path)
       return
     }
 
-    if(path.includes('/orders/edit')) {
+    if (path.includes('/orders/edit')) {
       router.push(path)
       return
     }
 
-    if(path.includes('/orders/order_detail/') && id === 'root_order-create') {
+    if (path.includes('/orders/order_detail/') && id === 'root_order-create') {
       router.push(path)
       return
     }
 
 
-    if(searchParamsType && id === 'root_order-create') {
+    if (searchParamsType && id === 'root_order-create') {
       router.push(`${path}?type=preorder&date=${searchParamsDate}`)
       return
     }
 
-    if(searchParamsDate && id === 'root_order-create') {
+    if (searchParamsDate && id === 'root_order-create') {
       router.push(`${path}?date=${searchParamsDate}`)
       return
     }
 
-    if(path === '/orders') {
+    if (path === '/orders') {
+      router.push(path)
+      return
+    }
+
+    if (path === '/workers/add') {
+      router.push(path)
+      return
+    }
+
+    if (path.includes('/worker/')) {
       router.push(path)
       return
     }

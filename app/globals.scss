@@ -55,6 +55,10 @@ textarea {
   /* 2 */
 }
 
+input {
+  outline: none;
+}
+
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.
@@ -300,6 +304,10 @@ template {
 .trackYVisible>.ScrollbarsCustom-TrackY {
   opacity: 1;
   transition: all 0.15s ease-in-out;
+}
+
+.ScrollbarsCustom-Scroller {
+  margin-right: 0 !important;
 }
 
 

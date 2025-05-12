@@ -32,9 +32,9 @@ export const menuItem = [
         id: 4,
         name: 'Исполнители',
         icon: workers,
-
+       
         submenu: [
-            { id: 1, name: 'Все исполнители', link: '/workers' },
+            { id: 1, name: 'Все исполнители', link: '/workers', sublink: '/worker/'},
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
@@ -56,12 +56,12 @@ export const menuItem = [
             { id: 2, name: 'Звонки', link: '/reports/calls' },
             { id: 3, name: 'Уведомления', link: '/reports/notifications' },
             { id: 4, name: 'События', link: '/reports/logs' },
-           
+
         ]
     },
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: '?purchase' },
-   /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
     {
         id: 8,
         name: 'Поддержка',
@@ -69,7 +69,7 @@ export const menuItem = [
         link: '/support',
         submenu: [
             { id: 1, name: 'Чат', link: '/support/chat' },
-            { id: 2, name: 'База знаний', link: '/support/faq' }, 
+            { id: 2, name: 'База знаний', link: '/support/faq' },
         ]
     },
     { id: 9, name: 'Настройки', icon: settings, link: '/settings' },

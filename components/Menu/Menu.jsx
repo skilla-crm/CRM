@@ -58,9 +58,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-   /*  useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         if (menuEvents?.orders) {
@@ -90,7 +90,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
     }
     const handleBack = (link) => {
-       
+
         if (path.includes(link)) {
             window.history.back()
             return
@@ -265,7 +265,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading }) => {
     }, [eventsLinks, el])
 
     useEffect(() => {
-        if (el.submenu.some(link => path === link.link) && !hiddenMenu) {
+        if ((el.submenu.some(link => path === link.link) || el.submenu.some(link => path.includes(link.sublink))) && !hiddenMenu) {
             setOpen(true)
             return
         }
@@ -293,7 +293,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading }) => {
     }
 
     useEffect(() => {
-        open && !el.submenu.find(el => el.link === path) && setOpen(false)
+        open && !el.submenu.find(el => path.includes(el.link) || path.includes(el.sublink)) && setOpen(false)
     }, [path, el.submenu]);
 
     return (
@@ -321,7 +321,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading }) => {
                         className={classNames(s.link, s.link_sub,
                             eventsSub && s.link_events,
                             eventsSub && path === item.link && s.link_events_active,
-                            (path === item.link || (el.sublink && path.includes(el.sublink)))
+                            (path === item.link || (item.sublink && path.includes(item.sublink)))
                             && s.link_active)}
                     >
 

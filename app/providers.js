@@ -18,7 +18,6 @@ export function Providers({ children }) {
     const activeCompanyId = cookies.get('active-company')
     const { data: menuData, isLoading } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
     const [activeCompany, setActiveCompany] = useState({});
-    console.log(document.visibilityState)
 
     const chekToken = () => {
         const getCookieDocument = () => {
@@ -39,14 +38,14 @@ export function Providers({ children }) {
         }
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         document.addEventListener('visibilitychange', chekToken)
 
         return () => {
             document.removeEventListener('visibilitychange', chekToken)
         }
 
-    }, [])
+    }, []) */
 
     /*   useEffect(() => {
           const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)
