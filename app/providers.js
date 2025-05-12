@@ -40,12 +40,12 @@ export function Providers({ children }) {
     }
 
     useEffect(() => {
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') {
-                chekToken()
-                return
-            }
-        })
+        document.addEventListener('visibilitychange', chekToken)
+
+        return () => {
+            document.removeEventListener('visibilitychange', chekToken)
+        }
+
     }, [])
 
     /*   useEffect(() => {
