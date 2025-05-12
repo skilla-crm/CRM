@@ -9,7 +9,7 @@ import { MenuContext } from "@/contexts/MenuContext";
 import { useEffect, useState } from "react";
 import Menu from "@/components/Menu/Menu";
 import { fetchWithToken } from '@/app/api/api';
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL 
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 export function Providers({ children }) {
     const router = useRouter()
@@ -21,22 +21,26 @@ export function Providers({ children }) {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
+
             window.onfocus = function () {
                 const getCookieDocument = () => {
                     let cookie = document.cookie.split('; ').find(row => row.startsWith('token' + '='));
                     return cookie ? cookie.split('=')[1] : null;
-                  }
+                }
+            
 
-                  const cookieDocument = getCookieDocument()
-                  if(!cookieDocument) {
+                const cookieDocument = getCookieDocument()
+                console.log(cookieDocument, token)
+                
+                if (!cookieDocument) {
                     router.push('https://lk.skilla.ru/login')
                     return
-                  }
+                }
 
-                  if(cookieDocument !== token) {
+                /*   if(cookieDocument !== token) {
                     router.push('https://lk.skilla.ru/')
                     return
-                  }
+                  } */
             };
         }
     }, [isLoading])
