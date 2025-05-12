@@ -18,32 +18,35 @@ export function Providers({ children }) {
     const activeCompanyId = cookies.get('active-company')
     const { data: menuData, isLoading } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
     const [activeCompany, setActiveCompany] = useState({});
+    console.log(document.visibilityState)
+
+    const chekToken = () => {
+        const getCookieDocument = () => {
+            let cookie = document.cookie.split('; ').find(row => row.startsWith('token' + '='));
+            return cookie ? cookie.split('=')[1] : null;
+        }
+        const cookieDocument = getCookieDocument().replace('%7C', '|')
+        console.log(cookieDocument, token, cookieDocument === token)
+
+        if (!cookieDocument) {
+            router.push('https://lk.skilla.ru/login')
+            return
+        }
+
+        if (cookieDocument && cookieDocument !== token) {
+            router.push('https://lk.skilla.ru/')
+            return
+        }
+    }
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-
-            window.onfocus = function () {
-                const getCookieDocument = () => {
-                    let cookie = document.cookie.split('; ').find(row => row.startsWith('token' + '='));
-                    return cookie ? cookie.split('=')[1] : null;
-                }
-            
-
-                const cookieDocument = getCookieDocument().replace('%7C', '|')
-                console.log(cookieDocument, token, cookieDocument === token)
-
-                if (!cookieDocument) {
-                    router.push('https://lk.skilla.ru/login')
-                    return
-                }
-
-                  if(cookieDocument && cookieDocument !== token) {
-                    router.push('https://lk.skilla.ru/')
-                    return
-                  }
-            };
-        }
-    }, [isLoading])
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                chekToken()
+                return
+            }
+        })
+    }, [])
 
     /*   useEffect(() => {
           const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)
