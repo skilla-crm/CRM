@@ -29,18 +29,18 @@ export function Providers({ children }) {
                 }
             
 
-                const cookieDocument = getCookieDocument()
+                const cookieDocument = getCookieDocument().replace('%', '|')
                 console.log(cookieDocument, token)
-                
+
                 if (!cookieDocument) {
                     router.push('https://lk.skilla.ru/login')
                     return
                 }
 
-                /*   if(cookieDocument !== token) {
+                  if(cookieDocument !== token) {
                     router.push('https://lk.skilla.ru/')
                     return
-                  } */
+                  }
             };
         }
     }, [isLoading])
