@@ -42,6 +42,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const [dopBlockState, setDopBlock] = useState(false);
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
     const [eventsLinks, setEventsLinks] = useState([])
+    const [visButton, setVisButton] = useState(false)
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
@@ -58,7 +59,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-    /* useEffect(() => {
+   /*  useEffect(() => {
         create()
     }, []) */
 
@@ -113,11 +114,19 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     }
 
 
+    const handleVisButton = () => {
+        setVisButton(true)
+    }
+
+     const handleHiddenButton = () => {
+        setVisButton(false)
+    }
+
 
     return (
-        <div className={s.root}>
+        <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
 
-            <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && s.button_hide_active)}>
+            <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />
             </button>
 
@@ -142,9 +151,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
-                <div className={s.header}>
+                <div onClick={handleHidenMenu} className={s.header}>
                     {(brand === '0' || !brand) ?
-                        <Image className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
+                        <Image height={36} className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
                         :
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
                             src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
@@ -241,8 +250,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                             </Link>
                         })}
                     </div>
-
+                    <div onClick={handleHidenMenu} className={s.area}></div>
                 </Scrollbar>
+
                 <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
             </div>
         </div>

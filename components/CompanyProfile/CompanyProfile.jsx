@@ -10,6 +10,7 @@ import Wallet from '@/public/icons/iconWallet.svg';
 import Logout from '@/public/icons/logout.svg';
 import Forward from '@/public/icons/iconBackForward.svg';
 import Done from '@/public/icons/iconDone.svg';
+import IconFaq from '@/public/icons/menu/iconFaq.svg';
 import IsLogo from '@/public/icons/skillaIs.svg';
 import IconClose from '@/public/icons/iconClose.svg';
 import AvatarDefault from '@/public/images/AvatarDefault.png';
@@ -121,10 +122,14 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                 </Scrollbar>
 
                 <div className={s.bottom}>
-                    <button className={classNames(s.button, openModal && s.link_active)} onClick={handleOpenModal}>
+                    {/* {<button className={classNames(s.button, openModal && s.link_active)} onClick={handleOpenModal}>
                         <Dashboard />
                         <p>О Скилла IS</p>
-                    </button>
+                    </button>} */}
+                    <Link href='/support/faq' className={classNames(path.includes('/support/faq') && s.link_active)} onClick={handleClose}>
+                        <IconFaq />
+                        <p>База знаний</p>
+                    </Link>
                     <Link href='/pay' onClick={handleClose} className={classNames(path.includes('/pay') && s.link_active)}>
                         <Wallet />
                         <p>Оплата услуг</p>
@@ -143,17 +148,23 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 };
 
 const Worker = ({ el }) => {
+    const [avatarError, setAvtarError] = useState(false)
 
     const handleAuthWorker = (e) => {
         const id = e.currentTarget.id
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
 
+    const handleLoadAvatarError = () => {
+        console.log('аватар ошибка')
+        setAvtarError(true)
+    }
+
     return (
         <div id={el.id} onClick={handleAuthWorker} className={s.worker}>
             <div className={s.avatar}>
-                {el.avatar_mini !== '' ?
-                    <img src={`https://lk.skilla.ru/images/persons/chat/${el?.avatar_mini}`} alt='аватар'></img>
+                {el.avatar_mini !== '' && !avatarError ?
+                    <img onError={handleLoadAvatarError} src={`https://lk.skilla.ru/images/persons/chat/${el?.avatar_mini}`} alt='аватар'></img>
                     :
                     <Image src={AvatarDefault} alt='аватар' />
                 }
@@ -181,7 +192,7 @@ const Modal = ({ openModal, setOpenModal }) => {
     }
 
     useEffect(() => {
-       
+
         document.addEventListener('click', closeModal);
         return () => document.removeEventListener('click', closeModal);
     }, [openModal]);
