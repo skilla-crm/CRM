@@ -1,23 +1,18 @@
 
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
-import { ModuleContainer } from '@/components/ModuleContainer/ModuleContainer';
-import Script from 'next/script';
-
 
 export const metadata = {
-  title: "Заказы"
+  title: "Группы"
 };
 
-/* 
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
     .then((module) => module.ModuleContainer)
-) */
+)
 
-export default async function Orders() {
-
-  const id = "root_orders_dir"
+export default async function GroupsUpdate() {
+  const id = "root_groups"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
@@ -25,8 +20,11 @@ export default async function Orders() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-    {/*   <Script id={`${id}script`} src={process.env.REACT_APP_URL_ORDERS} strategy="afterInteractive" /> */}
-       <ModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_GROUPS} srcCss={process.env.REACT_APP_URL_GROUPS_CSS} id={id} />
     </div>
+
+
+
+
   );
 }

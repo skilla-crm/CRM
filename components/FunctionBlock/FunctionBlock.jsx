@@ -121,7 +121,7 @@ const MultiFunctionButton = ({ hiddenMenu }) => {
                 {/* <Link onClick={handleCloseMenu} href={''}><li><LoadDocs/> Загрузить выписку</li></Link> */}
                 <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
                 {/* <div></div> */}
-                <Link onClick={handleCloseMenu} href={'/worker/new'}><li><Worker /> Добавить исполнителя</li></Link>
+                <Link onClick={handleCloseMenu} href={'/workers/add'}><li><Worker /> Добавить исполнителя</li></Link>
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Customer/> Добавить заказчика</li></Link> */}
             </ul>
         </div>

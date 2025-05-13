@@ -16,8 +16,8 @@ const Iframe = ({ src, id }) => {
     const [anim, setAnim] = useState(false)
     const [link, setLink] = useState('')
     const item = document.getElementById(id);
+    
     useEffect(() => {
-        console.log(item)
         if (item) {
             item.onload = () => {
                 setLoad(false)

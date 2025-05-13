@@ -8,11 +8,9 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
 
-  console.log(searchParamsType, path, searchParamsDate)
+
 
   useEffect(() => {
-
-
     if (path === '/orders/create') {
       router.push(path)
       return
@@ -57,9 +55,13 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   }, [path])
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
+     const script = document.createElement('script');
+     script.src = src;
+     script.async = true;
+
+/*     const script = document.getElementById(`${id}script`); */
+
+    console.log(script)
 
     const link = document.createElement('link');
     link.href = srcCss;
@@ -68,10 +70,10 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
     document.head.appendChild(link);
 
-    document.body.appendChild(script);
+       document.body.appendChild(script);
 
     return () => {
-      if (script.parentNode) {
+      if (script && script.parentNode) {
         document?.body?.removeChild(script);
       }
 
