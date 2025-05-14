@@ -5,6 +5,10 @@
     width: 500px;
     display: flex;
     justify-content: center;
+    visibility: hidden;
+    &_anim {
+        visibility: visible;
+    }
 }
 
 .notification {

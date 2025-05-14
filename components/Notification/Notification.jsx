@@ -29,7 +29,7 @@ const Notification = ({ type, text, open, setOpen }) => {
 
 
     return (
-        <div className={s.root}>
+        <div className={classNames(s.root, anim && s.root_anim)}>
             <div className={classNames(s.notification, anim && s.notification_anim)}>
                 <div className={s.line}></div>
                 {type === 'copy' && <Copy />}
