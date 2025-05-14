@@ -35,7 +35,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     positions?.sort()
 
     useEffect(() => {
-        if (!isLoading && window.onload) {
+        if (!isLoading) {
             setAllCompanies([...partnershipsDop, ...partnerships])
         }
     }, [partnerships, partnershipsDop, isLoading])
