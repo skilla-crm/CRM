@@ -9,14 +9,13 @@ export const metadata = {
   title: "Заказы"
 };
 
-/* 
+
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
     .then((module) => module.ModuleContainer)
-) */
+)
 
 export default async function Orders() {
-
   const id = "root_orders_dir"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
@@ -25,8 +24,7 @@ export default async function Orders() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-    {/*   <Script id={`${id}script`} src={process.env.REACT_APP_URL_ORDERS} strategy="afterInteractive" /> */}
-       <ModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
+       <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
     </div>
   );
 }

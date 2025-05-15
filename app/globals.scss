@@ -85,6 +85,10 @@ select {
  * Correct the inability to style clickable types in iOS and Safari.
  */
 
+ ul {
+  list-style-type: none;
+ }
+
 button,
 [type="button"],
 [type="reset"],

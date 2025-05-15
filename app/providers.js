@@ -38,14 +38,14 @@ export function Providers({ children }) {
         }
     }
 
-  /*   useEffect(() => {
+    useEffect(() => {
         document.addEventListener('visibilitychange', chekToken)
 
         return () => {
             document.removeEventListener('visibilitychange', chekToken)
         }
 
-    }, []) */
+    }, [])
 
     /*   useEffect(() => {
           const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)

@@ -55,22 +55,15 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   }, [path])
 
   useEffect(() => {
-     const script = document.createElement('script');
-     script.src = src;
-     script.async = true;
-
-/*     const script = document.getElementById(`${id}script`); */
-
-    console.log(script)
-
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
     const link = document.createElement('link');
     link.href = srcCss;
     link.rel = 'stylesheet';
     link.type = 'text/css';
-
     document.head.appendChild(link);
-
-       document.body.appendChild(script);
+    document.body.appendChild(script);
 
     return () => {
       if (script && script.parentNode) {
