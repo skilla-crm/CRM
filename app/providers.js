@@ -61,7 +61,7 @@ export function Providers({ children }) {
                 setActiveCompany={setActiveCompany}
             />
             <div className={s.container}>
-                <MenuContext.Provider value={{ activeCompanyId: activeCompany?.id ? activeCompany.id : '' }}>
+                <MenuContext.Provider value={{ activeCompanyId: activeCompany?.id ? activeCompany.id : 0 }}>
                     {children}
                 </MenuContext.Provider>
             </div>
