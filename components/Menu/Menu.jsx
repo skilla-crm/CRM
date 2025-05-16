@@ -19,11 +19,13 @@ import ProfileLogo from '@/public/icons/profileLogo.svg';
 import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
+import BadgePro from '@/public/icons/badgePro.svg';
 //constants
 import { menuItem } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
+import ProModal from '../ProModal/ProModal';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
@@ -59,9 +61,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-    useEffect(() => {
+    /* useEffect(() => {
         create()
-    }, [])
+    }, []) */
 
     useEffect(() => {
         if (menuEvents?.orders) {
@@ -163,13 +165,13 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
                 <div onClick={handleOpenCompanyProfile} className={classNames(s.profile, hiddenMenu && s.profile_hidden)}>
                     <ProfileLogo className={classNames(s.logo_small, hiddenMenu && s.logo_hidden)} />
+                    <BadgePro className={classNames(s.bage, ispro === '1' && !hiddenMenu && s.bage_vis)} />
                     <div className={classNames(s.avatar, hiddenMenu && s.avatar_hidden)}>
                         {(!avatar_mini || avatar_mini === '') ?
                             <Image src={AvatarDefault} alt='логотип'></Image>
                             :
                             <img src={`https://lk.skilla.ru/images/persons/chat/${avatar_mini}`} alt='аватар пользователя' />
                         }
-
                     </div>
 
                     <div className={classNames(s.block, hiddenMenu && s.block_hidden)}>
@@ -197,7 +199,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
 
                     <div className={classNames(s.profile_small, hiddenMenu && s.profile_small_vis)}>
-                        <ProfileLogo />
+                         <ProfileLogo />
+                        <BadgePro/>
+                       
                         <div className={s.block_small}>
                             <p className={s.date}>{dateNow.format('D.MM')}</p>
                             <p className={s.date}>{dateNow.format('dd').slice(0, 1).toUpperCase()}{dateNow.format('dd').slice(1)}</p>
