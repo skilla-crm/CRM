@@ -251,7 +251,7 @@
         color: rgba(255, 255, 255, 0.60);
         margin-left: 6px;
         position: relative;
-        top: -4px;
+        top: 0;
         transition: all 0.15s;
     }
 
@@ -354,7 +354,6 @@
 
 
 .loader {
-    background-color: #091336;
     position: absolute;
     right: 10px;
     opacity: 0;

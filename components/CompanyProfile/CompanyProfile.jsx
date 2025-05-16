@@ -161,7 +161,6 @@ const Worker = ({ el }) => {
     }
 
     const handleLoadAvatarError = () => {
-        console.log('аватар ошибка')
         setAvtarError(true)
     }
 
@@ -173,10 +172,9 @@ const Worker = ({ el }) => {
                     :
                     <Image src={AvatarDefault} alt='аватар' />
                 }
-
             </div>
             <p>{el.name} {el.surname}<sup>{el.position === 'supervisor' ? el.id : ''}</sup></p>
-            <Forward />
+            {!load && <Forward />}
             <div className={classNames(s.loader, load && s.loader_active)}>
                 <LoaderButton color={'#FFF'} />
             </div>
