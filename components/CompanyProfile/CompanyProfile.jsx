@@ -50,6 +50,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     }
 
     const handleLogOut = () => {
+         localStorage.clear();
         redirect('https://lk.skilla.ru/login/logout.php')
     }
 
