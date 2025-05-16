@@ -52,6 +52,22 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       return
     }
 
+    
+    if (path === '/purchases') {
+      router.push(path)
+      return
+    }
+
+    if (path === '/purchases/stock') {
+      router.push(path)
+      return
+    }
+
+   /*  if (path.includes('/purchases/manual')) {
+      router.push(path)
+      return
+    } */
+
   }, [path])
 
   useEffect(() => {

@@ -230,16 +230,21 @@
     flex-shrink: 0;
     padding: 6px 10px;
     border-radius: 4px;
+    position: relative;
     transition: all 0.15s;
 
     p {
         font-size: 16px;
         font-weight: 400;
         line-height: 16px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
     }
 
     sup {
-        opacity: 0;
+        opacity: 1;
         font-size: 12px;
         font-weight: 400;
         line-height: 14px;
@@ -260,10 +265,6 @@
         background-color: rgba(255, 255, 255, 0.10);
 
         svg {
-            opacity: 1;
-        }
-
-        sup {
             opacity: 1;
         }
     }
@@ -348,5 +349,30 @@
 
     &:hover {
         opacity: 0.6;
+    }
+}
+
+
+.loader {
+    background-color: #091336;
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: all 0.15s ease-in-out;
+    width: 16px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+
+    div {
+        flex-shrink: 0;
+    }
+
+    &_active {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
     }
 }

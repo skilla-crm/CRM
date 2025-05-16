@@ -20,10 +20,15 @@ const Iframe = ({ src, id }) => {
     useEffect(() => {
         if (item) {
             item.onload = () => {
+                console.log('pfuhepbkcz')
                 setLoad(false)
             }
+        } else {
+            setLoad(true)
         }
     }, [item])
+
+ 
 
 
     useEffect(() => {
@@ -34,6 +39,7 @@ const Iframe = ({ src, id }) => {
 
 
     useEffect(() => {
+        setLoad(true)
         if (activeCompanyId) {
             setLink(`/?cur_partnership=${activeCompanyId}`)
         } else {

@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+import { Viewport } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server';
 import "./globals.scss";
 import s from './layout.module.scss';
@@ -6,10 +7,16 @@ import s from './layout.module.scss';
 import { Providers } from './providers';
 
 
+ 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export const metadata = {
   title: "Скилла работа",
-  viewport: "width=device-width"
 };
 
 const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 'swap' })

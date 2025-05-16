@@ -21,6 +21,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     useEffect(() => {
         if (partnershipsDop && company && partnershipsDop?.length === 0) {
             setActiveCompany(company)
+            cookies.set('active-company', item.id)
             return
         }
 
@@ -40,6 +41,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
 
     const handleChoseActiveCompany = (item) => {
         setActiveCompany(item)
+        localStorage.setItem('activeCompanyName', JSON.stringify(item))
         cookies.set('active-company', item.id)
         setOpen(false)
     }
@@ -63,10 +65,10 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
                 <Arrow className={classNames(s.arrow, open && s.arrow_up)} />
             </div>
 
-            <ul ref={listRef} style={{ maxHeight: open ? `${allCompanies?.length * 44 + 44 + 40 + 4 + cities?.length * 30}px` : '0' }} className={classNames(s.list, open && s.list_open)}>
-                {/*  <p className={s.city}>{company?.city}</p> */}
-
+            <ul ref={listRef} style={{ maxHeight: open ? `${allCompanies?.length * 44 + 44 + 40 + 30 + 4 + cities?.length * 30}px` : '0' }} className={classNames(s.list, open && s.list_open)}>
+                <p className={s.city}>{company?.city}</p>
                 {partnershipsDop?.length > 0 && <li onClick={() => handleChoseActiveCompany({})} className={classNames(s.item, s.item_2, !activeCompany?.id && s.item_active)}>
+
                     <p>Все компании</p>
                     <div className={classNames(s.done_2, !activeCompany?.id && s.done_active)}>
                         <Done />

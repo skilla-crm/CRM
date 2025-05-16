@@ -59,9 +59,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
- /*    useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         if (menuEvents?.orders) {
@@ -104,12 +104,10 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         e.stopPropagation()
         if (hiddenMenu) {
             setHiddenMenu(false)
-            cookies.remove('hidemenu')
-            cookies.set('hidemenu', '0')
+            document.cookie = 'hidemenu=0'
         } else {
             setHiddenMenu(true)
-            cookies.remove('hidemenu')
-            cookies.set('hidemenu', '1')
+            document.cookie = 'hidemenu=1'
         }
     }
 
@@ -118,7 +116,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         setVisButton(true)
     }
 
-     const handleHiddenButton = () => {
+    const handleHiddenButton = () => {
         setVisButton(false)
     }
 
@@ -152,12 +150,12 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div onClick={handleHidenMenu} className={s.header}>
-                    {(brand === '0' || !brand) ?
-                        <Image height={36} className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
-                        :
+                    {(brand !== '0' && brand) ?
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
                             src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
                         />
+                        :
+                        <Image height={36} className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
                     }
 
 

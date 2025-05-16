@@ -2,6 +2,7 @@ import s from './CompanyProfile.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import dayjs from 'dayjs';
 import classNames from 'classnames';
 import Scrollbar from 'react-scrollbars-custom';
 import Image from 'next/image';
@@ -17,7 +18,8 @@ import AvatarDefault from '@/public/images/AvatarDefault.png';
 //components
 import CompanyList from '../CompanyList/CompanyList';
 import Details from '../Details/Details';
-import dayjs from 'dayjs';
+import LoaderButton from '../LoaderButton/LoaderButton';
+
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
     phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details }) => {
@@ -50,7 +52,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     }
 
     const handleLogOut = () => {
-         localStorage.clear();
+        localStorage.clear();
         redirect('https://lk.skilla.ru/login/logout.php')
     }
 
@@ -150,8 +152,10 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
 const Worker = ({ el }) => {
     const [avatarError, setAvtarError] = useState(false)
+    const [load, setLoad] = useState(false)
 
     const handleAuthWorker = (e) => {
+        setLoad(true)
         const id = e.currentTarget.id
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
@@ -173,6 +177,9 @@ const Worker = ({ el }) => {
             </div>
             <p>{el.name} {el.surname}<sup>{el.position === 'supervisor' ? el.id : ''}</sup></p>
             <Forward />
+            <div className={classNames(s.loader, load && s.loader_active)}>
+                <LoaderButton color={'#FFF'} />
+            </div>
             {/* <Done /> */}
         </div>
     )
