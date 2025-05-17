@@ -7,6 +7,7 @@ import { useCookies } from 'next-client-cookies';
 import { MenuContext } from "@/contexts/MenuContext";
 import { useEffect, useState } from "react";
 import Menu from "@/components/Menu/Menu";
+import ProModal from '@/components/ProModal/ProModal';
 import { fetchWithToken } from '@/app/api/api';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -38,22 +39,18 @@ export function Providers({ children }) {
         }
     }
 
-     useEffect(() => {
-         document.addEventListener('visibilitychange', chekToken)
+    /* useEffect(() => {
+        document.addEventListener('visibilitychange', chekToken)
  
-         return () => {
-             document.removeEventListener('visibilitychange', chekToken)
-         }
+        return () => {
+            document.removeEventListener('visibilitychange', chekToken)
+        }
  
-     }, [])
-
-    /*   useEffect(() => {
-          const active = menuData?.partnerships_connect_to?.find(el => el.id == activeCompanyId)
-          active && setActiveCompany(active)
-      }, [activeCompanyId, menuData]) */
+    }, []) */
 
     return (
         <>
+            <ProModal />
             <Menu
                 menuData={menuData}
                 isLoading={isLoading}

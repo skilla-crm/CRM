@@ -25,7 +25,6 @@ import { menuItem } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
-import ProModal from '../ProModal/ProModal';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
@@ -61,9 +60,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-    /* useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         if (menuEvents?.orders) {
@@ -152,7 +151,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div onClick={handleHidenMenu} className={s.header}>
-                    {(brand !== '0' && brand) ?
+                    {(brand !== 0 || company?.brand_type !== 0) ?
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
                             src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
                         />

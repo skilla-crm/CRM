@@ -60,7 +60,7 @@ export const menuItem = [
         ]
     },
 
-    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: '?purchase' },
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
    /*  {
         id: 8,

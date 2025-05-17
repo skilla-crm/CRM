@@ -1,8 +1,7 @@
 .promodal {
-    position: fixed;
-    right: 0;
-    top: 0;
+    z-index: 10;
     width: 932px;
+    height: fit-content;
     box-sizing: border-box;
     padding: 40px;
     border-radius: 8px;
@@ -18,8 +17,8 @@
     position: relative;
     top: 0;
     left: 0;
-    transform: translateY(-150%);
-    transition: transform 0.4s;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease-in-out;
 
     &_anim {
         transform: translateY(0);
@@ -193,7 +192,7 @@
 }
 
 .promodal__deadline {
-    display: none;
+    display: flex;
     align-items: center;
 }
 
@@ -223,7 +222,7 @@
     border: none;
     width: 24px;
     height: 24px;
-   /*  background: url(../../image/close.png); */
+    background: url(./image/close.png);
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -239,13 +238,13 @@
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
+    padding-top: 120px;
     justify-content: center;
-    z-index: 2;
+    z-index: 50;
     background-color: rgba(0, 0, 0, 0.2);
     visibility: hidden;
     opacity: 0;
-    transition: all 0.2s;
+    transition: all 0.25s ease-in-out;
 
     &_anim {
         opacity: 1;

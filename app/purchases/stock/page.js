@@ -3,9 +3,10 @@ import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 import MenuPurchases from '@/components/MenuPurchases/MenuPurchases'
 
-/* export const metadata = {
-  title: "Закупки"
-}; */
+export const metadata = {
+  title: "Склад"
+};
+
 
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')

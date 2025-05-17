@@ -3,16 +3,16 @@ import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 import MenuPurchases from '@/components/MenuPurchases/MenuPurchases'
 
-/* export const metadata = {
-  title: "Закупки"
-}; */
+export const metadata = {
+  title: "Склад"
+};
 
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Stock() {
+export default async function StockPages() {
   const id = "root_stock"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
@@ -26,5 +26,8 @@ export default async function Stock() {
         <DynamicModuleContainer src={process.env.REACT_APP_URL_STOCK} srcCss={process.env.REACT_APP_URL_STOCK_CSS} id={id} />
       </div>
     </>
+
+
+
   );
 }
