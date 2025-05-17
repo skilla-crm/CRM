@@ -14,13 +14,14 @@ const Iframe = ({ src, id }) => {
     const { activeCompanyId } = useContext(MenuContext);
     const [load, setLoad] = useState(true)
     const [anim, setAnim] = useState(false)
-    const [link, setLink] = useState('')
+   /*  const [link, setLink] = useState('') */
     const item = document.getElementById(id);
+
+    console.log(activeCompanyId)
     
     useEffect(() => {
         if (item) {
             item.onload = () => {
-                console.log('pfuhepbkcz')
                 setLoad(false)
             }
         } else {
@@ -38,14 +39,15 @@ const Iframe = ({ src, id }) => {
     }, [])
 
 
-    useEffect(() => {
+    /* useEffect(() => {
         setLoad(true)
         if (activeCompanyId) {
+            console.log('тут', activeCompanyId)
             setLink(`/?cur_partnership=${activeCompanyId}`)
         } else {
             setLink('')
         }
-    }, [activeCompanyId])
+    }, [activeCompanyId]) */
 
     return (
         <div className={classNames(s.window, anim && s.window_anim)}>
@@ -59,7 +61,7 @@ const Iframe = ({ src, id }) => {
             <iframe
                 loading="eager"
                 className={s.iframe}
-                src={`${src}${link}`}
+                src={`${src}${`/?cur_partnership=${activeCompanyId}`}`}
                 id={id}
             ></iframe>
         </div>
