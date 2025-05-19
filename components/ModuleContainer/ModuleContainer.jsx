@@ -26,6 +26,11 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       return
     }
 
+    if (path.includes('/orders/repeat/')) {
+      router.push(path)
+      return
+    }
+
 
     if (searchParamsType && id === 'root_order-create') {
       router.push(`${path}?type=preorder&date=${searchParamsDate}`)

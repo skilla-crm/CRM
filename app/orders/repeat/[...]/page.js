@@ -2,7 +2,7 @@ import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: "Редактировать заказ"
+  title: "Повторить заказ"
 };
 
 const DynamicModuleContainer = dynamic(() =>
