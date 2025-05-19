@@ -17,7 +17,6 @@ const Iframe = ({ src, id }) => {
    /*  const [link, setLink] = useState('') */
     const item = document.getElementById(id);
 
-    console.log(activeCompanyId)
     
     useEffect(() => {
         if (item) {
@@ -39,15 +38,15 @@ const Iframe = ({ src, id }) => {
     }, [])
 
 
-    /* useEffect(() => {
+    useEffect(() => {
         setLoad(true)
-        if (activeCompanyId) {
+      /*   if (activeCompanyId) {
             console.log('тут', activeCompanyId)
             setLink(`/?cur_partnership=${activeCompanyId}`)
         } else {
             setLink('')
-        }
-    }, [activeCompanyId]) */
+        } */
+    }, [activeCompanyId])
 
     return (
         <div className={classNames(s.window, anim && s.window_anim)}>
