@@ -153,7 +153,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                 <div onClick={handleHidenMenu} className={s.header}>
                     {(brand !== 0 || company?.brand_type !== 0) ?
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
-                            src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
+                            src={`https://lk.skilla.ru/documents/brands/${brand ? brand : company?.brand_type}/logo_new.png`}
                         />
                         :
                         <Image height={36} className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>
