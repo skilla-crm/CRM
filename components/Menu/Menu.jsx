@@ -61,9 +61,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const dayDiff = paidTo.diff(dateNow, 'day');
     console.log('из кук', brand)
 
- /*    useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         if (menuEvents?.orders) {
