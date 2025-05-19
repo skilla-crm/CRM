@@ -59,8 +59,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
+    console.log('из кук', brand)
 
-   /*  useEffect(() => {
+ /*    useEffect(() => {
         create()
     }, []) */
 
