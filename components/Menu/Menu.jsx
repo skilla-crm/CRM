@@ -32,7 +32,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenu')
     const avatar_mini = cookies.get('avatar_mini')
-    const name = cookies.get('name')
+    const name = decodeURIComponent(cookies.get('name')).replace(/\+/g, ' ')
     const date = cookies.get('date')
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
@@ -59,6 +59,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
+    console.log(name, cookies.get('name'))
 
     /* useEffect(() => {
         create()
