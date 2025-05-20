@@ -32,7 +32,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenu')
     const avatar_mini = cookies.get('avatar_mini')
-    const name = decodeURIComponent(cookies.get('name')).replace(/\+/g, ' ')
+    const name = cookies.get('name') ? decodeURI(cookies.get('name')).replace(/\+/g, ' ') : 'нет имени'
     const date = cookies.get('date')
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
@@ -59,7 +59,6 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
-    console.log(name, cookies.get('name'))
 
     /* useEffect(() => {
         create()
@@ -175,7 +174,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                     </div>
 
                     <div className={classNames(s.block, hiddenMenu && s.block_hidden)}>
-                        <p className={s.name}>{name ? decodeURI(name) : ''}</p>
+                        <p className={s.name}>{name}</p>
                         {<p className={classNames(s.company, !isLoading && s.company_vis)}>
                             {activeCompany?.name && activeCompany?.name}
                             {!activeCompany?.name && partnershipsDop?.length > 0 && 'Все компании'}
