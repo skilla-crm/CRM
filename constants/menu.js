@@ -7,6 +7,7 @@ import report from '@/public/icons/menu/report.svg'
 import purchases from '@/public/icons/menu/purchases.svg'
 import support from '@/public/icons/menu/support.svg'
 import settings from '@/public/icons/menu/settings.svg'
+import calendar from '@/public/icons/menu/iconCalendar.svg'
 
 
 
@@ -32,9 +33,9 @@ export const menuItem = [
         id: 4,
         name: 'Исполнители',
         icon: workers,
-       
+
         submenu: [
-            { id: 1, name: 'Все исполнители', link: '/workers', sublink: '/worker/'},
+            { id: 1, name: 'Все исполнители', link: '/workers', sublink: '/worker/' },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
@@ -62,16 +63,17 @@ export const menuItem = [
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
-   /*  {
-        id: 8,
-        name: 'Поддержка',
-        icon: support,
-        link: '/support',
-        submenu: [
-            { id: 1, name: 'Чат', link: '/support/chat' },
-            { id: 2, name: 'База знаний', link: '/support/faq' },
-        ]
-    }, */
+    /*  {
+         id: 8,
+         name: 'Поддержка',
+         icon: support,
+         link: '/support',
+         submenu: [
+             { id: 1, name: 'Чат', link: '/support/chat' },
+             { id: 2, name: 'База знаний', link: '/support/faq' },
+         ]
+     }, */
+    { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
     { id: 9, name: 'Настройки', icon: settings, link: '/settings' },
 
 ]

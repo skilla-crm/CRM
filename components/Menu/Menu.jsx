@@ -59,8 +59,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
+    console.log(brand !== '0')
 
-    /* useEffect(() => {
+   /*  useEffect(() => {
         create()
     }, []) */
 
@@ -151,9 +152,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div onClick={handleHidenMenu} className={s.header}>
-                    {(brand !== 0 || company?.brand_type !== 0) ?
+                    {(brand !== '0' && brand) ?
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
-                            src={`https://lk.skilla.ru/documents/brands/${brand ? brand : company?.brand_type}/logo_new.png`}
+                            src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
                         />
                         :
                         <Image height={36} className={classNames(s.logo, hiddenMenu && s.logo_hidden)} src={Logo} alt='логотип'></Image>

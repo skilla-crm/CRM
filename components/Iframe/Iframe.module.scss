@@ -13,9 +13,9 @@
 
 .iframe {
     position: absolute;
-    left: -242px;
+    left: -72px/* -242px */;
     top: -65px;
-    width: calc(100% + 240px);
+    width: calc(100% + 72px/* 240px */);
     height: calc(100% + 64px);
     overflow: hidden;
     border: none;
