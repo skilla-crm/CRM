@@ -13,12 +13,17 @@
 
 .iframe {
     position: absolute;
-    left: -72px/* -242px */;
+    left: -242px;
     top: -65px;
-    width: calc(100% + 72px/* 240px */);
+    width: calc(100% + 240px);
     height: calc(100% + 64px);
     overflow: hidden;
     border: none;
+
+    &_hidden {
+         left: -72px;
+        width: calc(100% + 72px); 
+    }
 }
 
 .sceleton {

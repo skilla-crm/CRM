@@ -14,10 +14,21 @@ const Iframe = ({ src, id }) => {
     const { activeCompanyId } = useContext(MenuContext);
     const [load, setLoad] = useState(true)
     const [anim, setAnim] = useState(false)
-   /*  const [link, setLink] = useState('') */
+    const [hiddenIframeMenu, setHiddenIframeMenu] = useState(false)
+    /*  const [link, setLink] = useState('') */
     const item = document.getElementById(id);
 
-    
+    useEffect(() => {
+        const getCookieDocument = () => {
+            let cookie = document.cookie.split('; ').find(row => row.startsWith('hidemenu' + '='));
+            return cookie ? cookie.split('=')[1] : null;
+        }
+
+        const hiddenMenu = getCookieDocument()
+        setHiddenIframeMenu(hiddenMenu === '1')
+    }, [])
+
+
     useEffect(() => {
         if (item) {
             item.onload = () => {
@@ -28,7 +39,7 @@ const Iframe = ({ src, id }) => {
         }
     }, [item])
 
- 
+
 
 
     useEffect(() => {
@@ -40,12 +51,12 @@ const Iframe = ({ src, id }) => {
 
     useEffect(() => {
         setLoad(true)
-      /*   if (activeCompanyId) {
-            console.log('тут', activeCompanyId)
-            setLink(`/?cur_partnership=${activeCompanyId}`)
-        } else {
-            setLink('')
-        } */
+        /*   if (activeCompanyId) {
+              console.log('тут', activeCompanyId)
+              setLink(`/?cur_partnership=${activeCompanyId}`)
+          } else {
+              setLink('')
+          } */
     }, [activeCompanyId])
 
     return (
@@ -59,7 +70,7 @@ const Iframe = ({ src, id }) => {
 
             <iframe
                 loading="eager"
-                className={s.iframe}
+                className={classNames(s.iframe, hiddenIframeMenu && s.iframe_hidden)}
                 src={`${src}${`/?cur_partnership=${activeCompanyId}`}`}
                 id={id}
             ></iframe>

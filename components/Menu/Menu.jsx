@@ -30,7 +30,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const hiddenButtonRef = useRef()
     const cookies = useCookies();
-    const hidemenu = cookies.get('hidemenu')
+    const hidemenu = cookies.get('hidemenuNew')
     const avatar_mini = cookies.get('avatar_mini')
     const name = cookies.get('name') ? decodeURI(cookies.get('name')).replace(/\+/g, ' ') : 'нет имени'
     const date = cookies.get('date')
@@ -106,10 +106,10 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         e.stopPropagation()
         if (hiddenMenu) {
             setHiddenMenu(false)
-            document.cookie = 'hidemenu=0'
+            document.cookie = 'hidemenuNew=0'
         } else {
             setHiddenMenu(true)
-            document.cookie = 'hidemenu=1'
+            document.cookie = 'hidemenuNew=1'
         }
     }
 
