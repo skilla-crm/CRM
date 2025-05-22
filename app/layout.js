@@ -9,7 +9,7 @@ import { Providers } from '../Providers/Providers';
 
  
 export const viewport = {
-  width: '1600',
+  width: '1700',
   initialScale: 0,
 }
 
