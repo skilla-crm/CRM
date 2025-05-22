@@ -47,14 +47,14 @@ export function Providers({ children }) {
         }
     }
 
-   /*  useEffect(() => {
+    useEffect(() => {
         document.addEventListener('visibilitychange', chekToken)
  
         return () => {
             document.removeEventListener('visibilitychange', chekToken)
         }
  
-    }, []) */
+    }, [])
 
     return (
         <>
