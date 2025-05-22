@@ -5,7 +5,7 @@ export const metadata = {
   title: "Настройки"
 };
 
-export default async function Settings({ value }) {
+export default async function Settings() {
   const src = process.env.REACT_APP_URL_SETTINGS;
   const id = 'root_settings'
   

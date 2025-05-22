@@ -74,7 +74,6 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
             <div className={classNames(s.overlay, open && s.overlay_open)}></div>
             <div ref={refProfie} className={classNames(s.root, open && !hiddenMenu && s.root_open, hiddenMenu && s.root_2, hiddenMenu && open && s.root_open2)}>
 
-
                 <div className={s.header}>
                     <p className={s.name}>{user?.name} {user?.surname}</p>
                     <p className={s.text}>Руководитель</p>

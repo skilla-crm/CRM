@@ -17,7 +17,7 @@ export function Providers({ children }) {
     const token = cookies.get('token')
     const activeCompanyId = cookies.get('active-company')
     const activeCompanyName = cookies.get('activeCompanyName')
-    const { data: menuData, isLoading } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
+    const { data: menuData, isLoading, mutate } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token), { refreshInterval: 0 })
     const [activeCompany, setActiveCompany] = useState({});
 
 
@@ -28,6 +28,10 @@ export function Providers({ children }) {
         }
 
     }, [activeCompanyName])
+
+    useEffect(() => {
+        mutate()
+    }, [token])
 
     const chekToken = () => {
         const getCookieDocument = () => {

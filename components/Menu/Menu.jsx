@@ -38,7 +38,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const ispro = cookies.get('is_pro')
     const token = cookies.get('token')
     const isBlockedCookies = cookies.get('is_blocked');
-    const { data: menuEvents, isLoading: isLoadingEvents } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
+    const { data: menuEvents, isLoading: isLoadingEvents, mutate } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
@@ -60,9 +60,13 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
 
-   /*  useEffect(() => {
+  /*   useEffect(() => {
         create()
     }, []) */
+
+    useEffect(() => {
+        mutate()
+    }, [token])
 
     useEffect(() => {
         if (menuEvents?.orders) {
@@ -121,6 +125,8 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         setVisButton(false)
     }
 
+    console.log(activeCompany)
+
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
@@ -178,7 +184,6 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
                         {<p className={classNames(s.company, !isLoading && s.company_vis)}>
                             {activeCompany?.name && activeCompany?.name}
                             {!activeCompany?.name && partnershipsDop?.length > 0 && 'Все компании'}
-                            {partnershipsDop?.length === 0 && company?.name}
                         </p>}
 
 
@@ -198,9 +203,9 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
 
                     <div className={classNames(s.profile_small, hiddenMenu && s.profile_small_vis)}>
-                         <ProfileLogo />
-                        <BadgePro/>
-                       
+                        <ProfileLogo />
+                        <BadgePro />
+
                         <div className={s.block_small}>
                             <p className={s.date}>{dateNow.format('D.MM')}</p>
                             <p className={s.date}>{dateNow.format('dd').slice(0, 1).toUpperCase()}{dateNow.format('dd').slice(1)}</p>
