@@ -5,7 +5,6 @@ import {usePathname } from 'next/navigation';
 
 const MenuPurchases = ({role, purchaseCount}) => {
       const path = usePathname();
-      console.log(path)
     return (
         <div className={s.tabs}>
             <Link href={'/purchases'}><div id='1' className={`${s.tab} ${(path === '/purchases' || path.includes('detail=')) && s.tab_active}`}>Закупки <sup>{purchaseCount}</sup></div></Link>

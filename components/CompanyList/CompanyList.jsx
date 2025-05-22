@@ -41,8 +41,9 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
 
     const handleChoseActiveCompany = (item) => {
         setActiveCompany(item)
-        localStorage.setItem('activeCompanyName', JSON.stringify(item))
+        localStorage.setItem('', JSON.stringify(item))
         cookies.set('active-company', item.id)
+         cookies.set('activeCompanyName', JSON.stringify(item))
         setOpen(false)
     }
 

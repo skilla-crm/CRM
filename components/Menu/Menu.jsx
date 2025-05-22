@@ -5,8 +5,8 @@ import useSWR from 'swr'
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
-import { create } from '@/app/actions';
-import { fetchWithToken } from '@/app/api/api';
+import { create } from '@/actions';
+import { fetchWithToken } from '@/api/api';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
@@ -59,9 +59,8 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
-    console.log(brand !== '0')
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 

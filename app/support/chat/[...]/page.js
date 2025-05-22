@@ -13,10 +13,9 @@ export default async function Chat() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-
   const data = await fetch(`https://lk.dev.skilla.ru/chat-token/index.php?token=206|WWD8pp4txzqhznnu8u1L3ESM95KXV3hTYjBh4Rm7`)
   const token2 = await data.json();
-  console.log(token2.token)
+
 
 
   return (

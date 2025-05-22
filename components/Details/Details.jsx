@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import Scrollbar from 'react-scrollbars-custom';
 //API
-import { downloadDetails } from '@/app/api/api';
+import { downloadDetails } from '@/api/api';
 //Icons
 import Geo from '@/public/icons/details/geo.svg';
 import Code from '@/public/icons/details/code.svg';
@@ -113,7 +113,6 @@ const Item = ({ el }) => {
         const link = document.createElement('a');
         let binaryData = [];
         binaryData.push(data);
-        console.log(el.partnership_name)
         link.href = URL.createObjectURL(new Blob(binaryData, { type: "application/msword" }));
         link.setAttribute('download', `реквизиты ${el.partnership_name.replace('"', '').replace('"', '')}.docx`);
         document.body.appendChild(link);

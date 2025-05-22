@@ -4,7 +4,7 @@ import { CookiesProvider } from 'next-client-cookies/server';
 import "./globals.scss";
 import s from './layout.module.scss';
 //components
-import { Providers } from './providers';
+import { Providers } from '../Providers/Providers';
 
 
  

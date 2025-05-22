@@ -16,7 +16,6 @@ export const downloadDetails = (partnershipId, num, token) =>
          },
             responseType: 'blob' })
         .then((res) => {
-                console.log(res)
                 return res.data
             });
 

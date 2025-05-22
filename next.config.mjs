@@ -9,11 +9,11 @@ const nextConfig = {
                 permanent: true,
             },
 
-            {
+          /*   {
                 source: '/orders/order_detail',
                 destination: '/orders',
                 permanent: true,
-            },
+            }, */
         ]
     },
     reactStrictMode: true,

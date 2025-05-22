@@ -1,5 +1,5 @@
 'use client'
-import { create } from "@/app/actions"
+import { create } from "@/actions"
 
 
 const Main = () => {
