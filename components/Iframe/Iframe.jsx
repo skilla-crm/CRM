@@ -16,7 +16,7 @@ const Iframe = ({ src, id }) => {
     const [anim, setAnim] = useState(false)
     const [hiddenIframeMenu, setHiddenIframeMenu] = useState(false)
     /*  const [link, setLink] = useState('') */
-    const item = document.getElementById(id);
+
 
     useEffect(() => {
         const getCookieDocument = () => {
@@ -30,14 +30,18 @@ const Iframe = ({ src, id }) => {
 
 
     useEffect(() => {
+        const item = document.getElementById(id);
+
         if (item) {
+            console.log(item)
             item.onload = () => {
                 setLoad(false)
+                console.log('загрузился')
             }
         } else {
             setLoad(true)
         }
-    }, [item])
+    }, [])
 
 
 

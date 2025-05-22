@@ -32,3 +32,4 @@ export default function middleware(req) {
         return NextResponse.redirect(new URL("/new/pay", req.url));
     }
 }
+

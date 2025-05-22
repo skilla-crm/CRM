@@ -62,8 +62,8 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
    /*  useEffect(() => {
         create()
-    }, [])
- */
+    }, []) */
+
     useEffect(() => {
         if (menuEvents?.orders) {
             setEventsLinks(prevState => [...prevState, '/orders'])

@@ -11,7 +11,7 @@ const DynamicModuleContainer = dynamic(() =>
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Pay() {
+export default async function Calendar() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
