@@ -21,7 +21,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     useEffect(() => {
         if (partnershipsDop && company && partnershipsDop?.length === 0) {
             setActiveCompany(company)
-            cookies.set('active-company', item.id)
+            company.id && cookies.set('active-company', company?.id)
             return
         }
 
@@ -42,8 +42,8 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     const handleChoseActiveCompany = (item) => {
         setActiveCompany(item)
         localStorage.setItem('', JSON.stringify(item))
-        cookies.set('active-company', item.id)
-         cookies.set('activeCompanyName', JSON.stringify(item))
+        cookies.set('active-company', item?.id)
+        cookies.set('activeCompanyName', JSON.stringify(item))
         setOpen(false)
     }
 
