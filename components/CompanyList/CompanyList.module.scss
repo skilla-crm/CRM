@@ -76,7 +76,7 @@
     flex-direction: column;
     border-radius: 4px;
     border: 1px solid #ffffff00;
-   
+
     transition: all 0.2s;
     z-index: 4;
     background: #091336;
@@ -98,8 +98,9 @@
     transition: all 0.15s;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
 
-    
+
     &_2 {
         height: 40px;
     }
@@ -150,7 +151,7 @@
     align-items: flex-start;
     padding-top: 6px;
     transform: scale(0);
-  /*   transition: all 0.15s; */
+    /*   transition: all 0.15s; */
 
     &_2 {
         width: 16px;
@@ -159,7 +160,7 @@
         transform: scale(0);
         display: flex;
         align-items: center;
-   /*      transition: all 0.15s; */
+        /*      transition: all 0.15s; */
 
         svg {
             transition: all 0.15s;
@@ -193,4 +194,28 @@
     display: flex;
     align-items: center;
     padding: 0 12px;
+}
+
+.loader {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: all 0.15s ease-in-out;
+    width: 16px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+
+    div {
+        flex-shrink: 0;
+    }
+
+    &_active {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
 }

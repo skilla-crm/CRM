@@ -27,7 +27,7 @@ import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
-const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
+const Menu = ({ activeCompany, setActiveCompany }) => {
     const hiddenButtonRef = useRef()
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenuNew')
@@ -39,6 +39,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const token = cookies.get('token')
     const isBlockedCookies = cookies.get('is_blocked');
     const { data: menuEvents, isLoading: isLoadingEvents, mutate } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
+    const { data: menuData, isLoading, mutate: mutatueMenu } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
@@ -66,6 +67,7 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
 
     useEffect(() => {
         mutate()
+        mutatueMenu()
     }, [token])
 
     useEffect(() => {
@@ -107,13 +109,19 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
     const handleHidenMenu = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        if (hiddenMenu) {
-            setHiddenMenu(false)
-            document.cookie = 'hidemenuNew=0'
+
+        if (openCompanyProfile) {
+            setOpenCompanyProfile(false)
         } else {
-            setHiddenMenu(true)
-            document.cookie = 'hidemenuNew=1'
+            if (hiddenMenu) {
+                setHiddenMenu(false)
+                document.cookie = 'hidemenuNew=0'
+            } else {
+                setHiddenMenu(true)
+                document.cookie = 'hidemenuNew=1'
+            }
         }
+
     }
 
 
@@ -125,13 +133,11 @@ const Menu = ({ menuData, isLoading, activeCompany, setActiveCompany }) => {
         setVisButton(false)
     }
 
-    console.log(activeCompany)
-
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
 
-            <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && s.button_hide_active, visButton && s.button_hide_vis)}>
+            <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />
             </button>
 

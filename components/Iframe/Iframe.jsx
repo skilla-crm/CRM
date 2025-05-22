@@ -33,10 +33,8 @@ const Iframe = ({ src, id }) => {
         const item = document.getElementById(id);
 
         if (item) {
-            console.log(item)
             item.onload = () => {
                 setLoad(false)
-                console.log('загрузился')
             }
         } else {
             setLoad(true)

@@ -5,6 +5,7 @@ import s from './CompanyList.module.scss';
 import { redirect } from 'next/navigation';
 import Arrow from '@/public/icons/menu/arrow.svg';
 import Done from '@/public/icons/iconDone.svg';
+import LoaderButton from '../LoaderButton/LoaderButton';
 
 const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, activeCompany, setActiveCompany }) => {
     const cookies = useCookies();
@@ -47,12 +48,6 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
         setOpen(false)
     }
 
-    const handleAuthCompany = (e) => {
-        const id = e.currentTarget.id;
-        redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
-
-    }
-
     useEffect(() => {
         document.addEventListener('mousedown', closeModal);
         return () => document.removeEventListener('mousedown', closeModal);
@@ -87,16 +82,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
                 </li>
 
                 {partnershipsDop?.map((el) => {
-                    return <li onClick={() => handleChoseActiveCompany(el)} key={el.id} className={classNames(s.item, activeCompany?.id === el.id && s.item_active)}>
-                        <div className={s.block}>
-                            <p>{el.name}</p>
-                            <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
-                        </div>
-                        <div className={classNames(s.done, activeCompany?.id === el.id && s.done_active)}>
-                            <Done />
-                        </div>
-
-                    </li>
+                    return <PartnerShipDop key={el.id} el={el} activeCompany={activeCompany} handler={handleChoseActiveCompany} />
                 })}
                 {partnershipsDop?.length > 0 && <div className={s.separator}></div>}
                 {cities?.map((el, i) => {
@@ -104,13 +90,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
                         <p className={s.city}>{el}</p>
 
                         {partnerships?.filter((item) => item.city === el)?.map((el) => {
-                            return <li id={el.dir_id} key={el.id} onClick={handleAuthCompany} className={s.item}>
-                                <div className={s.block}>
-                                    <p>{el.name}</p>
-                                    <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
-                                </div>
-
-                            </li>
+                            return <PartnerShipAnother key={el.id} el={el} />
 
                         })}
                     </div>
@@ -118,6 +98,44 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
 
             </ul>
         </div >
+    )
+}
+
+const PartnerShipDop = ({ el, activeCompany, handler }) => {
+    return (
+        <li onClick={() => handler(el)} className={classNames(s.item, activeCompany?.id === el.id && s.item_active)}>
+            <div className={s.block}>
+                <p>{el.name}</p>
+                <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
+            </div>
+            <div className={classNames(s.done, activeCompany?.id === el.id && s.done_active)}>
+                <Done />
+            </div>
+
+        </li>
+    )
+}
+
+const PartnerShipAnother = ({ el }) => {
+    const [load, setLoad] = useState(false)
+    const handleAuthCompany = (e) => {
+        setLoad(true)
+        const id = e.currentTarget.id;
+        redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
+
+    }
+    return (
+        <li id={el.dir_id} onClick={handleAuthCompany} className={s.item}>
+            <div className={s.block}>
+                <p>{el.name}</p>
+                <span>ИНН {el.inn} {el.kpp !== '' && 'КПП'} {el.kpp}</span>
+            </div>
+
+            <div className={classNames(s.loader, load && s.loader_active)}>
+                <LoaderButton color={'#FFF'} />
+            </div>
+
+        </li>
     )
 }
 
