@@ -20,6 +20,10 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     }, []).map((el) => { return el.city });
 
     useEffect(() => {
+        setOpen(false)
+    }, [allCompanies])
+
+    useEffect(() => {
         if (partnershipsDop && company && partnershipsDop?.length === 0) {
             setActiveCompany(company)
             company.id && cookies.set('active-company', company?.id)
@@ -120,6 +124,7 @@ const PartnerShipAnother = ({ el }) => {
     const [load, setLoad] = useState(false)
     const handleAuthCompany = (e) => {
         setLoad(true)
+        document.cookie = 'activeCompanyName=; Max-Age=-1;';
         const id = e.currentTarget.id;
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
 

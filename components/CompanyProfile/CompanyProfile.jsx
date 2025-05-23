@@ -53,6 +53,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
     const handleLogOut = () => {
         localStorage.clear();
+        document.cookie = 'activeCompanyName=; Max-Age=-1;';
         redirect('https://lk.skilla.ru/login/logout.php')
     }
 
@@ -155,6 +156,7 @@ const Worker = ({ el }) => {
 
     const handleAuthWorker = (e) => {
         setLoad(true)
+        document.cookie = 'activeCompanyName=; Max-Age=-1;';
         const id = e.currentTarget.id
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
