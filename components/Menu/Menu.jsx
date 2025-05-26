@@ -210,7 +210,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
                     <div className={classNames(s.profile_small, hiddenMenu && s.profile_small_vis)}>
                         <ProfileLogo />
-                        <BadgePro />
+                        {ispro === '1' && <BadgePro />}
 
                         <div className={s.block_small}>
                             <p className={s.date}>{dateNow.format('D.MM')}</p>

@@ -20,7 +20,7 @@ export function Providers({ children }) {
 
 
     useEffect(() => {
-        if (activeCompanyName) {
+        if (activeCompanyName?.id) {
             setActiveCompany(JSON.parse(activeCompanyName))
             return
         }
