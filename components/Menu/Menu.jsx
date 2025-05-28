@@ -60,10 +60,9 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
-    const test = token === '2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg'
-    console.log(token)
+    const test = (token === '2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg' || token === '17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo')
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
@@ -100,7 +99,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
     }
     const handleBack = (link) => {
-
+        console.log(path, link)
         if (path.includes(link)) {
             window.history.back()
             return
@@ -243,6 +242,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                                     setHiddenMenu={setHiddenMenu}
                                     eventsLinks={eventsLinks}
                                     isLoading={isLoading}
+                                    handleBack={handleBack}
                                 />
                             }
                             return <Link
@@ -274,7 +274,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     )
 };
 
-const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading }) => {
+const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handleBack }) => {
     const path = usePathname();
     const [open, setOpen] = useState(false);
     const [events, setEvents] = useState(false);
@@ -339,6 +339,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading }) => {
                 {el.submenu.map(item => {
                     const eventsSub = eventsLinks.some(link => link.includes(item?.link))
                     return <Link
+                        onClick={() => handleBack(item.sublink)}
                         id={item.id}
                         key={item.id}
                         href={item.link}

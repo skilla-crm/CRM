@@ -87,14 +87,13 @@ export const menuItemTest = [
         id: 3,
         name: 'Контрагенты',
         icon: counterparties,
-        sublink: 'detail',
 
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
-         /*    { id: 2, name: 'Задолженность', link: '/' }, */
+            /*    { id: 2, name: 'Задолженность', link: '/' }, */
             { id: 3, name: 'Счета', link: '/bills', sublink: 'detail' },
-           /*  { id: 4, name: 'УПД', link: '/' },
-            { id: 5, name: 'Акты сверок', link: '/' }, */
+            /*  { id: 4, name: 'УПД', link: '/' },
+             { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
     },
 
@@ -131,7 +130,7 @@ export const menuItemTest = [
     },
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
+    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     /*  {
          id: 8,
          name: 'Поддержка',

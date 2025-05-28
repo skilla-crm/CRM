@@ -17,11 +17,12 @@ export default async function Chat() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-  const data = await fetch(`https://lk.skilla.ru/chatv2`)
-  const token2 = await data.text()
- 
+  const data = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token.value}`)
+  const token2 = await data.json()
+  console.log(data, token2)
+
   return (
-    <div id={id} ispro={ispro?.value} role={role?.value} token={token2} version={'director'}>
+    <div id={id} ispro={ispro?.value} role={role?.value} token={token2.token} version={'director'}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_CHAT} srcCss={process.env.REACT_APP_URL_CHAT_CSS} id={id} />
     </div>
   );
