@@ -13,13 +13,13 @@ export default async function Chat() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-  const data = await fetch(`https://lk.dev.skilla.ru/chat-token/index.php?token=206|WWD8pp4txzqhznnu8u1L3ESM95KXV3hTYjBh4Rm7`)
-  const token2 = await data.json();
+  const data = await fetch(`https://lk.skilla.ru/chatv2`)
+  const token2 = await data.text()
 
 
 
   return (
-    <div id={id} ispro={ispro?.value} role={role?.value} token={token2.token} version={'director'}>
+    <div id={id} ispro={ispro?.value} role={role?.value} token={token2} version={'director'}>
       <DynamicModuleContainer src={process.env.REACT_APP_URL_CHAT} srcCss={process.env.REACT_APP_URL_CHAT_CSS} id={id} />
     </div>
   );

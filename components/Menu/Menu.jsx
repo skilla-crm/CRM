@@ -21,7 +21,7 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //constants
-import { menuItem } from '@/constants/menu';
+import { menuItem, menuItemTest } from '@/constants/menu';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
@@ -60,8 +60,9 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
+    const test = token === 'Bearer 2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg'
 
-    /* useEffect(() => {
+   /*  useEffect(() => {
         create()
     }, []) */
 
@@ -231,7 +232,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                     (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block,
                 )}>
                     <div className={s.container}>
-                        {menuItem.map(el => {
+                        {(test ? menuItemTest : menuItem).map(el => {
                             const eventsSub = eventsLinks.some(link => link.includes(el?.link))
                             if (el.submenu) {
                                 return <SubMenu
