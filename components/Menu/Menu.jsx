@@ -60,7 +60,8 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
-    const test = token === 'Bearer 2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg'
+    const test = token === '2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg'
+    console.log(token)
 
    /*  useEffect(() => {
         create()
