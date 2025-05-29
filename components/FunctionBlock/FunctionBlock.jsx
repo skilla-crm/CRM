@@ -23,7 +23,7 @@ const FunctionBlock = ({ company, isLoading, hiddenMenu, test }) => {
             <div className={s.blur}></div>
             <div className={s.container}>
                 <Subscription company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
-                <MultiFunctionButton hiddenMenu={hiddenMenu} />
+                <MultiFunctionButton hiddenMenu={hiddenMenu} test={test}/>
             </div>
         </div>
     )
@@ -76,7 +76,7 @@ const Subscription = ({ company, isLoading, hiddenMenu }) => {
     )
 }
 
-const MultiFunctionButton = ({ hiddenMenu }) => {
+const MultiFunctionButton = ({ hiddenMenu, test }) => {
     const [openMenu, setOpenMenu] = useState(false)
     const listRef = useRef()
     const buttonRef = useRef()
