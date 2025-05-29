@@ -57,7 +57,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       return
     }
 
-    
+
     if (path === '/purchases') {
       router.push(path)
       return
@@ -68,19 +68,20 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       return
     }
 
-  
 
-   /*  if (path.includes('/purchases/manual')) {
-      router.push(path)
-      return
-    } */
+
+    /*  if (path.includes('/purchases/manual')) {
+       router.push(path)
+       return
+     } */
 
   }, [path])
 
   useEffect(() => {
     const script = document.createElement('script');
     script.src = src;
-    script.async = true;
+    /* script.async = true; */
+    script.defer = true;
     const link = document.createElement('link');
     link.href = srcCss;
     link.rel = 'stylesheet';

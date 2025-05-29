@@ -23,12 +23,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
         setOpen(false)
     }, [allCompanies])
 
-    useEffect(() => {
-        if (partnershipsDop && company && partnershipsDop?.length === 0) {
-            setActiveCompany(company)
-        }
-
-    }, [company, partnershipsDop])
+   
 
     const handleOpen = () => {
         open ? setOpen(false) : setOpen(true)

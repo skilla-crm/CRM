@@ -91,9 +91,9 @@ export const menuItemTest = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
             /*    { id: 2, name: 'Задолженность', link: '/' }, */
-            { id: 3, name: 'Счета', link: '/bills', sublink: 'detail' },
-            /*  { id: 4, name: 'УПД', link: '/' },
-             { id: 5, name: 'Акты сверок', link: '/' }, */
+            { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
+            { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' },
+            /*            { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
     },
 

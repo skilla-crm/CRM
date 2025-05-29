@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
+import { ModuleContainer } from '@/components/ModuleContainer/ModuleContainer';
 
 export const metadata = {
   title: "Создание заказа"
@@ -19,7 +20,7 @@ export default async function Create() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={id} />
+      <ModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={id} />
     </div>
 
 

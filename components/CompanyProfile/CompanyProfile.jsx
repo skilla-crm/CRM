@@ -37,6 +37,13 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     positions?.sort()
 
     useEffect(() => {
+        if (partnershipsDop && company && partnershipsDop?.length === 0) {
+            setActiveCompany(company)
+        }
+
+    }, [company, partnershipsDop])
+
+    useEffect(() => {
         if (!isLoading) {
             setAllCompanies([...partnershipsDop, ...partnerships])
         }

@@ -267,7 +267,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                     <div onClick={handleHidenMenu} className={s.area}></div>
                 </Scrollbar>
 
-                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
+                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} test={test}/>
             </div>
         </div>
 
