@@ -73,7 +73,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
             console.log("tokenChat", tokenChat)
                 newMessageAttention(tokenChat?.token)
                     .then(res => {
-                        res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
+                        res.count > 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
                         console.log(res)
                     })
         }
@@ -81,7 +81,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
             fetchData()
 
-    }, [token])
+    }, [token, menuEvents])
 
     /* useEffect(() => {
         create()
