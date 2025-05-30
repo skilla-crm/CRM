@@ -65,11 +65,12 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     /*  const tokenChat = '3716|UX8q3sYSMbV6AiY1asplAABJ582Ononftwih8sK4b038dc98' */
     useEffect(() => {
         const data = fetchTokenChat(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
-        data.token && newMessageAttention(data.token)
+        console.log(data, data.json())
+      /*   data.token && newMessageAttention(data.token)
             .then(res => {
                 res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
                 console.log(res)
-            })
+            }) */
     }, [token])
 
     /* useEffect(() => {
