@@ -66,7 +66,8 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     useEffect(() => {
         fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
             .then(res => {
-                newMessageAttention(res)
+                console.log(res, res?.data, res.json())
+                newMessageAttention(res.json())
                     .then(res => {
                         res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
                          console.log(res)
