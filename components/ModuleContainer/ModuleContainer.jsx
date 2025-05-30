@@ -7,8 +7,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-
-  console.log(path)
+  const version = 1;
 
   useEffect(() => {
     if (path === '/orders/create') {
@@ -79,11 +78,11 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = src;
+    script.src = `${src}?v=${version}`;;
     /* script.async = true; */
     script.defer = true;
     const link = document.createElement('link');
-    link.href = srcCss;
+    link.href = `${srcCss}?v=${version}`;
     link.rel = 'stylesheet';
     link.type = 'text/css';
     document.head.appendChild(link);

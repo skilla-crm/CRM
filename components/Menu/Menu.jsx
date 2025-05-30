@@ -62,7 +62,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const dayDiff = paidTo.diff(dateNow, 'day');
     const test = (token === '2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg' || token === '17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo')
 
-    /* useEffect(() => {
+   /*  useEffect(() => {
         create()
     }, []) */
 
