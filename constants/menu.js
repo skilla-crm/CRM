@@ -85,7 +85,7 @@ export const menuItemTest = [
     { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublink: 'order_detail' },
     {
         id: 3,
-        name: 'Контрагенты',
+        name: 'Заказчики',
         icon: counterparties,
 
         submenu: [
