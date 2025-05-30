@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/actions';
-import { fetchWithToken, fetchWithTokenChat, newMessageAttention } from '@/api/api';
+import { fetchWithToken, fetchTokenChat, newMessageAttention } from '@/api/api';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
@@ -64,20 +64,18 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
     /*  const tokenChat = '3716|UX8q3sYSMbV6AiY1asplAABJ582Ononftwih8sK4b038dc98' */
     useEffect(() => {
-        fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
+        fetchTokenChat(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
             .then(res => {
-                console.log(res, res?.data, res.json())
-                newMessageAttention(res.json())
+                console.log(res.token)
+                newMessageAttention(res.token)
                     .then(res => {
                         res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
-                         console.log(res)
+                        console.log(res)
                     })
             })
+    }, [token])
 
-
-    }, [])
-
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 

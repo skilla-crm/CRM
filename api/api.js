@@ -22,9 +22,9 @@ export const downloadDetails = (partnershipId, num, token) =>
 
 
 
-export const fetchWithTokenChat = (url, token) => {
+export const fetchTokenChat = (url) => {
     axios
-        .get(url, { headers: { Authorization: `Bearer ${token}`, 'Accept': 'application/json' } })
+        .get(url, { headers: { 'Accept': 'application/json' } })
         .then((res) => res);
 }
 
