@@ -64,14 +64,11 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
     /*  const tokenChat = '3716|UX8q3sYSMbV6AiY1asplAABJ582Ononftwih8sK4b038dc98' */
     useEffect(() => {
-        fetchTokenChat(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
+        const data = fetchTokenChat(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
+        data.token && newMessageAttention(data.token)
             .then(res => {
-                console.log(res.token)
-                newMessageAttention(res.token)
-                    .then(res => {
-                        res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
-                        console.log(res)
-                    })
+                res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
+                console.log(res)
             })
     }, [token])
 
