@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: "Счета"
+  title: "Создать счет"
 };
 
 

@@ -7,7 +7,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 1;
+  const version = 2;
 
   useEffect(() => {
     if (path === '/orders/create') {

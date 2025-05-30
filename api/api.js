@@ -13,9 +13,30 @@ export const downloadDetails = (partnershipId, num, token) =>
             {
                 headers: {
                     Authorization: `Bearer ${token}`
-         },
-            responseType: 'blob' })
+                },
+                responseType: 'blob'
+            })
         .then((res) => {
-                return res.data
-            });
+            return res.data
+        });
 
+
+
+export const fetchWithTokenChat = (url, token) => {
+    axios
+        .get(url, { headers: { Authorization: `Bearer ${token}`, 'Accept': 'application/json' } })
+        .then((res) => res);
+}
+
+
+export const newMessageAttention = (token) =>
+    axios
+        .get(`https://api.chat.skilla.ru/api/messages/count-unread-messages`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            })
+        .then((res) => {
+            return res.data
+        });

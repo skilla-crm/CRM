@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/actions';
-import { fetchWithToken } from '@/api/api';
+import { fetchWithToken, fetchWithTokenChat, newMessageAttention } from '@/api/api';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
@@ -61,6 +61,20 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
     const test = (token === '2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg' || token === '17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo')
+
+    /*  const tokenChat = '3716|UX8q3sYSMbV6AiY1asplAABJ582Ononftwih8sK4b038dc98' */
+    useEffect(() => {
+        fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
+            .then(res => {
+                newMessageAttention(res)
+                    .then(res => {
+                        res.count == 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
+                         console.log(res)
+                    })
+            })
+
+
+    }, [])
 
    /*  useEffect(() => {
         create()
@@ -267,7 +281,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                     <div onClick={handleHidenMenu} className={s.area}></div>
                 </Scrollbar>
 
-                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} test={test}/>
+                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} test={test} />
             </div>
         </div>
 

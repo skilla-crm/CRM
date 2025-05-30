@@ -114,7 +114,7 @@ const MultiFunctionButton = ({ hiddenMenu, test }) => {
             </div>
 
             <ul ref={listRef} className={classNames(s.menu, openMenu && s.menu_open)}>
-                {test && <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>}
+               {/*  {test && <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>} */}
                 {test && <Link onClick={handleCloseMenu} href={'/bills/create'}><li><Docs /> Выставить счет</li></Link>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Docs/> Создать акт-сверки</li></Link> */}
                 {test && <div></div>}
