@@ -38,5 +38,5 @@ export const newMessageAttention = (token) =>
                 },
             })
         .then((res) => {
-            return res
+            return res.data
         });
