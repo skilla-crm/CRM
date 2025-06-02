@@ -83,7 +83,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
     }, [token, menuEvents])
 
-   /*  useEffect(() => {
+  /*   useEffect(() => {
         create()
     }, []) */
 

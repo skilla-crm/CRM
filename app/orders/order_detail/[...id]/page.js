@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { ModuleContainer } from '@/components/ModuleContainer/ModuleContainer';
 
 export const metadata = {
-  title: "Детали заказа"
+  title: "Заказ"
 };
 
 const DynamicModuleContainer = dynamic(() =>
@@ -20,7 +20,7 @@ export default async function Details() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <ModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
     </div>
 
 

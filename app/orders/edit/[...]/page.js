@@ -20,7 +20,7 @@ export default async function Edit() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <ModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={id} />
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={id} />
     </div>
 
 

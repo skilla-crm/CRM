@@ -24,7 +24,7 @@ export default async function Orders() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-       <ModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
+       <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
     </div>
   );
 }

@@ -7,7 +7,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 5;
+  const version = 7;
 
   useEffect(() => {
     if (path === '/orders/create') {
@@ -69,10 +69,10 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
 
 
-    /*  if (path.includes('/purchases/manual')) {
+     if (path.includes('/purchases/manual')) {
        router.push(path)
        return
-     } */
+     }
 
   }, [path])
 
