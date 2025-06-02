@@ -83,9 +83,9 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
     }, [token, menuEvents])
 
-  /*   useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         mutate()
@@ -253,7 +253,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                     (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block,
                 )}>
                     <div className={s.container}>
-                        {menuItemTest.map(el => {
+                        {(test ? menuItemTest : menuItem).map(el => {
                             const eventsSub = eventsLinks.some(link => link.includes(el?.link))
                             if (el.submenu) {
                                 return <SubMenu

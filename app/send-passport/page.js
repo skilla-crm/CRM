@@ -10,9 +10,6 @@ export default async function SendPassport() {
 
     return (
         <Iframe2 src={src} id={id} />
-
-
-
     );
 }
 

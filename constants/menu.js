@@ -10,23 +10,21 @@ import settings from '@/public/icons/menu/settings.svg'
 import calendar from '@/public/icons/menu/iconCalendar.svg'
 
 
-
 export const menuItem = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
     { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublink: 'order_detail' },
     {
         id: 3,
-        name: 'Контрагенты',
+        name: 'Заказчики',
         icon: counterparties,
-        link: '/counterparties',
 
-        /* submenu: [
-            { id: 1, name: 'Все заказчики', link: 'https://lk.skilla.ru/clients/' },
-            { id: 2, name: 'Задолженность', link: '/' },
-            { id: 3, name: 'Счета', link: '/' },
-            { id: 4, name: 'УПД', link: '/' },
-            { id: 5, name: 'Акты сверок', link: '/' },
-        ] */
+        submenu: [
+            { id: 1, name: 'Все заказчики', link: '/counterparties' },
+            /*    { id: 2, name: 'Задолженность', link: '/' }, */
+            { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
+            /* { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' }, */
+           /*  { id: 5, name: 'Акты сверок', link: '/' }, */
+        ]
     },
 
     {
@@ -62,7 +60,7 @@ export const menuItem = [
     },
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     /*  {
          id: 8,
          name: 'Поддержка',
@@ -80,6 +78,7 @@ export const menuItem = [
 
 
 
+
 export const menuItemTest = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
     { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublink: 'order_detail' },
@@ -92,8 +91,8 @@ export const menuItemTest = [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
             /*    { id: 2, name: 'Задолженность', link: '/' }, */
             { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
-     /*        { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' }, */
-            /*            { id: 5, name: 'Акты сверок', link: '/' }, */
+            { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' },
+           /*  { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
     },
 

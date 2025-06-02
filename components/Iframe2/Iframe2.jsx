@@ -6,8 +6,7 @@ import s from './Iframe2.module.scss'
 import classNames from 'classnames'
 import { MenuContext } from "@/contexts/MenuContext";
 
-const Iframe = ({ src, id }) => {
-    const { activeCompanyId } = useContext(MenuContext);
+const Iframe2 = ({ src, id }) => {
     const [load, setLoad] = useState(true)
     const [anim, setAnim] = useState(false)
      const [hiddenIframeMenu, setHiddenIframeMenu] = useState(false)
@@ -58,5 +57,5 @@ const Iframe = ({ src, id }) => {
     );
 }
 
-export default Iframe;
+export default Iframe2;
 
