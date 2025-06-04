@@ -34,7 +34,7 @@ export function Providers({ children }) {
         }
         const cookieDocument = getCookieDocument().replace('%7C', '|')
 
-      /*   if (!cookieDocument) {
+        if (!cookieDocument) {
             router.push('https://lk.skilla.ru/login')
             return
         }
@@ -42,7 +42,7 @@ export function Providers({ children }) {
         if (cookieDocument && cookieDocument !== token) {
             router.push('https://lk.skilla.ru/')
             return
-        } */
+        }
     }
 
     useEffect(() => {
