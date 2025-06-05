@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 /* 350|AzgciLV9wnUGymn4vpCMuG8gGWJRtcvEHfZuNgi7 */
 export async function create() {
     const cookieStore = await cookies()
-    cookieStore.set('token', "435|I8njfkTAlssfn818ukCNyMqEjjFESRpvbz549Oxr")
+    cookieStore.set('token', "2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg")
     cookieStore.set('role', "director")
     cookieStore.set('avatar_mini', "7648_mini.jpg")
     cookieStore.set('name', "%D0%98%D0%B3%D0%BE%D1%80%D1%8C+")

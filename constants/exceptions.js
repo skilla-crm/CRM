@@ -1,0 +1,2 @@
+export const oneCityTokens = ['616|25By3OpcgVqtNzKsuERgLAsxfLNzhE2wjljjRIUk', '435|I8njfkTAlssfn818ukCNyMqEjjFESRpvbz549Oxr']
+export const testTokens = ['2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg', '17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo']

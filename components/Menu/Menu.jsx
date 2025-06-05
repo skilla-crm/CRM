@@ -22,6 +22,7 @@ import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //constants
 import { menuItem, menuItemTest } from '@/constants/menu';
+import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
@@ -60,12 +61,10 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
-    const test = (token === '2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg' || token === '17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo')
-    const oneCityTokens = !['616|25By3OpcgVqtNzKsuERgLAsxfLNzhE2wjljjRIUk', '435|I8njfkTAlssfn818ukCNyMqEjjFESRpvbz549Oxr'].some(el => el === token)
+    const test = testTokens.includes(token)
+    const oneCity = !oneCityTokens.some(el => el === token)
 
-    /*  const tokenChat = '3716|UX8q3sYSMbV6AiY1asplAABJ582Ononftwih8sK4b038dc98' */
     useEffect(() => {
-
         const fetchData = async () => {
             const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
             const tokenChat = await res.json()
@@ -84,9 +83,9 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
 
     }, [token, menuEvents])
 
-    useEffect(() => {
+    /* useEffect(() => {
         create()
-    }, [])
+    }, []) */
 
     useEffect(() => {
         mutate()
@@ -175,7 +174,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                 city={city}
                 phone={phone}
                 email={email}
-                partnerships={oneCityTokens ? partnerships : []}
+                partnerships={oneCity ? partnerships : []}
                 partnershipsDop={partnershipsDop}
                 isLoading={isLoading}
                 activeCompany={activeCompany}
