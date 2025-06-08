@@ -8,6 +8,8 @@ import purchases from '@/public/icons/menu/purchases.svg'
 import support from '@/public/icons/menu/support.svg'
 import settings from '@/public/icons/menu/settings.svg'
 import calendar from '@/public/icons/menu/iconCalendar.svg'
+import sell from '@/public/icons/menu/iconSell.svg'
+import bill from '@/public/icons/menu/iconBill.svg'
 
 
 export const menuItem = [
@@ -23,7 +25,7 @@ export const menuItem = [
             /*    { id: 2, name: 'Задолженность', link: '/' }, */
             { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
             /* { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' }, */
-           /*  { id: 5, name: 'Акты сверок', link: '/' }, */
+            /*  { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
     },
 
@@ -93,7 +95,7 @@ export const menuItemTest = [
             { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
             { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' },
             { id: 5, name: 'Акты', link: '/act', sublink: 'act/detail' },
-           /*  { id: 5, name: 'Акты сверок', link: '/' }, */
+            /*  { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
     },
 
@@ -143,5 +145,28 @@ export const menuItemTest = [
      }, */
     { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
     { id: 9, name: 'Настройки', icon: settings, link: '/settings' },
+
+]
+
+
+export const menuItemAccountan = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
+    { id: 3, name: 'Банк', icon: bank, link: '/payments' },
+    { id: 4, name: 'Счета', icon: bill, link: '/bills', sublink: 'bills/detail' },
+    {
+        id: 5,
+        name: 'Продажа',
+        icon: sell,
+
+        submenu: [
+            { id: 1, name: 'УПД',  link: '/upd', sublink: 'upd/detail'},
+            { id: 2, name: 'Акты', link: '/act', sublink: 'act/detail' },
+        ]
+    },
+   /*  { id: 5, name: 'УПД', icon: counterparties, link: '/upd', sublink: 'upd/detail' },
+    { id: 6, name: 'Акты', icon: counterparties, link: '/act', sublink: 'act/detail' }, */
+    { id: 6, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
 
 ]

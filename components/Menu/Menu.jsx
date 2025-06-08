@@ -21,7 +21,7 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //constants
-import { menuItem, menuItemTest } from '@/constants/menu';
+import { menuItem, menuItemTest, menuItemAccountan } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
@@ -38,6 +38,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
     const token = cookies.get('token')
+    const role = cookies.get('role')
     const isBlockedCookies = cookies.get('is_blocked');
     const { data: menuEvents, isLoading: isLoadingEvents, mutate } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
     const { data: menuData, isLoading, mutate: mutatueMenu } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
@@ -65,27 +66,26 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
-            const tokenChat = await res.json()
-            
-
-            console.log("tokenChat", tokenChat)
+        if (role === 'director') {
+            const fetchData = async () => {
+                const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
+                const tokenChat = await res.json()
                 newMessageAttention(tokenChat?.token)
                     .then(res => {
                         res.count > 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
                         console.log(res)
                     })
-        }
-        
-
+            }
             fetchData()
+        }
 
-    }, [token, menuEvents])
 
-    /* useEffect(() => {
+
+    }, [token, menuEvents, role])
+
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         mutate()
@@ -180,6 +180,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                 activeCompany={activeCompany}
                 setActiveCompany={setActiveCompany}
                 details={menuData?.partnerships_details}
+                role={role}
             />
 
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
@@ -253,7 +254,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                     (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block,
                 )}>
                     <div className={s.container}>
-                        {(test ? menuItemTest : menuItem).map(el => {
+                        {(role === 'accountant' ? menuItemAccountan : test ? menuItemTest : menuItem).map(el => {
                             const eventsSub = eventsLinks.some(link => link.includes(el?.link))
                             if (el.submenu) {
                                 return <SubMenu

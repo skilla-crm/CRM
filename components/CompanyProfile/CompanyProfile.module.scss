@@ -96,6 +96,11 @@
     flex-direction: column;
     gap: 2px;
 
+    &_2 {
+        border: none;
+        margin-top: -12px;
+    }
+
     a {
         height: 40px;
         flex-shrink: 0;
@@ -204,6 +209,10 @@
 
     &:hover {
         background-color: rgba(225, 13, 13, 0.34);
+    }
+
+    &_margin {
+        margin-top: auto;
     }
 }
 

@@ -22,7 +22,7 @@ import LoaderButton from '../LoaderButton/LoaderButton';
 
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
-    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details }) => {
+    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role }) => {
     const path = usePathname();
     const [allCompanies, setAllCompanies] = useState([]);
     const [openModal, setOpenModal] = useState(false)
@@ -84,8 +84,11 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
                 <div className={s.header}>
                     <p className={s.name}>{user?.name} {user?.surname}</p>
-                    <p className={s.text}>Руководитель</p>
-                    {allCompanies?.length > 0 && <CompanyList
+                    <p className={s.text}>
+                        {role === 'director' && 'Руководитель'}
+                        {role === 'accountant' && 'Бухгалтер'}
+                    </p>
+                    {allCompanies?.length > 0 && role === 'director' && <CompanyList
                         company={company}
                         allCompanies={allCompanies}
                         partnerships={partnerships}
@@ -104,7 +107,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     details={details}
                 />
 
-                <Scrollbar className={s.scroll}>
+                {role === 'director' && <Scrollbar className={s.scroll}>
                     <div>
                         {positions?.map((el, i) => {
                             return <div key={i} className={s.position}>
@@ -125,17 +128,13 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                             </div>
                         })}
                     </div>
-                    <div className={s.position}>
 
-                    </div>
 
                 </Scrollbar>
+                }
 
-                <div className={s.bottom}>
-                    {/* {<button className={classNames(s.button, openModal && s.link_active)} onClick={handleOpenModal}>
-                        <Dashboard />
-                        <p>О Скилла IS</p>
-                    </button>} */}
+
+                <div className={classNames(s.bottom, role === 'accountant' && s.bottom_2)}>
                     <Link href='/support/faq' className={classNames(path.includes('/support/faq') && s.link_active)} onClick={handleClose}>
                         <IconFaq />
                         <p>База знаний</p>
@@ -146,7 +145,8 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     </Link>
                 </div>
 
-                <button className={s.logout} onClick={handleLogOut}>
+
+                <button className={classNames(s.logout, role === 'accountant' && s.logout_margin)} onClick={handleLogOut}>
                     <Logout />
                     <p>Выйти</p>
                 </button>
