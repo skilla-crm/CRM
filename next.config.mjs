@@ -3,11 +3,11 @@ const nextConfig = {
     basePath: '/new',
     async redirects() {
         return [
-            {
+          /*   {
                 source: '/',
-                destination: '/dashboard',
+                destination: '/',
                 permanent: true,
-            },
+            }, */
 
           /*   {
                 source: '/orders/order_detail',

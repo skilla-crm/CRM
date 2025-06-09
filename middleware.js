@@ -24,6 +24,14 @@ export default function middleware(req) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
     }
 
+    if (token && role.value === 'accountant') {
+        return NextResponse.redirect("https://lk.skilla.ru/new/orders");
+    }
+
+    if (token && role.value === 'director') {
+        return NextResponse.redirect("https://lk.skilla.ru/new/dashboard");
+    }
+
     if (role.value !== 'director' && role.value !== 'accountant') {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
