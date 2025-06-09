@@ -115,6 +115,11 @@ const PartnerShipDop = ({ el, activeCompany, handler }) => {
 
 const PartnerShipAnother = ({ el, setDisabled }) => {
     const [load, setLoad] = useState(false)
+
+    useEffect(() => {
+        setDisabled(false)
+    }, [])
+    
     const handleAuthCompany = (e) => {
         setLoad(true)
         setDisabled(true)

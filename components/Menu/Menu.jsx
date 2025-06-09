@@ -68,9 +68,16 @@ const Menu = ({ setActiveCompanyId }) => {
 
     useEffect(() => {
         const active = JSON.parse(localStorage.getItem('activeCompany'))
-        setActiveCompany(active)
-        active?.id && setActiveCompanyId(active?.id)
-    }, [])
+
+        if (active?.id) {
+            setActiveCompany(active)
+            setActiveCompanyId(active?.id)
+        } else {
+            setActiveCompany({})
+            setActiveCompanyId(0)
+        }
+
+    }, [token])
 
     useEffect(() => {
         if (role === 'director') {
@@ -88,9 +95,9 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
-   /*  useEffect(() => {
-        create()
-    }, []) */
+    /*  useEffect(() => {
+         create()
+     }, []) */
 
     useEffect(() => {
         mutate()
