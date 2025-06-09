@@ -68,6 +68,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     useEffect(() => {
         const active = JSON.parse(localStorage.getItem('activeCompany'))
+        setOpenCompanyProfile(false)
 
         if (active?.id) {
             setActiveCompany(active)
