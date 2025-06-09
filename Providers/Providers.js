@@ -13,19 +13,8 @@ export function Providers({ children }) {
     const router = useRouter()
     const cookies = useCookies();
     const token = cookies.get('token')
-    const activeCompanyId = cookies.get('active-company')
-    const activeCompanyName = cookies.get('activeCompanyName')
-   
-    const [activeCompany, setActiveCompany] = useState({});
+    const [activeCompanyId, setActiveCompanyId] = useState(0)
 
-
-    useEffect(() => {
-        if (activeCompanyName?.id) {
-            setActiveCompany(JSON.parse(activeCompanyName))
-            return
-        }
-
-    }, [activeCompanyName])
 
     const chekToken = () => {
         const getCookieDocument = () => {
@@ -45,24 +34,22 @@ export function Providers({ children }) {
         }
     }
 
-   /*  useEffect(() => {
-        document.addEventListener('visibilitychange', chekToken)
- 
-        return () => {
-            document.removeEventListener('visibilitychange', chekToken)
-        }
- 
-    }, []) */
+     useEffect(() => {
+         document.addEventListener('visibilitychange', chekToken)
+  
+         return () => {
+             document.removeEventListener('visibilitychange', chekToken)
+         }
+  
+     }, [])
 
     return (
         <>
             <ProModal />
-            <Menu
-                activeCompany={activeCompany}
-                setActiveCompany={setActiveCompany}
-            />
+            <Menu setActiveCompanyId={setActiveCompanyId}/>
+
             <div className={s.container}>
-                <MenuContext.Provider value={{ activeCompanyId: activeCompany?.id ? activeCompany.id : 0 }}>
+                <MenuContext.Provider value={{ activeCompanyId: activeCompanyId }}>
                     {children}
                 </MenuContext.Provider>
             </div>

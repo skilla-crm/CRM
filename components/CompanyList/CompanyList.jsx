@@ -7,9 +7,9 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Done from '@/public/icons/iconDone.svg';
 import LoaderButton from '../LoaderButton/LoaderButton';
 
-const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, activeCompany, setActiveCompany }) => {
-    const cookies = useCookies();
+const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, activeCompany, setActiveCompany, setActiveCompanyId }) => {
     const [open, setOpen] = useState(false);
+    const [disabled, setDisabled] = useState(false)
     const listRef = useRef();
     const fieldRef = useRef();
     const cities = partnerships?.reduce((acc, curr) => {
@@ -23,7 +23,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
         setOpen(false)
     }, [allCompanies])
 
-   
+
 
     const handleOpen = () => {
         open ? setOpen(false) : setOpen(true)
@@ -40,7 +40,8 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     const handleChoseActiveCompany = (item) => {
         setActiveCompany(item)
         localStorage.setItem('', JSON.stringify(item))
-        cookies.set('activeCompanyName', JSON.stringify(item))
+        localStorage.setItem('activeCompany', JSON.stringify(item))
+        setActiveCompanyId(item?.id ? item?.id : 0)
         setOpen(false)
     }
 
@@ -50,7 +51,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     }, []);
 
     return (
-        <div className={s.root}>
+        <div className={classNames(classNames(s.root, disabled && s.root_disabled))}>
             <div ref={fieldRef} onClick={handleOpen} className={classNames(s.field, open && s.field_open)}>
                 {activeCompany?.name && <p>{activeCompany?.name}</p>}
                 {!activeCompany?.name && <p>Все компании</p>}
@@ -86,7 +87,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
                         <p className={s.city}>{el}</p>
 
                         {partnerships?.filter((item) => item.city === el)?.map((el) => {
-                            return <PartnerShipAnother key={el.id} el={el} />
+                            return <PartnerShipAnother key={el.id} el={el} setDisabled={setDisabled} />
 
                         })}
                     </div>
@@ -112,11 +113,12 @@ const PartnerShipDop = ({ el, activeCompany, handler }) => {
     )
 }
 
-const PartnerShipAnother = ({ el }) => {
+const PartnerShipAnother = ({ el, setDisabled }) => {
     const [load, setLoad] = useState(false)
     const handleAuthCompany = (e) => {
         setLoad(true)
-        document.cookie = 'activeCompanyName=; Max-Age=-1;';
+        setDisabled(true)
+        localStorage.clear();
         const id = e.currentTarget.id;
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
 

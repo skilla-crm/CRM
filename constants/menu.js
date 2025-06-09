@@ -14,7 +14,7 @@ import bill from '@/public/icons/menu/iconBill.svg'
 
 export const menuItem = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
-    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublink: 'order_detail' },
+    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     {
         id: 3,
         name: 'Заказчики',
@@ -23,7 +23,7 @@ export const menuItem = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
             /*    { id: 2, name: 'Задолженность', link: '/' }, */
-            { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
+            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail'] },
             /* { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' }, */
             /*  { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
@@ -35,7 +35,7 @@ export const menuItem = [
         icon: workers,
 
         submenu: [
-            { id: 1, name: 'Все исполнители', link: '/workers', sublink: '/worker/' },
+            { id: 1, name: 'Все исполнители', link: '/workers', sublinks: ['/worker/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
@@ -61,7 +61,7 @@ export const menuItem = [
         ]
     },
 
-    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublinks: ['purchases'] },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     /*  {
          id: 8,
@@ -83,7 +83,7 @@ export const menuItem = [
 
 export const menuItemTest = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
-    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublink: 'order_detail' },
+    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     {
         id: 3,
         name: 'Заказчики',
@@ -92,9 +92,9 @@ export const menuItemTest = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
             /*    { id: 2, name: 'Задолженность', link: '/' }, */
-            { id: 3, name: 'Счета', link: '/bills', sublink: 'bills/detail' },
-            { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' },
-            { id: 5, name: 'Акты', link: '/act', sublink: 'act/detail' },
+            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
+            { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
             /*  { id: 5, name: 'Акты сверок', link: '/' }, */
         ]
     },
@@ -105,7 +105,7 @@ export const menuItemTest = [
         icon: workers,
 
         submenu: [
-            { id: 1, name: 'Все исполнители', link: '/workers', sublink: '/worker/' },
+            { id: 1, name: 'Все исполнители', link: '/workers', sublinks: ['/worker/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
@@ -131,7 +131,7 @@ export const menuItemTest = [
         ]
     },
 
-    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublinks: ['purchases'] },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     /*  {
          id: 8,
@@ -153,19 +153,19 @@ export const menuItemAccountan = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
     { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
     { id: 3, name: 'Банк', icon: bank, link: '/payments' },
-    { id: 4, name: 'Счета', icon: bill, link: '/bills', sublink: 'bills/detail' },
+    { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
     {
         id: 5,
         name: 'Продажа',
         icon: sell,
 
         submenu: [
-            { id: 1, name: 'УПД',  link: '/upd', sublink: 'upd/detail'},
-            { id: 2, name: 'Акты', link: '/act', sublink: 'act/detail' },
+            { id: 1, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 2, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
         ]
     },
-   /*  { id: 5, name: 'УПД', icon: counterparties, link: '/upd', sublink: 'upd/detail' },
-    { id: 6, name: 'Акты', icon: counterparties, link: '/act', sublink: 'act/detail' }, */
+    /*  { id: 5, name: 'УПД', icon: counterparties, link: '/upd', sublink: 'upd/detail' },
+     { id: 6, name: 'Акты', icon: counterparties, link: '/act', sublink: 'act/detail' }, */
     { id: 6, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
 

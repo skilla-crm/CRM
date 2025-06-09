@@ -22,7 +22,7 @@ import LoaderButton from '../LoaderButton/LoaderButton';
 
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
-    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role }) => {
+    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role, setActiveCompanyId }) => {
     const path = usePathname();
     const [allCompanies, setAllCompanies] = useState([]);
     const [openModal, setOpenModal] = useState(false)
@@ -60,7 +60,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
     const handleLogOut = () => {
         localStorage.clear();
-        document.cookie = 'activeCompanyName=; Max-Age=-1;';
+
         redirect('https://lk.skilla.ru/login/logout.php')
     }
 
@@ -88,13 +88,14 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                         {role === 'director' && 'Руководитель'}
                         {role === 'accountant' && 'Бухгалтер'}
                     </p>
-                    {allCompanies?.length > 0 && role === 'director' && <CompanyList
+                    {allCompanies?.length > 0 && <CompanyList
                         company={company}
                         allCompanies={allCompanies}
                         partnerships={partnerships}
                         partnershipsDop={partnershipsDop}
                         activeCompany={activeCompany}
                         setActiveCompany={setActiveCompany}
+                        setActiveCompanyId={setActiveCompanyId}
                     />
                     }
                 </div>
@@ -163,7 +164,7 @@ const Worker = ({ el }) => {
 
     const handleAuthWorker = (e) => {
         setLoad(true)
-        document.cookie = 'activeCompanyName=; Max-Age=-1;';
+        localStorage.clear();
         const id = e.currentTarget.id
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }

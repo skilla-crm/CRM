@@ -17,13 +17,13 @@ import Worker from '@/public/icons/worker.svg';
 import Customer from '@/public/icons/customer.svg';
 
 
-const FunctionBlock = ({ company, isLoading, hiddenMenu, test }) => {
+const FunctionBlock = ({ company, isLoading, hiddenMenu, test, role }) => {
     return (
         <div className={s.root}>
             <div className={s.blur}></div>
             <div className={s.container}>
                 <Subscription company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
-                <MultiFunctionButton hiddenMenu={hiddenMenu} test={test}/>
+                <MultiFunctionButton hiddenMenu={hiddenMenu} test={test} role={role} />
             </div>
         </div>
     )
@@ -76,7 +76,7 @@ const Subscription = ({ company, isLoading, hiddenMenu }) => {
     )
 }
 
-const MultiFunctionButton = ({ hiddenMenu, test }) => {
+const MultiFunctionButton = ({ hiddenMenu, test, role }) => {
     const [openMenu, setOpenMenu] = useState(false)
     const listRef = useRef()
     const buttonRef = useRef()
@@ -104,24 +104,28 @@ const MultiFunctionButton = ({ hiddenMenu, test }) => {
 
     return (
         <div className={s.multi}>
-            <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+            {role === 'director' && <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                 <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
                 <p className={s.add_text}>Новый заказ</p>
-            </Link>
+            </Link>}
+
+            {role === 'accountant' && <Link href={'/bills/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
+                <p className={s.add_text}>Новый счет</p>
+            </Link>}
 
             <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open, hiddenMenu && s.button_menu_hidden)}>
                 <Chewron />
             </div>
 
             <ul ref={listRef} className={classNames(s.menu, openMenu && s.menu_open)}>
-               {/*  {test && <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>} */}
+                {(test || role === 'accountant') && <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>}
                 <Link onClick={handleCloseMenu} href={'/bills/create'}><li><Docs /> Выставить счет</li></Link>
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Docs/> Создать акт-сверки</li></Link> */}
-                <div></div>
+                {role === 'director' && <div></div>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><LoadDocs/> Загрузить выписку</li></Link> */}
-                <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
-                {/* <div></div> */}
-                <Link onClick={handleCloseMenu} href={'/workers/add'}><li><Worker /> Добавить исполнителя</li></Link>
+                {role === 'director' && <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>}
+                {role === 'director' && <Link onClick={handleCloseMenu} href={'/workers/add'}><li><Worker /> Добавить исполнителя</li></Link>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Customer/> Добавить заказчика</li></Link> */}
             </ul>
         </div>

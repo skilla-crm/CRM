@@ -1,5 +1,10 @@
 .root {
     position: relative;
+
+    &_disabled {
+        pointer-events: none;
+        opacity: 0.8;
+    }
 }
 
 .field {

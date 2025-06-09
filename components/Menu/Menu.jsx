@@ -28,7 +28,7 @@ import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
-const Menu = ({ activeCompany, setActiveCompany }) => {
+const Menu = ({ setActiveCompanyId }) => {
     const hiddenButtonRef = useRef()
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenuNew')
@@ -47,6 +47,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
     const [eventsLinks, setEventsLinks] = useState([])
     const [visButton, setVisButton] = useState(false)
+    const [activeCompany, setActiveCompany] = useState({});
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
@@ -66,6 +67,12 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
 
     useEffect(() => {
+        const active = JSON.parse(localStorage.getItem('activeCompany'))
+        setActiveCompany(active)
+        active?.id && setActiveCompanyId(active?.id)
+    }, [])
+
+    useEffect(() => {
         if (role === 'director') {
             const fetchData = async () => {
                 const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
@@ -79,13 +86,11 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
             fetchData()
         }
 
-
-
     }, [token, menuEvents, role])
 
-    useEffect(() => {
+   /*  useEffect(() => {
         create()
-    }, [])
+    }, []) */
 
     useEffect(() => {
         mutate()
@@ -119,9 +124,8 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
     const handleOpenCompanyProfile = () => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
     }
-    const handleBack = (link) => {
-        console.log(path, link)
-        if (path.includes(link)) {
+    const handleBack = (links) => {
+        if (links?.find(el => path.includes(el))) {
             window.history.back()
             return
         }
@@ -174,13 +178,14 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                 city={city}
                 phone={phone}
                 email={email}
-                partnerships={oneCity ? partnerships : []}
+                partnerships={oneCity && role === 'director' ? partnerships : []}
                 partnershipsDop={partnershipsDop}
                 isLoading={isLoading}
                 activeCompany={activeCompany}
                 setActiveCompany={setActiveCompany}
                 details={menuData?.partnerships_details}
                 role={role}
+                setActiveCompanyId={setActiveCompanyId}
             />
 
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
@@ -268,7 +273,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                                 />
                             }
                             return <Link
-                                onClick={() => handleBack(el.sublink)}
+                                onClick={() => handleBack(el.sublinks)}
                                 id={el.id}
                                 key={el.id}
                                 href={el.link}
@@ -276,7 +281,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                                     eventsSub && s.link_events,
                                     isLoading && s.link_events_hidden,
                                     eventsSub && path === el.link && s.link_events_active,
-                                    (path === el.link || (el.sublink && path.includes(el.sublink))) && s.link_active,
+                                    (path === el.link || (el.sublinks && el.sublinks?.find(el => path.includes(el)))) && s.link_active,
                                     hiddenMenu && s.link_hidden)}
                             >
                                 <el.icon />
@@ -289,7 +294,7 @@ const Menu = ({ activeCompany, setActiveCompany }) => {
                     <div onClick={handleHidenMenu} className={s.area}></div>
                 </Scrollbar>
 
-                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} test={test} />
+                <FunctionBlock company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} test={test} role={role} />
             </div>
         </div>
 
@@ -311,7 +316,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handle
     }, [eventsLinks, el])
 
     useEffect(() => {
-        if ((el.submenu.some(link => path === link.link) || el.submenu.some(link => path.includes(link.sublink))) && !hiddenMenu) {
+        if ((el.submenu.some(link => path === link.link) || el.submenu.some(link => link.sublinks?.find(el => path.includes(el)))) && !hiddenMenu) {
             setOpen(true)
             return
         }
@@ -339,7 +344,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handle
     }
 
     useEffect(() => {
-        open && !el.submenu.find(el => path.includes(el.link) || path.includes(el.sublink)) && setOpen(false)
+        open && !el.submenu.find(el => path.includes(el.link) || el.sublinks?.find(el => path.includes(el))) && setOpen(false)
     }, [path, el.submenu]);
 
     return (
@@ -361,14 +366,14 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handle
                 {el.submenu.map(item => {
                     const eventsSub = eventsLinks.some(link => link.includes(item?.link))
                     return <Link
-                        onClick={() => handleBack(item.sublink)}
+                        onClick={() => handleBack(item?.sublinks)}
                         id={item.id}
                         key={item.id}
                         href={item.link}
                         className={classNames(s.link, s.link_sub,
                             eventsSub && s.link_events,
                             eventsSub && path === item.link && s.link_events_active,
-                            (path === item.link || (item.sublink && path.includes(item.sublink)))
+                            (path === item.link || (item.sublinks && item.sublinks?.find(el => path.includes(el))))
                             && s.link_active)}
                     >
 
