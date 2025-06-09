@@ -24,7 +24,7 @@ export default function middleware(req) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
     }
 
-    if (role.value !== 'director') {
+    if (role.value !== 'director' && role.value !== 'accountant') {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
 
