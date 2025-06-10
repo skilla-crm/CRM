@@ -119,14 +119,16 @@ const PartnerShipAnother = ({ el, setDisabled }) => {
     useEffect(() => {
         setDisabled(false)
     }, [])
-    
+
     const handleAuthCompany = (e) => {
         setLoad(true)
         setDisabled(true)
         localStorage.clear();
         const id = e.currentTarget.id;
+        setTimeout(() => {
+            redirect(`/`)
+        })
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
-
     }
     return (
         <li id={el.dir_id} onClick={handleAuthCompany} className={s.item}>

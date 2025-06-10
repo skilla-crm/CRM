@@ -1,10 +1,19 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    left: 40px;
+    top: 38px;
+    width: calc(100% - 80px);
+}
+
 .tabs {
     display: flex;
     gap: 20px;
     align-items: center;
-    position: absolute;
-    left: 40px;
-    top: 38px;
+
+    z-index: 0;
 }
 
 .tab {
@@ -35,10 +44,33 @@
         border-bottom: 2px solid #002CFB;
 
         sup {
-           max-width: 80px;
+            max-width: 80px;
             opacity: 1;
         }
 
         color: #121922;
+    }
+}
+
+.add {
+    padding: 0 20px;
+    height: 40px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #002CFB;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.056px;
+    cursor: pointer;
+    transition: all 0.15s;
+
+    &:hover {
+        background-color: #0024cb;
     }
 }

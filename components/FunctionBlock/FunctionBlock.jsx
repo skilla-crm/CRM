@@ -122,9 +122,9 @@ const MultiFunctionButton = ({ hiddenMenu, test, role }) => {
                 {(test || role === 'accountant') && <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>}
                 <Link onClick={handleCloseMenu} href={'/bills/create'}><li><Docs /> Выставить счет</li></Link>
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Docs/> Создать акт-сверки</li></Link> */}
-                {role === 'director' && <div></div>}
+                { <div></div>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><LoadDocs/> Загрузить выписку</li></Link> */}
-                {role === 'director' && <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>}
+                 <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
                 {role === 'director' && <Link onClick={handleCloseMenu} href={'/workers/add'}><li><Worker /> Добавить исполнителя</li></Link>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Customer/> Добавить заказчика</li></Link> */}
             </ul>

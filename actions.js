@@ -3,8 +3,8 @@ import { cookies } from 'next/headers'
 /* 350|AzgciLV9wnUGymn4vpCMuG8gGWJRtcvEHfZuNgi7 accountant*/
 export async function create() {
     const cookieStore = await cookies()
-    cookieStore.set('token', "18|DHHFpqyqM6tNzAXlf2n1AmAYNqERRlAMDxDT7rMZ")
-    cookieStore.set('role', "accountant")
+    cookieStore.set('token', "350|AzgciLV9wnUGymn4vpCMuG8gGWJRtcvEHfZuNgi7")
+    cookieStore.set('role', "director")
     cookieStore.set('avatar_mini', "7648_mini.jpg")
     cookieStore.set('name', "%D0%98%D0%B3%D0%BE%D1%80%D1%8C+")
     cookieStore.set('partnership_name', "%D0%9E%D0%9E%D0%9E+%C2%AB%D0%A2%D0%95%D0%A1%D0%A2%D0%9E%D0%92%D0%90%D0%AF+%D0%9A%D0%9E%D0%9C%D0%9F%D0%90%D0%9D%D0%98%D0%AF%C2%BB")

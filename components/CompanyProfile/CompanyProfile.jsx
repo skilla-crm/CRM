@@ -38,9 +38,9 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
     useEffect(() => {
         const active = JSON.parse(localStorage.getItem('activeCompany'))
-        if (partnershipsDop && company && partnershipsDop?.length === 0 ) {
+        if (partnershipsDop && company && partnershipsDop?.length === 0) {
             setActiveCompany(company)
-        } 
+        }
 
     }, [company, partnershipsDop])
 
@@ -166,7 +166,10 @@ const Worker = ({ el }) => {
     const handleAuthWorker = (e) => {
         setLoad(true)
         localStorage.clear();
-        const id = e.currentTarget.id
+        const id = e.currentTarget.id;
+        setTimeout(() => {
+            redirect(`/`)
+        })
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
 
