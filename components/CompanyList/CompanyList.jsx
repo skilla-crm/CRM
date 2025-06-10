@@ -126,8 +126,9 @@ const PartnerShipAnother = ({ el, setDisabled }) => {
         localStorage.clear();
         const id = e.currentTarget.id;
         setTimeout(() => {
-            redirect(`/`)
-        })
+            window.location.reload();
+        }, 100)
+        
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
     return (
