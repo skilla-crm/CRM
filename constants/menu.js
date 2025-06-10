@@ -10,7 +10,7 @@ import settings from '@/public/icons/menu/settings.svg'
 import calendar from '@/public/icons/menu/iconCalendar.svg'
 import sell from '@/public/icons/menu/iconSell.svg'
 import bill from '@/public/icons/menu/iconBill.svg'
-
+import iconDocumentIn from '@/public/icons/menu/iconDocumentIn.svg'
 
 export const menuItem = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
@@ -164,9 +164,10 @@ export const menuItemAccountan = [
             { id: 2, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
         ]
     },
+    { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
     /*  { id: 5, name: 'УПД', icon: counterparties, link: '/upd', sublink: 'upd/detail' },
      { id: 6, name: 'Акты', icon: counterparties, link: '/act', sublink: 'act/detail' }, */
-    { id: 6, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
 
 ]
