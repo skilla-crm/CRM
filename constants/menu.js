@@ -23,7 +23,7 @@ export const menuItem = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
             /*    { id: 2, name: 'Задолженность', link: '/' }, */
-            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail'] },
+            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             /* { id: 4, name: 'УПД', link: '/upd', sublink: 'upd/detail' }, */
             /*  { id: 5, name: 'Акты сверок', link: '/' }, */
         ]

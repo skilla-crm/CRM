@@ -1,6 +1,7 @@
 import s from './CompanyProfile.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { redirect, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
@@ -162,11 +163,14 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 const Worker = ({ el }) => {
     const [avatarError, setAvtarError] = useState(false)
     const [load, setLoad] = useState(false)
+    const router = useRouter()
 
     const handleAuthWorker = (e) => {
         setLoad(true)
         localStorage.clear();
         const id = e.currentTarget.id;
+        router.refresh()
+       /*  window.location.reload(); */
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
 

@@ -69,16 +69,16 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
 
 
-     if (path.includes('/purchases/manual')) {
-       router.push(path)
-       return
-     }
+    if (path.includes('/purchases/manual')) {
+      router.push(path)
+      return
+    }
 
-     
-     if (path.includes('/upd/manual')) {
-       router.push(path)
-       return
-     }
+
+    if (path.includes('/upd/manual')) {
+      router.push(path)
+      return
+    }
 
   }, [path])
 
