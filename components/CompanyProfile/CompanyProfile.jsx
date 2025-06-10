@@ -167,9 +167,6 @@ const Worker = ({ el }) => {
         setLoad(true)
         localStorage.clear();
         const id = e.currentTarget.id;
-        setTimeout(() => {
-            redirect(`/`)
-        })
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
 
