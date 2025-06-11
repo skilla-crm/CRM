@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 /* 17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo */
 export async function create() {
     const cookieStore = await cookies()
-    cookieStore.set('token', "350|AzgciLV9wnUGymn4vpCMuG8gGWJRtcvEHfZuNgi7")
+    cookieStore.set('token', "17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo")
     cookieStore.set('role', "accountant")
     cookieStore.set('avatar_mini', "7648_mini.jpg")
     cookieStore.set('name', "%D0%98%D0%B3%D0%BE%D1%80%D1%8C+")
