@@ -47,7 +47,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
     useEffect(() => {
         if (!isLoading) {
-            setAllCompanies([...partnershipsDop, ...partnerships])
+            partnershipsDop && setAllCompanies([...partnershipsDop, ...partnerships])
         }
     }, [partnerships, partnershipsDop, isLoading])
 

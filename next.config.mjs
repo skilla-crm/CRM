@@ -8,14 +8,18 @@ const nextConfig = {
                 destination: '/orders',
                 permanent: true,
             },
-
-          /*   {
-                source: '/orders/order_detail',
-                destination: '/orders',
-                permanent: true,
-            }, */
         ]
     },
+
+  /*   async rewrites() {
+        return [
+            {
+                source: '/orders1',
+                destination: `http://react.skilla.ru/lexa.html`,
+            },
+        ]
+
+    }, */
     reactStrictMode: true,
     webpack(config) {
         config.module.rules.push({
@@ -26,9 +30,9 @@ const nextConfig = {
         return config;
     },
 
-   /*  experimental: {
-        nextScriptWorkers: true,
-    }, */
+    /*  experimental: {
+         nextScriptWorkers: true,
+     }, */
 };
 
 

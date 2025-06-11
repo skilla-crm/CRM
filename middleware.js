@@ -22,9 +22,7 @@ export default function middleware(req) {
     const isBlocked = req.cookies.get('is_blocked')
     const token = req.cookies.get('token')
     const role = req.cookies.get('role')
-    console.log(req.nextUrl.pathname, token, testTokens)
-    const test = testTokens.includes(token.value.replace('%7C', '|'))
-    console.log(test)
+    const test = testTokens?.includes(token?.value?.replace('%7C', '|'))
 
     if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
