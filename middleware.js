@@ -32,10 +32,6 @@ export default function middleware(req) {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
 
-    if (role.value === 'accountant' && !test) {
-        return NextResponse.redirect("https://lk.skilla.ru/accountant")
-    }
-
     if (isBlocked?.value === '1' && protectedRoutes.some(el => req.nextUrl.pathname.includes(el))) {
         return NextResponse.redirect(new URL("/new/pay", req.url));
     }
