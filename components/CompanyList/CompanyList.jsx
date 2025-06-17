@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { useRouter, usePathname } from 'next/router';
 import { useCookies } from 'next-client-cookies';
 import s from './CompanyList.module.scss';
 import { redirect } from 'next/navigation';
@@ -12,6 +13,7 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
     const [disabled, setDisabled] = useState(false)
     const listRef = useRef();
     const fieldRef = useRef();
+
     const cities = partnerships?.reduce((acc, curr) => {
         if (acc.findIndex(el => el.city === curr.city) === -1) {
             acc.push(curr);
@@ -39,10 +41,14 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
 
     const handleChoseActiveCompany = (item) => {
         setActiveCompany(item)
+        localStorage.setItem('filterCompanys', JSON.stringify(item?.id ? [item?.id] : []))
         localStorage.setItem('', JSON.stringify(item))
         localStorage.setItem('activeCompany', JSON.stringify(item))
         setActiveCompanyId(item?.id ? item?.id : 0)
         setOpen(false)
+        setTimeout(() => {
+            window.location.reload();
+        }, 10)
     }
 
     useEffect(() => {
@@ -128,7 +134,7 @@ const PartnerShipAnother = ({ el, setDisabled }) => {
         setTimeout(() => {
             window.location.reload();
         }, 100)
-        
+
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
     return (

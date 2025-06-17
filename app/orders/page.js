@@ -1,8 +1,6 @@
 
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
-import { ModuleContainer } from '@/components/ModuleContainer/ModuleContainer';
-import Script from 'next/script';
 
 
 export const metadata = {

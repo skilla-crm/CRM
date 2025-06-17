@@ -96,7 +96,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
-    /*  useEffect(() => {
+   /*   useEffect(() => {
          create()
      }, []) */
 
