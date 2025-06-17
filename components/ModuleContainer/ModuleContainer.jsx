@@ -85,8 +85,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = `${src}?v=${version}`;;
-    /* script.async = true; */
+    script.src = `${src}?v=${version}`;
     script.defer = true;
     const link = document.createElement('link');
     link.href = `${srcCss}?v=${version}`;
