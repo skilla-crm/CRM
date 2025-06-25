@@ -22,7 +22,7 @@ export default async function Stock() {
 
   return (
     <>
-      <MenuPurchases />
+      <MenuPurchases role={role?.value}/>
       <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`} isskilla="0">
         <DynamicModuleContainer src={process.env.REACT_APP_URL_STOCK} srcCss={process.env.REACT_APP_URL_STOCK_CSS} id={id} />
       </div>
