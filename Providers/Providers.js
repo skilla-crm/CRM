@@ -34,21 +34,21 @@ export function Providers({ children }) {
         }
     }
 
-       useEffect(() => {
-           document.addEventListener('visibilitychange', chekToken)
-    
-           return () => {
-               document.removeEventListener('visibilitychange', chekToken)
-           }
-    
-       }, [])
+    useEffect(() => {
+        document.addEventListener('visibilitychange', chekToken)
+
+        return () => {
+            document.removeEventListener('visibilitychange', chekToken)
+        }
+
+    }, [])
 
     return (
         <>
             <ProModal />
             <Menu setActiveCompanyId={setActiveCompanyId} />
 
-            <div className={s.container}>
+            <div id='container_provider' className={s.container}>
                 <MenuContext.Provider value={{ activeCompanyId: activeCompanyId }}>
                     {children}
                 </MenuContext.Provider>
