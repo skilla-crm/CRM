@@ -170,9 +170,9 @@ const Worker = ({ el }) => {
         localStorage.clear();
         const id = e.currentTarget.id;
         router.refresh()
-        setTimeout(() => {
+       /*  setTimeout(() => {
             window.location.reload();
-        }, 100)
+        }, 100) */
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
 
