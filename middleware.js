@@ -26,7 +26,7 @@ export default function middleware(req) {
     const partnership_id = req.cookies.get('partnership_id')
     const role = req.cookies.get('role')
     const test = testTokens?.includes(partnership_id)
-    const testBrig = testTokens?.includes('17')
+    const testBrig = partnership_id == '17'
 
     if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
