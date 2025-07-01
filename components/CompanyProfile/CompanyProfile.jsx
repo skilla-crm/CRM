@@ -113,7 +113,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     details={details}
                 />
 
-                <IncomeSupervisor/>
+                {role === 'supervisor' && user?.supervisor_sum && <IncomeSupervisor data={user?.supervisor_sum} />}
 
                 {role === 'director' && <Scrollbar className={s.scroll}>
                     <div>

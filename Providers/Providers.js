@@ -40,7 +40,6 @@ export function Providers({ children }) {
         return () => {
             document.removeEventListener('visibilitychange', chekToken)
         }
-
     }, [])
 
     return (
