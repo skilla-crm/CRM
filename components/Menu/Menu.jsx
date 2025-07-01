@@ -26,7 +26,7 @@ import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Menu = ({ setActiveCompanyId }) => {
     const hiddenButtonRef = useRef()
@@ -49,7 +49,6 @@ const Menu = ({ setActiveCompanyId }) => {
     const [eventsLinks, setEventsLinks] = useState([])
     const [visButton, setVisButton] = useState(false)
     const [activeCompany, setActiveCompany] = useState({});
-    /* const [menuIList, setMenuList] = useState(); */
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
@@ -88,8 +87,6 @@ const Menu = ({ setActiveCompanyId }) => {
     if (role === 'supervisor' && !test) {
         menuIList = menuItemSupervisor
     }
-
-
 
     useEffect(() => {
         const active = JSON.parse(localStorage.getItem('activeCompany'))
@@ -183,7 +180,6 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }
 
-
     const handleVisButton = () => {
         setVisButton(true)
     }
@@ -191,7 +187,6 @@ const Menu = ({ setActiveCompanyId }) => {
     const handleHiddenButton = () => {
         setVisButton(false)
     }
-
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
