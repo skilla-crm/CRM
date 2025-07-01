@@ -98,7 +98,8 @@
 
     &_2 {
         border: none;
-        margin-top: -12px;
+        margin-top: auto;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
     }
 
     a {
@@ -322,7 +323,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    
+
 
     p {
         margin-top: 12px;
@@ -331,13 +332,13 @@
     }
 
     a {
-       width: 449px;
-       color: #002CFB;
-       transition: all 0.15s ease-in-out;
+        width: 449px;
+        color: #002CFB;
+        transition: all 0.15s ease-in-out;
 
-       &:hover {
-        color: #0024CB;
-       }
+        &:hover {
+            color: #0024CB;
+        }
     }
 
     span {

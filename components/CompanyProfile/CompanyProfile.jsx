@@ -20,6 +20,7 @@ import AvatarDefault from '@/public/images/AvatarDefault.png';
 import CompanyList from '../CompanyList/CompanyList';
 import Details from '../Details/Details';
 import LoaderButton from '../LoaderButton/LoaderButton';
+import IncomeSupervisor from '../IncomeSupervisor/IncomeSupervisor';
 
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
@@ -89,8 +90,9 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     <p className={s.text}>
                         {role === 'director' && 'Руководитель'}
                         {role === 'accountant' && 'Бухгалтер'}
+                        {role === 'supervisor' && 'Менеджер по персоналу'}
                     </p>
-                    {allCompanies?.length > 0 && <CompanyList
+                    {allCompanies?.length > 0 && role !== 'supervisor' && <CompanyList
                         company={company}
                         allCompanies={allCompanies}
                         partnerships={partnerships}
@@ -106,9 +108,12 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                     city={city}
                     phone={phone}
                     email={email}
-                    code={company?.dir_id}
+                    code={role === 'supervisor' ? user?.id : company?.dir_id}
+
                     details={details}
                 />
+
+                <IncomeSupervisor/>
 
                 {role === 'director' && <Scrollbar className={s.scroll}>
                     <div>
@@ -137,19 +142,19 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                 }
 
 
-                <div className={classNames(s.bottom, role === 'accountant' && s.bottom_2)}>
+                <div className={classNames(s.bottom, role !== 'director' && s.bottom_2)}>
                     <Link href='/support/faq' className={classNames(path.includes('/support/faq') && s.link_active)} onClick={handleClose}>
                         <IconFaq />
                         <p>База знаний</p>
                     </Link>
-                    <Link href='/pay' onClick={handleClose} className={classNames(path.includes('/pay') && s.link_active)}>
+                    {(role === 'director' || role === 'accountant') && <Link href='/pay' onClick={handleClose} className={classNames(path.includes('/pay') && s.link_active)}>
                         <Wallet />
                         <p>Оплата услуг</p>
-                    </Link>
+                    </Link>}
                 </div>
 
 
-                <button className={classNames(s.logout, role === 'accountant' && s.logout_margin)} onClick={handleLogOut}>
+                <button className={classNames(s.logout)} onClick={handleLogOut}>
                     <Logout />
                     <p>Выйти</p>
                 </button>
@@ -170,9 +175,9 @@ const Worker = ({ el }) => {
         localStorage.clear();
         const id = e.currentTarget.id;
         router.refresh()
-       /*  setTimeout(() => {
-            window.location.reload();
-        }, 100) */
+        /*  setTimeout(() => {
+             window.location.reload();
+         }, 100) */
         redirect(`https://lk.skilla.ru/director/auth/?id=${id}`)
     }
 
