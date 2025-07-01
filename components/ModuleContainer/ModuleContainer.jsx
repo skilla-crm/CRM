@@ -10,6 +10,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const searchParamsDate = useSearchParams().get('date');
   const version = 34;
 
+
   useEffect(() => {
     if (path === '/orders/create') {
       router.push(path)

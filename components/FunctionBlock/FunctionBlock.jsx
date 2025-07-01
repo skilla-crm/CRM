@@ -91,7 +91,7 @@ const MultiFunctionButton = ({ hiddenMenu, test, role }) => {
 
     const closeModal = (e) => {
         e.stopPropagation()
-        if (listRef.current && !listRef.current.contains(e.target) && !buttonRef.current.contains(e.target)) {
+        if (listRef?.current && !listRef?.current?.contains(e.target) && !buttonRef?.current?.contains(e.target)) {
             setOpenMenu(false)
             return
         }
@@ -103,7 +103,7 @@ const MultiFunctionButton = ({ hiddenMenu, test, role }) => {
     }, []);
 
     return (
-        <div className={s.multi}>
+        <div className={classNames(s.multi, role === 'supervisor' && s.multi_2)}>
             {role === 'director' && <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                 <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
                 <p className={s.add_text}>Новый заказ</p>
@@ -114,17 +114,22 @@ const MultiFunctionButton = ({ hiddenMenu, test, role }) => {
                 <p className={s.add_text}>Новый счет</p>
             </Link>}
 
-            <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open, hiddenMenu && s.button_menu_hidden)}>
+            {role === 'supervisor' && <Link href={'/performers/add'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                <div className={classNames(s.icon, s.icon_2, hiddenMenu && s.icon_hidden)}><Plus /></div>
+                <p className={s.add_text2}>Новый исполнитель</p>
+            </Link>}
+
+            {role !== 'supervisor' && <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open, hiddenMenu && s.button_menu_hidden)}>
                 <Chewron />
-            </div>
+            </div>}
 
             <ul ref={listRef} className={classNames(s.menu, openMenu && s.menu_open)}>
                 <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>
                 <Link onClick={handleCloseMenu} href={'/bills/create'}><li><Docs /> Выставить счет</li></Link>
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Docs/> Создать акт-сверки</li></Link> */}
-                { <div></div>}
+                {<div></div>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><LoadDocs/> Загрузить выписку</li></Link> */}
-                 <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
+                <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
                 {role === 'director' && <Link onClick={handleCloseMenu} href={'/workers/add'}><li><Worker /> Добавить исполнителя</li></Link>}
                 {/* <Link onClick={handleCloseMenu} href={''}><li><Customer/> Добавить заказчика</li></Link> */}
             </ul>

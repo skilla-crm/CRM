@@ -21,7 +21,7 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //constants
-import { menuItem, menuItemTest, menuItemAccountan } from '@/constants/menu';
+import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemSupervisorTest } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
@@ -38,6 +38,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
     const token = cookies.get('token')
+    const partnership_id = cookies.get('partnership_id')
     const role = cookies.get('role')
     const isBlockedCookies = cookies.get('is_blocked');
     const { data: menuEvents, isLoading: isLoadingEvents, mutate } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
@@ -48,6 +49,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const [eventsLinks, setEventsLinks] = useState([])
     const [visButton, setVisButton] = useState(false)
     const [activeCompany, setActiveCompany] = useState({});
+    /* const [menuIList, setMenuList] = useState(); */
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
@@ -63,8 +65,31 @@ const Menu = ({ setActiveCompanyId }) => {
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
-    const test = testTokens.includes(token)
+    const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
+    let menuIList = []
+
+    if (role === 'accountant') {
+        menuIList = menuItemAccountan
+    }
+
+    if (role === 'director' && test) {
+        menuIList = menuItemTest
+    }
+
+    if (role === 'director' && !test) {
+        menuIList = menuItem
+    }
+
+    if (role === 'supervisor' && test) {
+        menuIList = menuItemSupervisorTest
+    }
+
+    if (role === 'supervisor' && !test) {
+        menuIList = menuItemSupervisor
+    }
+
+
 
     useEffect(() => {
         const active = JSON.parse(localStorage.getItem('activeCompany'))
@@ -96,9 +121,9 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
-    /*  useEffect(() => {
-         create()
-     }, []) */
+  /*   useEffect(() => {
+        create()
+    }, []) */
 
     useEffect(() => {
         mutate()
@@ -267,7 +292,7 @@ const Menu = ({ setActiveCompanyId }) => {
                     (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block,
                 )}>
                     <div className={s.container}>
-                        {(role === 'accountant' ? menuItemAccountan : test ? menuItemTest : menuItem).map(el => {
+                        {/* (role === 'accountant' ? menuItemAccountan : test ? menuItemTest : menuItem) */menuIList?.map(el => {
                             const eventsSub = eventsLinks.some(link => link.includes(el?.link))
                             if (el.submenu) {
                                 return <SubMenu

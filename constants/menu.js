@@ -11,6 +11,13 @@ import calendar from '@/public/icons/menu/iconCalendar.svg'
 import sell from '@/public/icons/menu/iconSell.svg'
 import bill from '@/public/icons/menu/iconBill.svg'
 import iconDocumentIn from '@/public/icons/menu/iconDocumentIn.svg'
+import iconPlan from '@/public/icons/menu/iconPlan.svg'
+import iconPayments from '@/public/icons/menu/iconPayments.svg'
+import iconDeal from '@/public/icons/menu/iconDeal.svg'
+import iconGroup from '@/public/icons/menu/iconGroup.svg'
+import iconNotification from '@/public/icons/menu/iconNotification.svg'
+import iconCall from '@/public/icons/menu/iconCall.svg'
+import iconReconciliation from '@/public/icons/menu/iconReconciliation.svg'
 
 export const menuItem = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
@@ -97,6 +104,36 @@ export const menuItemAccountan = [
     },
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+
+]
+
+export const menuItemSupervisor = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 2, name: 'Все исполнители', icon: workers, link: '/workers', sublinks: ['/worker/'] },
+    { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
+    { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
+    { id: 5, name: 'Сверка', icon: iconReconciliation, link: '/workers/reconciliation' },
+    { id: 6, name: 'Группы', icon: iconGroup, link: '/workers/groups' },
+    { id: 7, name: 'Сделки', icon: iconDeal, link: '/workers/smz' },
+    { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
+    { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
+    { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+
+]
+
+export const menuItemSupervisorTest = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
+    { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
+    { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
+    { id: 5, name: 'Сверка', icon: iconReconciliation, link: '/workers/reconciliation' },
+    { id: 6, name: 'Группы', icon: iconGroup, link: '/workers/groups' },
+    { id: 7, name: 'Сделки', icon: iconDeal, link: '/workers/smz' },
+    { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
+    { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
+    { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
 
 ]

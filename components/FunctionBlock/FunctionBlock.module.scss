@@ -174,12 +174,16 @@
 }
 
 .add_text {
-
     width: 102px;
     margin-left: 22px;
-
     transition: all 0.25s ease-in-out;
 
+}
+
+.add_text2 {
+    width: 162px;
+    margin-left: 22px;
+    transition: all 0.25s ease-in-out;
 }
 
 .icon {
@@ -188,6 +192,10 @@
     display: flex;
     align-items: center;
     transition: all 0.25s ease-in-out;
+
+    &_2 {
+        left: 20px;
+    }
 
     &_hidden {
         left: 18px;
@@ -199,6 +207,11 @@
 .multi {
     display: flex;
     position: relative;
+
+    &_2 {
+        border-radius: 4px;
+        overflow: hidden;
+    }
 }
 
 .text {
