@@ -168,7 +168,7 @@ export const menuItemTest = [
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
-            { id: 5, name: 'Группы', link: '/workers/groups' },
+            { id: 5, name: 'Группы', link: '/workers/groups',  sublinks: ['/update/', '/create/'] },
             { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
         ]
     },

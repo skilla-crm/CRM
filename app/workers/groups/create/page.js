@@ -21,7 +21,7 @@ export default async function GroupsCreate() {
   return (
 
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_GROUPS} srcCss={process.env.REACT_APP_URL_GROUPS_CSS} id={id} />
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_GROUPS2} srcCss={process.env.REACT_APP_URL_GROUPS2_CSS} id={id} />
     </div>
 
 
