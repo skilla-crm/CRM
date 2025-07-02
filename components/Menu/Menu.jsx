@@ -41,8 +41,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const partnership_id = cookies.get('partnership_id')
     const role = cookies.get('role')
     const isBlockedCookies = cookies.get('is_blocked');
-    const { data: menuEvents, isLoading: isLoadingEvents, mutate } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token))
-    const { data: menuData, isLoading, mutate: mutatueMenu } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token))
+    const { data: menuEvents, isLoading: isLoadingEvents, mutate } = useSWR(`${baseURL}menu_events`, url => fetchWithToken(url, token), { revalidateOnFocus: false })
+    const { data: menuData, isLoading, mutate: mutatueMenu } = useSWR(`${baseURL}menu`, url => fetchWithToken(url, token), { revalidateOnFocus: false })
     const [openCompanyProfile, setOpenCompanyProfile] = useState(false);
     const [dopBlockState, setDopBlock] = useState(false);
     const [hiddenMenu, setHiddenMenu] = useState(hidemenu === '1' ? true : false)
@@ -117,8 +117,8 @@ const Menu = ({ setActiveCompanyId }) => {
         }
 
     }, [token, menuEvents, role])
-
-   /*  useEffect(() => {
+/* 
+    useEffect(() => {
         create()
     }, []) */
 
