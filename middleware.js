@@ -37,7 +37,7 @@ export default function middleware(req) {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
 
-    if (role.value === 'supervisor' && !testBrig) {
+    if (role.value === 'supervisor' && !test) {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
 
