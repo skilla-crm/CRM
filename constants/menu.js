@@ -109,7 +109,7 @@ export const menuItemAccountan = [
 ]
 
 export const menuItemSupervisor = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 2, name: 'Все исполнители', icon: workers, link: '/workers', sublinks: ['/worker/'] },
     { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
     { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
@@ -124,7 +124,7 @@ export const menuItemSupervisor = [
 ]
 
 export const menuItemSupervisorTest = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders2' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders2', sublinks: ['order_detail'] },
     { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
     { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
     { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
@@ -168,7 +168,7 @@ export const menuItemTest = [
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
-            { id: 5, name: 'Группы', link: '/workers/groups',  sublinks: ['/update/', '/create/'] },
+            { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/update/', '/create/'] },
             { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
         ]
     },
