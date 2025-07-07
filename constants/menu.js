@@ -124,7 +124,7 @@ export const menuItemSupervisor = [
 ]
 
 export const menuItemSupervisorTest = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders2' },
     { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
     { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
     { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
@@ -142,7 +142,7 @@ export const menuItemSupervisorTest = [
 
 export const menuItemTest = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
-    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
+    { id: 2, name: 'Заказы', icon: orders, link: '/orders2', sublinks: ['order_detail'] },
     {
         id: 3,
         name: 'Заказчики',
