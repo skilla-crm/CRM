@@ -19,7 +19,7 @@ import iconNotification from '@/public/icons/menu/iconNotification.svg'
 import iconCall from '@/public/icons/menu/iconCall.svg'
 import iconReconciliation from '@/public/icons/menu/iconReconciliation.svg'
 
-export const menuItem = [
+export const menuItemOld = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
     { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     {
@@ -108,7 +108,7 @@ export const menuItemAccountan = [
 
 ]
 
-export const menuItemSupervisor = [
+/* export const menuItemSupervisor = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 2, name: 'Все исполнители', icon: workers, link: '/workers', sublinks: ['/worker/'] },
     { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
@@ -119,12 +119,11 @@ export const menuItemSupervisor = [
     { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
     { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
 
-]
+] */
 
-export const menuItemSupervisorTest = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders2', sublinks: ['order_detail'] },
+export const menuItemSupervisor = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
     { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
     { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
@@ -134,15 +133,13 @@ export const menuItemSupervisorTest = [
     { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
     { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-    /*  { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
-
 ]
 
 
 
-export const menuItemTest = [
+export const menuItem = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
-    { id: 2, name: 'Заказы', icon: orders, link: '/orders2', sublinks: ['order_detail'] },
+    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     {
         id: 3,
         name: 'Заказчики',

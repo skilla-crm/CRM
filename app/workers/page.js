@@ -1,5 +1,6 @@
 
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation';
 import dynamic from 'next/dynamic'
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default async function Workers() {
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
+  redirect(`/performers`)
 
   return (
     <div id="root_list_workers" ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>

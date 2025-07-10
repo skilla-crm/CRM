@@ -72,19 +72,19 @@ const Menu = ({ setActiveCompanyId }) => {
         menuIList = menuItemAccountan
     }
 
-    if (role === 'director' && test) {
+ /*    if (role === 'director' && test) {
         menuIList = menuItemTest
-    }
+    } */
 
-    if (role === 'director' && !test) {
+    if (role === 'director'/*  && !test */) {
         menuIList = menuItem
     }
 
-    if (role === 'supervisor' && test) {
+  /*   if (role === 'supervisor' && test) {
         menuIList = menuItemSupervisorTest
-    }
+    } */
 
-    if (role === 'supervisor' && !test) {
+    if (role === 'supervisor'/*  && !test */) {
         menuIList = menuItemSupervisor
     }
 
@@ -118,7 +118,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
-   /*  useEffect(() => {
+/*     useEffect(() => {
         create()
     }, []) */
 

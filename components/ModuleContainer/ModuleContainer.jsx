@@ -8,7 +8,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 39;
+  const version = 40;
 
 
   useEffect(() => {
@@ -22,7 +22,17 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       return
     }
 
+      if (path.includes('/orders2/edit')) {
+      router.push(path)
+      return
+    }
+
     if (path.includes('/orders/order_detail/') && id === 'root_order-create') {
+      router.push(path)
+      return
+    }
+
+     if (path.includes('/orders2/order_detail/') && id === 'root_order-create') {
       router.push(path)
       return
     }
@@ -31,6 +41,12 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       router.push(path)
       return
     }
+
+      if (path.includes('/orders2/repeat/')) {
+      router.push(path)
+      return
+    }
+
 
 
     if (searchParamsType && id === 'root_order-create') {
