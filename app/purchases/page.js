@@ -7,6 +7,10 @@ import MenuPurchases from '@/components/MenuPurchases/MenuPurchases'
   title: "Закупки"
 };
  */
+export const referrer = {
+  content: "no-referrer"
+}
+
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
     .then((module) => module.ModuleContainer)
@@ -21,7 +25,7 @@ export default async function Purchases() {
 
   return (
     <>
-      <MenuPurchases role={role?.value}/>
+      <MenuPurchases role={role?.value} />
       <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`} isskilla="0">
         <DynamicModuleContainer src={process.env.REACT_APP_URL_PURCHASES} srcCss={process.env.REACT_APP_URL_PURCHASES_CSS} id={id} />
       </div>

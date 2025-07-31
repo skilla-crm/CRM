@@ -3,8 +3,12 @@ import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: "Закупки"
+  title: "Закупки",
 };
+
+export const referrer = {
+  content: "no-referrer"
+}
 
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
