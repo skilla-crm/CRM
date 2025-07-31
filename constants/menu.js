@@ -104,7 +104,7 @@ export const menuItemAccountan = [
     },
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-    /* { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
 
 ]
 
@@ -125,7 +125,7 @@ export const menuItemAccountanTest = [
     },
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-    /* { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
 
 ]
 
@@ -154,7 +154,7 @@ export const menuItemSupervisor = [
     { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
     { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-   /*  { id: 11, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+    { id: 11, name: 'Поддержка', icon: support, link: '/support/chat' },
 ]
 
 

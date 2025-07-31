@@ -8,7 +8,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 57;
+  const version = 58;
 
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       router.push(path)
       return
     }
-
+  
     if (path.includes('/orders/repeat/')) {
       router.push(path)
       return
