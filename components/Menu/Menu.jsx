@@ -21,7 +21,7 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //constants
-import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemSupervisorTest } from '@/constants/menu';
+import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
@@ -68,15 +68,19 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = []
 
-    if (role === 'accountant') {
+    if (role === 'accountant' && test) {
+        menuIList = menuItemAccountanTest
+    }
+
+    if (role === 'accountant' && !test) {
         menuIList = menuItemAccountan
     }
 
- /*    if (role === 'director' && test) {
+    if (role === 'director' && test) {
         menuIList = menuItemTest
-    } */
+    }
 
-    if (role === 'director'/*  && !test */) {
+    if (role === 'director' && !test) {
         menuIList = menuItem
     }
 
@@ -118,9 +122,9 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
-   /*  useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
     useEffect(() => {
         mutate()

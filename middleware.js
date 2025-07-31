@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-export const testTokens = ['17', '200', '1001', '1076', '443', '1036', '1322', '1327', '1083', '8']
+export const testTokens = ['17', '200', '1001', '1076', '443', '1036', '1322', '1327', '1083', '8', '127']
 
 
 const protectedRoutes = [
