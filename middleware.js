@@ -38,7 +38,7 @@ export default function middleware(req) {
     }
 
     if (isBlocked?.value === '1' && protectedRoutes.some(el => req.nextUrl.pathname.includes(el))) {
-        return NextResponse.redirect(new URL("/new/pay", req.url));
+        return NextResponse.redirect("https://lk.skilla.ru/new/pay");
     }
 }
 
