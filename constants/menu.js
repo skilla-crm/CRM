@@ -90,7 +90,7 @@ export const menuItemOld = [
 export const menuItemAccountan = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
     { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
-    { id: 3, name: 'Банк', icon: bank, link: '/payments' },
+    { id: 3, name: 'Банк', icon: bank, link: '/bank' },
     { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
     {
         id: 5,
@@ -193,7 +193,7 @@ export const menuItem = [
     },
 
 
-    { id: 5, name: 'Банк', icon: bank, link: '/payments' },
+    { id: 5, name: 'Банк', icon: bank, link: '/bank' },
 
     {
         id: 6,
