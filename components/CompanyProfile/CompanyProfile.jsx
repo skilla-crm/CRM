@@ -24,7 +24,7 @@ import IncomeSupervisor from '../IncomeSupervisor/IncomeSupervisor';
 
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
-    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role, setActiveCompanyId }) => {
+    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role, setActiveCompanyId, partnership_id }) => {
     const path = usePathname();
     const [allCompanies, setAllCompanies] = useState([]);
     const [openModal, setOpenModal] = useState(false)
@@ -143,7 +143,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
 
                 <div className={classNames(s.bottom, role !== 'director' && s.bottom_2)}>
-                    <Link href='/support/faq' className={classNames(path.includes('/support/faq') && s.link_active)} onClick={handleClose}>
+                    <Link href={partnership_id == 17 ? '/support/faqnew' : '/support/faq'} className={classNames(path.includes('/support/faq') && s.link_active)} onClick={handleClose}>
                         <IconFaq />
                         <p>База знаний</p>
                     </Link>

@@ -122,7 +122,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
-   /*  useEffect(() => {
+ /*    useEffect(() => {
         create()
     }, []) */
 
@@ -218,6 +218,7 @@ const Menu = ({ setActiveCompanyId }) => {
                 details={menuData?.partnerships_details}
                 role={role}
                 setActiveCompanyId={setActiveCompanyId}
+                partnership_id={partnership_id}
             />
 
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
