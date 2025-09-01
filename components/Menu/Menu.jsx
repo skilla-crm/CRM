@@ -5,6 +5,8 @@ import useSWR from 'swr'
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 import { create } from '@/actions';
 import { fetchWithToken, fetchTokenChat, newMessageAttention } from '@/api/api';
 import { usePathname } from 'next/navigation';
@@ -27,6 +29,11 @@ import { oneCityTokens, testTokens } from '@/constants/exceptions';
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
+
+
+
+
 
 const Menu = ({ setActiveCompanyId }) => {
     const hiddenButtonRef = useRef()
@@ -68,6 +75,58 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = []
 
+    /*     window.Pusher = Pusher; */
+
+    useEffect(() => {
+        create()
+    }, [])
+
+    useEffect(() => {
+        console.log(token, user)
+
+        if (user?.id) {
+            const echo = new Echo({
+                broadcaster: "pusher",
+
+                client: new Pusher(`${process.env.NEXT_PUBLIC_PUSHER_APP_KEY}`, {
+                    cluster: "mt1",
+                    wsHost: process.env.NEXT_PUBLIC_PUSHER_APP_HOST,
+                    wssPort: process.env.NEXT_PUBLIC_PUSHER_APP_PORT ?? 6001,
+                    wsPort: process.env.NEXT_PUBLIC_PUSHER_APP_PORT ?? 6001,
+                    forceTLS: false,
+                    enableStats: false,
+                    enabledTransports: ["ws", "wss"],
+                    authEndpoint: `${process.env.NEXT_PUBLIC_BASE_URL}broadcasting/auth`,
+                    auth: {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            Accept: "application/json",
+                        },
+                    },
+                })
+            });
+
+            const channel = echo.private(`users.${user.id}`)
+
+            channel.listen(
+                "Broadcasting.UserReceivedEvent",
+                (e) => {
+                    console.log(e)
+                }
+            );
+
+            window.channelData = { userId: user.id, channel };
+
+            return () => {
+                channel.stopListening("Broadcasting.UserReceivedEvent");
+                echo.leave("users");
+            };
+        }
+
+
+    }, [token, user])
+
+
     if (role === 'accountant' && test) {
         menuIList = menuItemAccountanTest
     }
@@ -84,9 +143,9 @@ const Menu = ({ setActiveCompanyId }) => {
         menuIList = menuItem
     }
 
-  /*   if (role === 'supervisor' && test) {
-        menuIList = menuItemSupervisorTest
-    } */
+    /*   if (role === 'supervisor' && test) {
+          menuIList = menuItemSupervisorTest
+      } */
 
     if (role === 'supervisor'/*  && !test */) {
         menuIList = menuItemSupervisor
@@ -122,9 +181,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     }, [token, menuEvents, role])
 
- /*    useEffect(() => {
-        create()
-    }, []) */
+
 
     useEffect(() => {
         mutate()
