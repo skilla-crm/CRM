@@ -7,7 +7,6 @@ import IconPercent from '@/public/icons/iconPercent.svg'
 import { addSpaceNumber } from '@/utils/addSpaceNumber';
 
 const IncomeSupervisor = ({ data }) => {
-    console.log(data)
     return (
         <div className={s.root}>
             {Object.values(data)?.map((el, i) => {

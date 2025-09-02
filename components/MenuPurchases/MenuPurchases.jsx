@@ -6,7 +6,6 @@ import IconPlus from '../../public/icons/iconPlus.svg';
 
 const MenuPurchases = ({ role, purchaseCount }) => {
     const path = usePathname();
-    console.log(role)
 
     return (
         <div className={s.container}>

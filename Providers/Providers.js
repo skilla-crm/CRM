@@ -5,9 +5,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useCookies } from 'next-client-cookies';
 import { MenuContext } from "@/contexts/MenuContext";
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import Menu from "@/components/Menu/Menu";
 import ProModal from '@/components/ProModal/ProModal';
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
+
 
 export function Providers({ children }) {
     const router = useRouter()
@@ -46,6 +49,14 @@ export function Providers({ children }) {
         <>
             <ProModal />
             <Menu setActiveCompanyId={setActiveCompanyId} />
+
+            <ToastContainer
+                position="top-center"
+                hideProgressBar
+                closeOnClick
+                pauseOnHover
+                limit={3}
+            />
 
             <div id='container_provider' className={s.container}>
                 <MenuContext.Provider value={{ activeCompanyId: activeCompanyId }}>

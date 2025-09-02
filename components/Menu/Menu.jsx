@@ -5,8 +5,6 @@ import useSWR from 'swr'
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
-import Echo from "laravel-echo";
-import Pusher from "pusher-js";
 import { create } from '@/actions';
 import { fetchWithToken, fetchTokenChat, newMessageAttention } from '@/api/api';
 import { usePathname } from 'next/navigation';
@@ -22,6 +20,9 @@ import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
+//hooks
+import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
+import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
 //constants
 import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
@@ -73,58 +74,40 @@ const Menu = ({ setActiveCompanyId }) => {
     const dayDiff = paidTo.diff(dateNow, 'day');
     const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
-    let menuIList = []
+    let menuIList = [];
 
-    /*     window.Pusher = Pusher; */
-
-    useEffect(() => {
-        create()
-    }, [])
+    const channelEvents = useEstablishEventChannel(token, user)
+    const channelChat = useEstablishChatChannel(token, user)
 
     useEffect(() => {
-        console.log(token, user)
-
-        if (user?.id) {
-            const echo = new Echo({
-                broadcaster: "pusher",
-
-                client: new Pusher(`${process.env.NEXT_PUBLIC_PUSHER_APP_KEY}`, {
-                    cluster: "mt1",
-                    wsHost: process.env.NEXT_PUBLIC_PUSHER_APP_HOST,
-                    wssPort: process.env.NEXT_PUBLIC_PUSHER_APP_PORT ?? 6001,
-                    wsPort: process.env.NEXT_PUBLIC_PUSHER_APP_PORT ?? 6001,
-                    forceTLS: false,
-                    enableStats: false,
-                    enabledTransports: ["ws", "wss"],
-                    authEndpoint: `${process.env.NEXT_PUBLIC_BASE_URL}broadcasting/auth`,
-                    auth: {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                            Accept: "application/json",
-                        },
-                    },
-                })
-            });
-
-            const channel = echo.private(`users.${user.id}`)
-
-            channel.listen(
+        if (channelEvents) {
+            channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
                 (e) => {
                     console.log(e)
                 }
-            );
-
-            window.channelData = { userId: user.id, channel };
-
-            return () => {
-                channel.stopListening("Broadcasting.UserReceivedEvent");
-                echo.leave("users");
-            };
+            )
         }
+    }, [channelEvents])
+
+    useEffect(() => {
+        if (channelChat) {
+            channelChat.listen(
+                "NewMessage",
+                (e) => {
+                    console.log(e)
+                }
+            )
+        }
+    }, [channelChat])
 
 
-    }, [token, user])
+
+  /*   useEffect(() => {
+        create()
+    }, []) */
+
+
 
 
     if (role === 'accountant' && test) {
