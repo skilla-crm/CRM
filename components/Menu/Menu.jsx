@@ -20,21 +20,15 @@ import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
-//hooks
-/* import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
-import useEstablishChatChannel from '@/hooks/useEstablishChatChannel'; */
+
 //constants
 import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
+import NotificationsNew from '../NotificationsNew/NotificationsNew';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-
-
-
-
-
 
 const Menu = ({ setActiveCompanyId }) => {
     const hiddenButtonRef = useRef()
@@ -75,37 +69,10 @@ const Menu = ({ setActiveCompanyId }) => {
     const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
-/* 
-    const channelEvents = useEstablishEventChannel(token, user)
-    const channelChat = useEstablishChatChannel(token, user) */
-
-   /*  useEffect(() => {
-        if (channelEvents) {
-            channelEvents.listen(
-                "Broadcasting.UserReceivedEvent",
-                (e) => {
-                    console.log(e)
-                }
-            )
-        }
-    }, [channelEvents])
 
     useEffect(() => {
-        if (channelChat) {
-            channelChat.listen(
-                "NewMessage",
-                (e) => {
-                    console.log(e)
-                }
-            )
-        }
-    }, [channelChat]) */
-
-
-
-  /*   useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
 
@@ -234,6 +201,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
+            <NotificationsNew token={token} user={user}/>
 
             <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />

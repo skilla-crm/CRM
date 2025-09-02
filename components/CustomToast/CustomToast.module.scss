@@ -3,28 +3,29 @@
   align-items: center;
 
   gap: 6px;
-  height: 48px;
   border-radius: 4px;
   background: #fff;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
-  padding: 8px 12px 8px 8px;
+  padding: 12px 8px;
   opacity: 1;
   transition: opacity 0.15s ease-in-out;
 
   p {
-    font-family: Inter, sans-serif;
     font-size: 14px;
     font-weight: 400;
-    line-height: 14px;
+    line-height: 18px;
     color: #121922;
   }
 }
+
 .notification_error {
   width: 500px;
 }
 
 .notification_success {
-  width: 500px;
+  width: fit-content;
+  max-height: 76px;
+  border-left: 2px solid #002cfb;
 }
 
 .line {

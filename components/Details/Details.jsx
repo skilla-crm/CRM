@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useRef, useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import Scrollbar from 'react-scrollbars-custom';
+import { toast } from 'react-toastify';
 //API
 import { downloadDetails } from '@/api/api';
 //Icons
@@ -14,8 +15,9 @@ import Mail from '@/public/icons/details/mail.svg';
 import Save from '@/public/icons/details/save.svg';
 import Arrow from '@/public/icons/arrowS.svg';
 import SaveM from '@/public/icons/details/saveM.svg';
+import Copy from '@/public/icons/notification/iconCopy.svg';
 //components
-import Notification from '../Notification/Notification';
+import CustomToast from '../CustomToast/CustomToast';
 
 
 const Details = ({ city, phone, email, code, details }) => {
@@ -39,18 +41,36 @@ const Details = ({ city, phone, email, code, details }) => {
         const id = e.currentTarget.id;
         const value = e.currentTarget.value;
         navigator.clipboard.writeText(value)
-        setTimeout(() => {
-            setTimerId(setTimeout(() => handleCloseNotification(), 1500));
-            setNotification({
-                state: true,
-                type: 'copy',
-                text: id === 'code' ? 'Код заказчика скопирован в буфер обмена'
-                    : id === 'city' ? 'Город скопирован в буфер обмена'
-                        : id === 'phone' ? 'Телефон скопирован в буфер обмена'
-                            : id === 'mail' ? 'Адрес почты скопирован в буфер обмена'
-                                : ''
-            })
-        }, 200)
+
+        const text =  id === 'code' ? 'Код заказчика скопирован в буфер обмена'
+                     : id === 'city' ? 'Город скопирован в буфер обмена'
+                         : id === 'phone' ? 'Телефон скопирован в буфер обмена'
+                             : id === 'mail' ? 'Адрес почты скопирован в буфер обмена'
+                                 : ''
+
+        toast(
+            ({ closeToast }) => (
+                <CustomToast
+                    message={text}
+                    closeToast={closeToast}
+                    icon={<Copy />}
+                    type="success"
+                    buttonClose={false}
+                />
+            ),
+            {
+                autoClose: 1500,
+                closeButton: false,
+            }
+        );
+        /*  setTimeout(() => {
+             setTimerId(setTimeout(() => handleCloseNotification(), 1500));
+             setNotification({
+                 state: true,
+                 type: 'copy',
+                 
+             })
+         }, 200) */
 
 
     }
@@ -70,7 +90,7 @@ const Details = ({ city, phone, email, code, details }) => {
 
     return (
         <>
-            <Notification type={notificationOpen.type} text={notificationOpen.text} open={notificationOpen.state} setOpen={(state) => setNotification({ state })} />
+            {/*   <Notification type={notificationOpen.type} text={notificationOpen.text} open={notificationOpen.state} setOpen={(state) => setNotification({ state })} /> */}
 
             <div className={s.root}>
                 <button onClick={handleCopy} id='city' value={city} className={s.copy}><Geo />{city}</button>

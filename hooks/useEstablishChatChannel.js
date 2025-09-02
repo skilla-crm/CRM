@@ -1,4 +1,4 @@
-/* import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 
@@ -8,7 +8,7 @@ const useEstablishChatChannel = (token, user) => {
     async function handleEstablish() {
         const data = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
         const chatToken = await data.json()
-
+        
         const echo = new Echo({
             broadcaster: 'reverb',
 
@@ -52,7 +52,7 @@ const useEstablishChatChannel = (token, user) => {
     return channel
 }
 
-export default useEstablishChatChannel; */
+export default useEstablishChatChannel;
 
 
 
