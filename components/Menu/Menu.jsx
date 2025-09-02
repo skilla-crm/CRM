@@ -75,9 +75,9 @@ const Menu = ({ setActiveCompanyId }) => {
     const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
-
+/* 
     const channelEvents = useEstablishEventChannel(token, user)
-    const channelChat = useEstablishChatChannel(token, user)
+    const channelChat = useEstablishChatChannel(token, user) */
 
     useEffect(() => {
         if (channelEvents) {
