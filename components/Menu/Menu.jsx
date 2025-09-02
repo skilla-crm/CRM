@@ -21,8 +21,8 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //hooks
-import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
-import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
+/* import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
+import useEstablishChatChannel from '@/hooks/useEstablishChatChannel'; */
 //constants
 import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
@@ -79,7 +79,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const channelEvents = useEstablishEventChannel(token, user)
     const channelChat = useEstablishChatChannel(token, user) */
 
-    useEffect(() => {
+   /*  useEffect(() => {
         if (channelEvents) {
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
@@ -99,7 +99,7 @@ const Menu = ({ setActiveCompanyId }) => {
                 }
             )
         }
-    }, [channelChat])
+    }, [channelChat]) */
 
 
 
