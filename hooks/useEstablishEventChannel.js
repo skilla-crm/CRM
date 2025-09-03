@@ -31,7 +31,7 @@ const useEstablishEventChannel = (token, user, partnership_id) => {
             const channel = echo.private(`partnerships.${partnership_id}`)
             setChannel(channel)
 
-            window.channelData = { userId: user.id, channel };
+            window.channelData = { userId: user.id, partnership_id: partnership_id, channel };
 
             return () => {
                 channel.stopListening("Broadcasting.UserReceivedEvent");
