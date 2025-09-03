@@ -69,10 +69,10 @@ const Menu = ({ setActiveCompanyId }) => {
     const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
-/* 
+
     useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
 
@@ -201,7 +201,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
-       {/*      <NotificationsNew token={token} user={user}/> */}
+            <NotificationsNew token={token} user={user} partnership_id={partnership_id}/>
 
             <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />

@@ -8,8 +8,8 @@ import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
 //components
 import CustomToast from '../CustomToast/CustomToast';
 
-const NotificationsNew = ({ token, user }) => {
-    const channelEvents = useEstablishEventChannel(token, user)
+const NotificationsNew = ({ token, user, partnership_id }) => {
+    const channelEvents = useEstablishEventChannel(token, user, partnership_id)
     const channelChat = useEstablishChatChannel(token, user)
 
     useEffect(() => {
@@ -18,24 +18,25 @@ const NotificationsNew = ({ token, user }) => {
                 "Broadcasting.UserReceivedEvent",
                 (data) => {
                     console.log(data)
-                    const { description } = data;
+                    const { description, descripton_short, person } = data;
 
-                    description && setTimeout(() => {
-                        toast(
-                            ({ closeToast }) => (
-                                <CustomToast
-                                    message={description}
-                                    closeToast={closeToast}
-                                    /*   icon={<IconDoneBlue />} */
-                                    type="success"
-                                />
-                            ),
-                            {
-                                autoClose: 95000,
-                                closeButton: false,
-                            }
-                        );
-                    }, 300)
+                    (description || descripton_short) && toast(
+                        ({ closeToast }) => (
+                            <CustomToast
+                                message={person?.id !== user.id ? description : descripton_short}
+                                closeToast={closeToast}
+                                buttonClose={true}
+                                person={person?.id !== user.id ? person : null}
+                                /*   icon={<IconDoneBlue />} */
+                                type="success"
+                            />
+                        ),
+                        {
+                            autoClose: person?.id !== user.id ? 5500 : 2500,
+                            closeButton: false,
+                        }
+                    );
+
 
 
                 }
@@ -61,7 +62,6 @@ const NotificationsNew = ({ token, user }) => {
             pauseOnHover
             limit={3}
             transition={Slide}
-
         />
     )
 };

@@ -8,7 +8,7 @@
   box-shadow: none !important;
   padding: 0 !important;
   margin: 0 0 10px 0 !important;
-  width: 500px !important;
+  width: max-content !important;
   min-height: unset !important;
 }
 

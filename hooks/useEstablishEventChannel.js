@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 
-const useEstablishEventChannel = (token, user) => {
+const useEstablishEventChannel = (token, user, partnership_id) => {
     const [channel, setChannel] = useState(null);
     useEffect(() => {
 
@@ -28,19 +28,19 @@ const useEstablishEventChannel = (token, user) => {
                 })
             });
 
-            const channel = echo.private(`users.${user.id}`)
+            const channel = echo.private(`partnerships.${partnership_id}`)
             setChannel(channel)
 
             window.channelData = { userId: user.id, channel };
 
             return () => {
                 channel.stopListening("Broadcasting.UserReceivedEvent");
-                echo.leave("users");
+                echo.leave("partnerships");
             };
         }
 
 
-    }, [token, user])
+    }, [token, user, partnership_id])
 
     return channel
 }
