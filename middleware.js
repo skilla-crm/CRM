@@ -29,7 +29,7 @@ export default function middleware(req) {
     const testBrig = partnership_id?.value == '17'
 
 
-   /*  if (!token) {
+    if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
     }
 
@@ -39,6 +39,6 @@ export default function middleware(req) {
 
     if (isBlocked?.value === '1' && protectedRoutes.some(el => req.nextUrl.pathname.includes(el))) {
         return NextResponse.redirect("https://lk.skilla.ru/new/pay");
-    } */
+    }
 }
 

@@ -70,9 +70,9 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-    useEffect(() => {
+   /*  useEffect(() => {
         create()
-    }, [])
+    }, []) */
 
 
 
@@ -123,7 +123,6 @@ const Menu = ({ setActiveCompanyId }) => {
                 newMessageAttention(tokenChat?.token)
                     .then(res => {
                         res.count > 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
-                        console.log(res)
                     })
             }
             fetchData()
@@ -201,7 +200,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
-            <NotificationsNew token={token} user={user} partnership_id={partnership_id}/>
+            <NotificationsNew token={token} user={user} partnership_id={partnership_id} role={role}/>
 
             <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />
