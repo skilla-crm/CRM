@@ -5,6 +5,8 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 //hooks
 import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
 import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
+//icons
+import chatIcon from '@/public/icons/chatIcon.svg';
 //components
 import CustomToast from '../CustomToast/CustomToast';
 //utils
@@ -47,16 +49,37 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
         }
     }, [channelEvents]) */
 
-    /*  useEffect(() => {
-         if (channelChat) {
-             channelChat.listen(
-                 "NewMessage",
-                 (e) => {
-                     console.log(e)
-                 }
-             )
-         }
-     }, [channelChat]) */
+   /*  useEffect(() => {
+        if (channelChat) {
+            channelChat.listen(
+                "NewMessage",
+                (data) => {
+                    console.log(data)
+                    const { message } = data;
+                    const { text, user } = message;
+
+                    toast(
+                        ({ closeToast }) => (
+                            <CustomToast
+                                message={text}
+                                closeToast={closeToast}
+                                buttonClose={true}
+                                person={{name: `Cпециалист поддержки ${user.name} ${user.surname}`}}
+                                Icon={chatIcon}
+                                type="success"
+                            />
+                        ),
+                        {
+                            autoClose: 7500,
+                            closeButton: false,
+                        }
+                    );
+                }
+            )
+        }
+    }, [channelChat]) */
+
+
     return (
         <ToastContainer
             position="top-center"
