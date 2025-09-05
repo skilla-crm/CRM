@@ -16,7 +16,7 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
     const channelEvents = useEstablishEventChannel(token, user, partnership_id)
     const channelChat = useEstablishChatChannel(token, user)
 
-    /* useEffect(() => {
+    useEffect(() => {
         if (channelEvents) {
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
@@ -47,9 +47,9 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
                 }
             )
         }
-    }, [channelEvents]) */
+    }, [channelEvents])
 
-   /*  useEffect(() => {
+    useEffect(() => {
         if (channelChat) {
             channelChat.listen(
                 "NewMessage",
@@ -77,9 +77,9 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
                 }
             )
         }
-    }, [channelChat]) */
+    }, [channelChat])
 
-
+    
     return (
         <ToastContainer
             position="top-center"
