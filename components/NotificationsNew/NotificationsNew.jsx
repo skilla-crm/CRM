@@ -2,6 +2,7 @@
 import s from './NotificationsNew.module.scss';
 import { useEffect } from 'react';
 import { ToastContainer, toast, Slide } from "react-toastify";
+import { usePathname } from 'next/navigation';
 //hooks
 import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
 import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
@@ -12,9 +13,11 @@ import CustomToast from '../CustomToast/CustomToast';
 //utils
 import { handleNotificationAccesses } from '@/utils/handleNotificationAccesses';
 
-const NotificationsNew = ({ token, user, partnership_id, role }) => {
-    const channelEvents = useEstablishEventChannel(token, user, partnership_id)
-    const channelChat = useEstablishChatChannel(token, user)
+const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, setEventsLinks }) => {
+    const channelEvents = useEstablishEventChannel(token, user, partnership_id);
+    const channelChat = useEstablishChatChannel(token, user);
+    const path = usePathname();
+    console.log(path)
 
     useEffect(() => {
         if (channelEvents) {
@@ -23,6 +26,11 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
                 (data) => {
                     console.log(data)
                     const { description, description_short, person, type, supervisor_id, action } = data;
+
+                    if (type === 'ORDERS') {
+                        console.log('рефетч')
+                        refetchEvents()
+                    }
 
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(
@@ -44,13 +52,15 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
 
 
 
+
+
                 }
             )
         }
     }, [channelEvents])
 
     useEffect(() => {
-        if (channelChat) {
+        if (channelChat && !path.includes('/support/chat')) {
             channelChat.listen(
                 "NewMessage",
                 (data) => {
@@ -58,28 +68,42 @@ const NotificationsNew = ({ token, user, partnership_id, role }) => {
                     const { message } = data;
                     const { text, user } = message;
 
-                    toast(
-                        ({ closeToast }) => (
-                            <CustomToast
-                                message={text}
-                                closeToast={closeToast}
-                                buttonClose={true}
-                                person={{name: `Cпециалист поддержки ${user.name} ${user.surname}`}}
-                                Icon={chatIcon}
-                                type="success"
-                            />
-                        ),
-                        {
-                            autoClose: 7500,
-                            closeButton: false,
-                        }
-                    );
+
+
+
+                    if (user?.role === 'support') {
+                        setEventsLinks(prevState => [...prevState, '/support/chat'])
+                        toast(
+                            ({ closeToast }) => (
+                                <CustomToast
+                                    message={text}
+                                    closeToast={closeToast}
+                                    buttonClose={true}
+                                    person={{ name: `Cпециалист поддержки ${user?.name} ${user?.surname}` }}
+                                    Icon={chatIcon}
+                                    type="success"
+                                />
+                            ),
+                            {
+                                autoClose: 7500,
+                                closeButton: false,
+                            }
+                        );
+                    }
+
+
                 }
             )
         }
-    }, [channelChat])
+    }, [channelChat, path])
 
-    
+    useEffect(() => {
+        if (path.includes('/support/chat')) {
+            setEventsLinks(prevState => [...prevState.filter(el => el !== '/support/chat')])
+        }
+    }, [path])
+
+
     return (
         <ToastContainer
             position="top-center"

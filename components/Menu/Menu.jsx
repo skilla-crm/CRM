@@ -70,9 +70,9 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-    useEffect(() => {
+   /*  useEffect(() => {
         create()
-    }, [])
+    }, []) */
 
 
 
@@ -116,7 +116,7 @@ const Menu = ({ setActiveCompanyId }) => {
     }, [token])
 
     useEffect(() => {
-        if (role === 'director') {
+       
             const fetchData = async () => {
                 const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
                 const tokenChat = await res.json()
@@ -126,9 +126,9 @@ const Menu = ({ setActiveCompanyId }) => {
                     })
             }
             fetchData()
-        }
+        
 
-    }, [token, menuEvents, role])
+    }, [token, role, mutate])
 
 
 
@@ -138,8 +138,20 @@ const Menu = ({ setActiveCompanyId }) => {
     }, [token])
 
     useEffect(() => {
-        if (menuEvents?.orders) {
+        if (menuEvents?.orders && role === 'director') {
             setEventsLinks(prevState => [...prevState, '/orders'])
+        }
+
+        if (!menuEvents?.orders && role === 'director') {
+            setEventsLinks(prevState => [...prevState.filter(el => el !== '/orders')])
+        }
+
+        if (menuEvents?.performers) {
+            setEventsLinks(prevState => [...prevState, '/performers'])
+        }
+
+        if (!menuEvents?.performers) {
+            setEventsLinks(prevState => [...prevState.filter(el => el !== '/performers')])
         }
 
         if (menuEvents?.purchases) {
@@ -200,7 +212,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
-            <NotificationsNew token={token} user={user} partnership_id={partnership_id} role={role}/>
+            <NotificationsNew token={token} user={user} partnership_id={partnership_id} role={role} refetchEvents={mutate} setEventsLinks={setEventsLinks}/>
 
             <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />
