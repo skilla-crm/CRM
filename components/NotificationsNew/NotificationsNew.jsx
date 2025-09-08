@@ -27,7 +27,6 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                     const { description, description_short, person, type, supervisor_id, action } = data;
 
                     if (type === 'ORDERS') {
-                        console.log('рефетч')
                         refetchEvents()
                     }
 
@@ -37,7 +36,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             <CustomToast
                                 message={person?.id !== user.id ? description : description_short}
                                 closeToast={closeToast}
-                                buttonClose={type === 'AUTOSELECT' ? null : true}
+                                buttonClose={true}
                                 person={person?.id !== user.id ? person : null}
                                 icon={null}
                                 type="success"
@@ -56,7 +55,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                 }
             )
         }
-    }, [channelEvents])
+    }, [channelEvents, user])
 
     useEffect(() => {
         if (channelChat/*  && !path.includes('/support/chat') */) {
@@ -111,8 +110,9 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             newestOnTop
             /*  pauseOnHover */
             /*     pauseOnFocusLoss */
-            limit={3}
+            limit={5}
             transition={Slide}
+            stacked 
         />
     )
 };
