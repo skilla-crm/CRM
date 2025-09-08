@@ -21,10 +21,12 @@ export default async function Chat() {
   const data = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token.value}`)
   const token2 = await data.json()
 
+  console.log(partnership_id)
+
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={token2.token} version={'director'}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_CHAT} srcCss={process.env.REACT_APP_URL_CHAT_CSS} id={id} />
+      <DynamicModuleContainer src={partnership_id.value == 17 ? process.env.REACT_APP_URL_CHAT2 : process.env.REACT_APP_URL_CHAT} srcCss={partnership_id.value == 17 ? process.env.REACT_APP_URL_CHAT2_CSS : process.env.REACT_APP_URL_CHAT_CSS} id={id} />
     </div>
   );
 }

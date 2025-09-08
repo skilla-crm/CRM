@@ -17,7 +17,6 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     const channelEvents = useEstablishEventChannel(token, user, partnership_id);
     const channelChat = useEstablishChatChannel(token, user);
     const path = usePathname();
-    console.log(path)
 
     useEffect(() => {
         if (channelEvents) {
@@ -60,7 +59,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     }, [channelEvents])
 
     useEffect(() => {
-        if (channelChat && !path.includes('/support/chat')) {
+        if (channelChat/*  && !path.includes('/support/chat') */) {
             channelChat.listen(
                 "NewMessage",
                 (data) => {
@@ -85,7 +84,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                                 />
                             ),
                             {
-                                autoClose: 7500,
+                                autoClose: 5500,
                                 closeButton: false,
                             }
                         );
@@ -95,7 +94,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                 }
             )
         }
-    }, [channelChat, path])
+    }, [channelChat])
 
     useEffect(() => {
         if (path.includes('/support/chat')) {
@@ -109,7 +108,9 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             position="top-center"
             hideProgressBar
             closeOnClick
-            pauseOnHover
+            newestOnTop
+            /*  pauseOnHover */
+            /*     pauseOnFocusLoss */
             limit={3}
             transition={Slide}
         />
