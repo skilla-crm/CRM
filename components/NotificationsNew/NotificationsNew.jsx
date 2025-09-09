@@ -19,11 +19,14 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     const path = usePathname();
 
     useEffect(() => {
-        if (channelEvents) {
+
+
+        if (channelEvents && user?.id) {
+            console.log('слушатель подключился')
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
                 (data) => {
-                    console.log(data)
+                    console.log('слушатель работает')
                     const { description, description_short, person, type, supervisor_id, action } = data;
 
                     if (type === 'ORDERS') {
@@ -48,12 +51,10 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                         }
                     );
 
-
-
-
-
                 }
             )
+        } else {
+            console.log('слушатель не подключилсчяя')
         }
     }, [channelEvents, user])
 
@@ -112,7 +113,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             /*     pauseOnFocusLoss */
             limit={5}
             transition={Slide}
-            stacked 
+            stacked
         />
     )
 };
