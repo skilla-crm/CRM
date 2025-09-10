@@ -17,17 +17,12 @@ const protectedRoutes = [
     "/worker"
 ];
 
-const routesSupervisor = []
-
 
 export default function middleware(req) {
     const isBlocked = req.cookies.get('is_blocked')
     const token = req.cookies.get('token')
     const partnership_id = req.cookies.get('partnership_id')
     const role = req.cookies.get('role')
-    const test = testTokens?.includes(partnership_id?.value)
-    const testBrig = partnership_id?.value == '17'
-
 
     if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");

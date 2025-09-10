@@ -204,7 +204,7 @@ export const menuItem = [
             { id: 1, name: 'Итоги компании', link: '/reports/company-results' },
             { id: 2, name: 'Звонки', link: '/reports/calls' },
             { id: 3, name: 'Уведомления', link: '/reports/notifications' },
-            { id: 4, name: 'События', link: '/reports/logs' },
+            { id: 4, name: 'События', link: '/events' },
 
         ]
     },
@@ -291,5 +291,15 @@ export const menuItemTest = [
      }, */
     { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
     { id: 9, name: 'Настройки', icon: settings, link: '/settings' },
+
+]
+
+
+export const menuItemOperator = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
+/*     { id: 3, name: 'Банк', icon: bank, link: '/bank' }, */
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
 
 ]

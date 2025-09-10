@@ -181,7 +181,7 @@
     font-weight: 400;
     line-height: 18px;
     overflow: hidden;
-     text-wrap: nowrap;
+    text-wrap: nowrap;
     text-overflow: ellipsis;
     min-height: 18px;
     max-height: 0;
@@ -282,11 +282,6 @@
     &_maxheight4 {
         max-height: calc(100% - 408px);
     }
-
-    &_block {
-        opacity: 0.5;
-        pointer-events: none;
-    }
 }
 
 .container {
@@ -295,7 +290,7 @@
     flex-shrink: 0;
     gap: 4px;
     overflow: hidden;
-   /*  padding-bottom: 52px; */
+    /*  padding-bottom: 52px; */
 }
 
 .link {
@@ -389,7 +384,7 @@
             background: linear-gradient(90deg, #3E412A 3%, #091336 19%);
             transition: all 0.2s ease-in-out;
         }
-        
+
 
         &::after {
             content: "";
@@ -408,23 +403,28 @@
 
         &:hover::after {
             opacity: 0.8;
-          }
+        }
 
-          &_hidden {
+        &_hidden {
             &::before {
                 opacity: 0;
             }
 
             &:hover::after {
                 opacity: 0;
-              }
-          }
+            }
+        }
 
-          &_active {
+        &_active {
             &::after {
                 opacity: 0.8;
             }
-          }
+        }
+    }
+
+    &_disabled {
+        opacity: 0.5;
+        pointer-events: none;
     }
 }
 
@@ -457,7 +457,7 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-       visibility: hidden;
+    visibility: hidden;
     transition: all 0.2s ease-in-out;
 
     &_open {

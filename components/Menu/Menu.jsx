@@ -22,7 +22,7 @@ import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 
 //constants
-import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest } from '@/constants/menu';
+import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest, menuItemOperator } from '@/constants/menu';
 import { oneCityTokens, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
@@ -51,9 +51,10 @@ const Menu = ({ setActiveCompanyId }) => {
     const [eventsLinks, setEventsLinks] = useState([])
     const [visButton, setVisButton] = useState(false)
     const [activeCompany, setActiveCompany] = useState({});
+    const [operatorMenu, setOperatorMenu] = useState(menuItemOperator)
     const router = useRouter()
     const path = usePathname();
-    const user = menuData?.user;
+    const user = { ...menuData?.user, accounting_module: 1 };
     const company = menuData?.partnership;
     const partnerships = menuData?.partnerships_contract_to;
     const partnershipsDop = menuData?.partnerships_connect_to;
@@ -70,7 +71,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
@@ -93,13 +94,18 @@ const Menu = ({ setActiveCompanyId }) => {
         menuIList = menuItem
     }
 
-    /*   if (role === 'supervisor' && test) {
-          menuIList = menuItemSupervisorTest
-      } */
-
-    if (role === 'supervisor'/*  && !test */) {
+    if (role === 'supervisor') {
         menuIList = menuItemSupervisor
     }
+
+    useEffect(() => {
+        if (role === 'operator' && user?.accounting_module === 1) {
+            setOperatorMenu(menuItemAccountan)
+        } else {
+            setOperatorMenu(menuItemOperator)
+        }
+    }, [user])
+
 
     useEffect(() => {
         const active = JSON.parse(localStorage.getItem('activeCompany'))
@@ -116,17 +122,17 @@ const Menu = ({ setActiveCompanyId }) => {
     }, [token])
 
     useEffect(() => {
-       
-            const fetchData = async () => {
-                const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
-                const tokenChat = await res.json()
-                newMessageAttention(tokenChat?.token)
-                    .then(res => {
-                        res.count > 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
-                    })
-            }
-            fetchData()
-        
+
+        const fetchData = async () => {
+            const res = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
+            const tokenChat = await res.json()
+            newMessageAttention(tokenChat?.token)
+                .then(res => {
+                    res.count > 0 && setEventsLinks(prevState => [...prevState, '/support/chat'])
+                })
+        }
+        fetchData()
+
 
     }, [token, role, mutate])
 
@@ -212,7 +218,7 @@ const Menu = ({ setActiveCompanyId }) => {
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
-            <NotificationsNew token={token} user={user} partnership_id={partnership_id} role={role} refetchEvents={mutate} setEventsLinks={setEventsLinks}/>
+            <NotificationsNew token={token} user={user} partnership_id={partnership_id} role={role} refetchEvents={mutate} setEventsLinks={setEventsLinks} />
 
             <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
                 <Chewron />
@@ -308,10 +314,9 @@ const Menu = ({ setActiveCompanyId }) => {
                     dopBlockState && s.navigation_maxheight2,
                     (ispro === '0' && !dopBlockState) && s.navigation_maxheight3,
                     (ispro === '0' && dopBlockState) && s.navigation_maxheight4,
-                    (isBlocked === 1 || isBlockedCookies === '1') && s.navigation_block,
                 )}>
                     <div className={s.container}>
-                        {/* (role === 'accountant' ? menuItemAccountan : test ? menuItemTest : menuItem) */menuIList?.map(el => {
+                        {(role === 'operator' ? operatorMenu : menuIList)?.map(el => {
                             const eventsSub = eventsLinks.some(link => link.includes(el?.link))
                             if (el.submenu) {
                                 return <SubMenu
@@ -322,6 +327,7 @@ const Menu = ({ setActiveCompanyId }) => {
                                     eventsLinks={eventsLinks}
                                     isLoading={isLoading}
                                     handleBack={handleBack}
+                                    disabled={(isBlocked === 1 || isBlockedCookies === '1')}
                                 />
                             }
                             return <Link
@@ -331,6 +337,7 @@ const Menu = ({ setActiveCompanyId }) => {
                                 href={el.link}
                                 className={classNames(s.link,
                                     eventsSub && s.link_events,
+                                    (isBlocked === 1 || isBlockedCookies === '1') && el.link !== '/support/chat' && s.link_disabled,
                                     isLoading && s.link_events_hidden,
                                     eventsSub && path === el.link && s.link_events_active,
                                     (path === el.link || (el.sublinks && el.sublinks?.find(el => path.includes(el)))) && s.link_active,
@@ -353,7 +360,7 @@ const Menu = ({ setActiveCompanyId }) => {
     )
 };
 
-const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handleBack }) => {
+const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handleBack, disabled }) => {
     const path = usePathname();
     const [open, setOpen] = useState(false);
     const [events, setEvents] = useState(false);
@@ -400,7 +407,7 @@ const SubMenu = ({ el, hiddenMenu, setHiddenMenu, eventsLinks, isLoading, handle
     }, [path, el.submenu]);
 
     return (
-        <div className={s.link_list}>
+        <div className={classNames(s.link_list, disabled && s.link_disabled)}>
             <div onClick={handleOpen} className={classNames(
                 s.link,
                 events && s.link_events,
