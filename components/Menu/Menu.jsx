@@ -54,7 +54,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const [operatorMenu, setOperatorMenu] = useState(menuItemOperator)
     const router = useRouter()
     const path = usePathname();
-    const user = { ...menuData?.user, accounting_module: 1 };
+    /* const user = { ...menuData?.user, accounting_module: 1 }; */
+    const user = menuData?.user;
     const company = menuData?.partnership;
     const partnerships = menuData?.partnerships_contract_to;
     const partnershipsDop = menuData?.partnerships_connect_to;
@@ -70,6 +71,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
+
+    console.log('перерисовка меню')
 
     /* useEffect(() => {
         create()
@@ -216,7 +219,6 @@ const Menu = ({ setActiveCompanyId }) => {
         setVisButton(false)
     }
 
-    console.log(user)
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>

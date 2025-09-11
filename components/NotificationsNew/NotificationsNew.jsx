@@ -33,6 +33,8 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                         refetchEvents()
                     }
 
+                    console.log(description, description_short, person, user)
+
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(
                         ({ closeToast }) => (
@@ -56,7 +58,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
         } else {
             console.log('слушатель не подключилсчяя')
         }
-    }, [channelEvents, user])
+    }, [channelEvents, user?.id])
 
     useEffect(() => {
         if (channelChat/*  && !path.includes('/support/chat') */) {
