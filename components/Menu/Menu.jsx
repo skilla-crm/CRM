@@ -134,7 +134,7 @@ const Menu = ({ setActiveCompanyId }) => {
         fetchData()
 
 
-    }, [token, role, mutate])
+    }, [token, role])
 
 
 
@@ -215,6 +215,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const handleHiddenButton = () => {
         setVisButton(false)
     }
+
+    console.log(user)
 
     return (
         <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
