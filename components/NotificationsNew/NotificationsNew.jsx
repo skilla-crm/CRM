@@ -14,11 +14,11 @@ import CustomToast from '../CustomToast/CustomToast';
 import { handleNotificationAccesses } from '@/utils/handleNotificationAccesses';
 
 const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, setEventsLinks }) => {
-    const channelEvents = useEstablishEventChannel(token, user, partnership_id);
+    /* const channelEvents = useEstablishEventChannel(token, user, partnership_id); */
     const channelChat = useEstablishChatChannel(token, user);
     const path = usePathname();
 
-    useEffect(() => {
+  /*   useEffect(() => {
 
 
         if (channelEvents && user?.id) {
@@ -56,7 +56,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
         } else {
             console.log('слушатель не подключилсчяя')
         }
-    }, [channelEvents, user])
+    }, [channelEvents, user]) */
 
     useEffect(() => {
         if (channelChat/*  && !path.includes('/support/chat') */) {
