@@ -26,14 +26,13 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
                 (data) => {
-                    console.log('слушатель работает')
                     const { description, description_short, person, type, supervisor_id, action } = data;
 
                     if (type === 'ORDERS') {
                         refetchEvents()
                     }
 
-                    console.log(description, description_short, person, user)
+
 
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(

@@ -1,4 +1,7 @@
 export const handleNotificationAccesses = (role, person, type, action, description, supervisor_id, user) => {
+    if (role === 'director') {
+        return true
+    }
 
     if (role === 'supervisor' && description?.includes('Ставка клиенту была изменена')) {
         return false
@@ -19,11 +22,6 @@ export const handleNotificationAccesses = (role, person, type, action, descripti
     if (role === 'supervisor' && type === 'AUTOSELECT' && supervisor_id == user.id) {
         return true
     }
-
-    if (role === 'director') {
-        return true
-    }
-
 
 
     return false
