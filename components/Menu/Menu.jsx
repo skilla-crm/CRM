@@ -20,6 +20,7 @@ import IconLightning from '@/public/icons/iconLightning.svg';
 import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
+import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
 
 //constants
 import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest, menuItemOperator } from '@/constants/menu';
@@ -71,6 +72,14 @@ const Menu = ({ setActiveCompanyId }) => {
     const test = testTokens.includes(partnership_id)
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
+    const channelEvents = useEstablishEventChannel(token, user, partnership_id);
+
+    useEffect(() => {
+        if (user?.id && partnership_id && channelEvents) {
+            window.channelData = { userId: user.id, partnership_id: partnership_id, channel: channelEvents };
+        }
+
+    }, [user?.id, partnership_id, channelEvents])
 
     useEffect(() => {
         create()

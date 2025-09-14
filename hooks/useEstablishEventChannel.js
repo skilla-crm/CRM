@@ -8,6 +8,7 @@ const useEstablishEventChannel = (token, user, partnership_id) => {
         console.log('соединение устванволенно')
 
         if (user?.id && token) {
+            console.log('соединение')
             const echo = new Echo({
                 broadcaster: "pusher",
 
@@ -16,8 +17,8 @@ const useEstablishEventChannel = (token, user, partnership_id) => {
                     wsHost: process.env.NEXT_PUBLIC_PUSHER_APP_HOST,
                     wssPort: process.env.NEXT_PUBLIC_PUSHER_APP_PORT ?? 6001,
                     wsPort: process.env.NEXT_PUBLIC_PUSHER_APP_PORT ?? 6001,
-                    forceTLS: false,
-                    enableStats: false,
+                    forceTLS: true,
+                    disableStats: true,
                     enabledTransports: ["ws", "wss"],
                     authEndpoint: `${process.env.NEXT_PUBLIC_BASE_URL}broadcasting/auth`,
                     auth: {
@@ -30,18 +31,19 @@ const useEstablishEventChannel = (token, user, partnership_id) => {
             });
 
             const channel = echo.private(`partnerships.${partnership_id}`)
+            
             setChannel(channel)
+             
+ 
+            /*   return () => {
+                  channel.stopListening("Broadcasting.UserReceivedEvent");
+                  echo.leave("partnerships");
+              }; */
 
-            window.channelData = { userId: user.id, partnership_id: partnership_id, channel };
-
-          /*   return () => {
-                channel.stopListening("Broadcasting.UserReceivedEvent");
-                echo.leave("partnerships");
-            }; */
         }
 
 
-    }, [token, user?.id, partnership_id])
+    }, [token, user, partnership_id])
 
     return channel
 }

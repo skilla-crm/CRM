@@ -21,8 +21,6 @@ export default async function Chat() {
   const data = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token.value}`)
   const token2 = await data.json()
 
-  console.log(partnership_id)
-
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={token2.token} version={'director'}>

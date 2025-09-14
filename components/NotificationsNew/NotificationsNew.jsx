@@ -20,20 +20,12 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
 
     useEffect(() => {
 
-
-        if (channelEvents && user?.id) {
+        if (channelEvents?.listen && user?.id) {
             console.log('слушатель подключился')
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
-                (data) => {
-                    const { description, description_short, person, type, supervisor_id, action } = data;
-
-                    if (type === 'ORDERS') {
-                        refetchEvents()
-                    }
-
-
-
+                (e) => {
+                    const { description, description_short, person, type, supervisor_id, action } = e;
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(
                         ({ closeToast }) => (
@@ -52,19 +44,22 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                         }
                     );
 
+                    if (type === 'ORDERS') {
+                        refetchEvents()
+                    }
+
                 }
             )
         } else {
             console.log('слушатель не подключилсчяя')
         }
-    }, [channelEvents, user?.id])
+    }, [channelEvents?.listen, user?.id])
 
     useEffect(() => {
         if (channelChat/*  && !path.includes('/support/chat') */) {
             channelChat.listen(
                 "NewMessage",
                 (data) => {
-                    console.log(data)
                     const { message } = data;
                     const { text, user } = message;
 
