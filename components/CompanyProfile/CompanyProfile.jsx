@@ -143,10 +143,6 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
 
 
                 <div className={classNames(s.bottom, role !== 'director' && s.bottom_2)}>
-                    <Link href={partnership_id == 17 ? '/support/faqnew' : '/support/faq'} className={classNames(path.includes('/support/faq') && s.link_active)} onClick={handleClose}>
-                        <IconFaq />
-                        <p>База знаний</p>
-                    </Link>
                     {(role === 'director' || role === 'accountant') && <Link href='/pay' onClick={handleClose} className={classNames(path.includes('/pay') && s.link_active)}>
                         <Wallet />
                         <p>Оплата услуг</p>

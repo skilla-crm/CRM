@@ -71,7 +71,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-    /* useEffect(() => {
+   /*  useEffect(() => {
         create()
     }, []) */
 
@@ -162,10 +162,6 @@ const Menu = ({ setActiveCompanyId }) => {
 
         if (menuEvents?.purchases) {
             setEventsLinks(prevState => [...prevState, '/purchases'])
-        }
-
-        if (menuEvents?.wiki) {
-            setEventsLinks((prevState) => [...prevState, '/support/faq'])
         }
     }, [menuEvents])
 
