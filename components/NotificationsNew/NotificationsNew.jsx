@@ -21,10 +21,10 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     useEffect(() => {
 
         if (channelEvents?.listen && user?.id) {
-            console.log('слушатель подключился')
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
                 (e) => {
+                    console.log(e)
                     const { description, description_short, person, type, supervisor_id, action } = e;
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(
@@ -51,7 +51,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                 }
             )
         } else {
-            console.log('слушатель не подключилсчяя')
+            console.log('слушатель не подключился')
         }
     }, [channelEvents?.listen, user?.id])
 

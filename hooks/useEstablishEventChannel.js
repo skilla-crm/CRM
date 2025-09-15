@@ -5,10 +5,7 @@ import Pusher from "pusher-js";
 const useEstablishEventChannel = (token, user, partnership_id) => {
     const [channel, setChannel] = useState(null);
     useEffect(() => {
-        console.log('соединение устванволенно')
-
         if (user?.id && token) {
-            console.log('соединение')
             const echo = new Echo({
                 broadcaster: "pusher",
 
@@ -31,10 +28,10 @@ const useEstablishEventChannel = (token, user, partnership_id) => {
             });
 
             const channel = echo.private(`partnerships.${partnership_id}`)
-            
+            window.channelData = { userId: user.id, partnership_id: partnership_id, channel };
             setChannel(channel)
-             
- 
+
+
             /*   return () => {
                   channel.stopListening("Broadcasting.UserReceivedEvent");
                   echo.leave("partnerships");
