@@ -53,8 +53,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const [operatorMenu, setOperatorMenu] = useState(menuItemOperator)
     const router = useRouter()
     const path = usePathname();
-    /* const user = { ...menuData?.user, accounting_module: 1 }; */
     const user = menuData?.user;
+    //
     const company = menuData?.partnership;
     const partnerships = menuData?.partnerships_contract_to;
     const partnershipsDop = menuData?.partnerships_connect_to;
