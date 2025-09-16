@@ -91,6 +91,7 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                         {role === 'director' && 'Руководитель'}
                         {role === 'accountant' && 'Бухгалтер'}
                         {role === 'supervisor' && 'Менеджер по персоналу'}
+                        {role === 'operator' && 'Менеджер по работе с клиентами'}
                     </p>
                     {allCompanies?.length > 0 && role !== 'supervisor' && <CompanyList
                         company={company}

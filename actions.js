@@ -4,8 +4,8 @@ import { cookies } from 'next/headers'
 /* 17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo */
 export async function create() {
     const cookieStore = await cookies()
-    cookieStore.set('token', "2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg")
-    cookieStore.set('role', "director")
+    cookieStore.set('token', "3053|1zgvxGrhFCS6fTlhW6tpa79GECwkrNL6m4YH7lmt")
+    cookieStore.set('role', "operator")
     cookieStore.set('avatar_mini', "")
     cookieStore.set('name', "%D0%98%D0%B3%D0%BE%D1%80%D1%8C+")
     cookieStore.set('partnership_name', "%D0%9E%D0%9E%D0%9E+%C2%AB%D0%A2%D0%95%D0%A1%D0%A2%D0%9E%D0%92%D0%90%D0%AF+%D0%9A%D0%9E%D0%9C%D0%9F%D0%90%D0%9D%D0%98%D0%AF%C2%BB")

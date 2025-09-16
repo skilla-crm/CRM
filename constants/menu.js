@@ -207,7 +207,6 @@ export const menuItemOperator = [
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq' },
-
 ]
 
 

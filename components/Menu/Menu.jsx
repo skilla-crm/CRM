@@ -71,9 +71,9 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-   /*  useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
 
@@ -99,7 +99,7 @@ const Menu = ({ setActiveCompanyId }) => {
     }
 
     useEffect(() => {
-        if (role === 'operator' && user?.accounting_module === 1) {
+        if (role === 'operator'/*  && user?.accounting_module === 0 */) {
             setOperatorMenu(menuItemAccountan)
         } else {
             setOperatorMenu(menuItemOperator)
