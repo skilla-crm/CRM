@@ -65,7 +65,7 @@ const MultiFunctionButton = ({ hiddenMenu, role }) => {
             {role === 'accountant' && <div className={classNames(s.multi)}>
                 <Link href={'/bills/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                     <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
-                    <p className={s.add_text}>Новый счет</p>
+                    <p className={s.add_text3}>Новый счет</p>
                 </Link>
 
                 <div ref={buttonRef} onClick={handleOpenMenu} className={classNames(s.button, s.button_menu, openMenu && s.button_menu_open, hiddenMenu && s.button_menu_hidden)}>
@@ -83,15 +83,15 @@ const MultiFunctionButton = ({ hiddenMenu, role }) => {
             </div>}
 
             {role === 'supervisor' &&
-                <Link href={'/performers/add'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                <Link href={'/performers/add'} className={classNames(s.button, s.button_simple, hiddenMenu && s.button_hidden)}>
                     <div className={classNames(s.icon, s.icon_2, hiddenMenu && s.icon_hidden)}><Plus /></div>
                     <p className={s.add_text2}>Новый исполнитель</p>
                 </Link>
             }
 
             {role === 'operator' &&
-                <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
-                    <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
+                <Link href={'/orders/create'} className={classNames(s.button, s.button_simple, hiddenMenu && s.button_hidden)}>
+                    <div className={classNames(s.icon, s.icon_3, hiddenMenu && s.icon_hidden)}><Plus /></div>
                     <p className={s.add_text}>Новый заказ</p>
                 </Link>
             }

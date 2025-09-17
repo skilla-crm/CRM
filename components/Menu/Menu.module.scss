@@ -270,6 +270,7 @@
     min-width: 100%;
     margin: 0;
     position: relative;
+    transition: all 0.15s ease-in-out;
 
     &_maxheight2 {
         max-height: calc(100% - 438px);
@@ -281,6 +282,10 @@
 
     &_maxheight4 {
         max-height: calc(100% - 408px);
+    }
+
+    &_hidden {
+        opacity: 0;
     }
 }
 

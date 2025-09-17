@@ -27,6 +27,8 @@ import { oneCityTokens, testTokens } from '@/constants/exceptions';
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 import NotificationsNew from '../NotificationsNew/NotificationsNew';
+//utils
+import { handleOperatorAccess } from '@/utils/handleOperatorAccess';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Menu = ({ setActiveCompanyId }) => {
@@ -50,7 +52,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const [eventsLinks, setEventsLinks] = useState([])
     const [visButton, setVisButton] = useState(false)
     const [activeCompany, setActiveCompany] = useState({});
-    const [operatorMenu, setOperatorMenu] = useState(menuItemOperator)
+    const [operatorMenu, setOperatorMenu] = useState(menuItemOperator);
+    const [loadMenu, setLoadMenu] = useState(role === 'operator' ? true : false)
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
@@ -99,11 +102,12 @@ const Menu = ({ setActiveCompanyId }) => {
     }
 
     useEffect(() => {
-        if (role === 'operator'/*  && user?.accounting_module === 0 */) {
-            setOperatorMenu(menuItemAccountan)
-        } else {
-            setOperatorMenu(menuItemOperator)
-        }
+        role === 'operator' && setLoadMenu(true)
+        if (role === 'operator' && user) {
+            setLoadMenu(false)
+            const operatorMenu = handleOperatorAccess(user)
+            setOperatorMenu(operatorMenu)
+        } 
     }, [user])
 
 
@@ -311,10 +315,12 @@ const Menu = ({ setActiveCompanyId }) => {
                     dopBlockState && s.navigation_maxheight2,
                     (ispro === '0' && !dopBlockState) && s.navigation_maxheight3,
                     (ispro === '0' && dopBlockState) && s.navigation_maxheight4,
+                    loadMenu && s.navigation_hidden
                 )}>
                     <div className={s.container}>
                         {(role === 'operator' ? operatorMenu : menuIList)?.map(el => {
                             const eventsSub = eventsLinks.some(link => link.includes(el?.link))
+
                             if (el.submenu) {
                                 return <SubMenu
                                     el={el}
@@ -327,6 +333,7 @@ const Menu = ({ setActiveCompanyId }) => {
                                     disabled={(isBlocked === 1 || isBlockedCookies === '1')}
                                 />
                             }
+
                             return <Link
                                 onClick={() => handleBack(el.sublinks)}
                                 id={el.id}

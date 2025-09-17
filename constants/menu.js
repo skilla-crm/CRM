@@ -39,7 +39,7 @@ export const menuItemAccountan = [
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
-    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq' }
+    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] }
 
 ]
 
@@ -61,7 +61,7 @@ export const menuItemAccountanTest = [
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
-    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq' }
+    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] }
 
 ]
 
@@ -77,7 +77,7 @@ export const menuItemSupervisor = [
     { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 11, name: 'Поддержка', icon: support, link: '/support/chat' },
-    { id: 12, name: 'База знаний', icon: IconFaq, link: '/support/faq' }
+    { id: 12, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] }
 ]
 
 
@@ -134,7 +134,7 @@ export const menuItem = [
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublinks: ['purchases'] },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
-    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq' },
+    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
     { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
     { id: 11, name: 'Настройки', icon: settings, link: '/settings' },
 
@@ -193,7 +193,7 @@ export const menuItemTest = [
 
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublinks: ['purchases'] },
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
-    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq' },
+    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
     { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
     { id: 11, name: 'Настройки', icon: settings, link: '/settings' },
 
@@ -202,11 +202,10 @@ export const menuItemTest = [
 
 export const menuItemOperator = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
-    { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
-    /*     { id: 3, name: 'Банк', icon: bank, link: '/bank' }, */
+    { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-    { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
-    { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq' },
+    { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' },
+    { id: 11, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
 ]
 
 
