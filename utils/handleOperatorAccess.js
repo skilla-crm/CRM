@@ -8,6 +8,10 @@ export const handleOperatorAccess = (user) => {
     const customer = { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' }
     const bank = { id: 3, name: 'Банк', icon: bankIcon, link: '/bank' }
     const calls = { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' }
+
+    window.operatorUser = user;
+
+
     const menu = menuItemOperator
 
     if (accounting_module) {

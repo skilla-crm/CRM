@@ -57,7 +57,6 @@ const Menu = ({ setActiveCompanyId }) => {
     const router = useRouter()
     const path = usePathname();
     const user = menuData?.user;
-    //
     const company = menuData?.partnership;
     const partnerships = menuData?.partnerships_contract_to;
     const partnershipsDop = menuData?.partnerships_connect_to;
@@ -77,8 +76,6 @@ const Menu = ({ setActiveCompanyId }) => {
     useEffect(() => {
         create()
     }, [])
-
-
 
 
     if (role === 'accountant' && test) {
