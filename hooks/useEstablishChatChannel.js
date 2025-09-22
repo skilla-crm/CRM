@@ -8,7 +8,7 @@ const useEstablishChatChannel = (token, user) => {
     async function handleEstablish() {
         const data = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token}`)
         const chatToken = await data.json()
-        
+
         const echo = new Echo({
             broadcaster: 'reverb',
 
@@ -42,9 +42,8 @@ const useEstablishChatChannel = (token, user) => {
     useEffect(() => {
         if (user?.id && token) {
             handleEstablish()
-
-           
         }
+
 
 
     }, [token, user?.id])

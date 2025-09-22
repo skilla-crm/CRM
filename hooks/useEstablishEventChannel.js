@@ -31,16 +31,26 @@ const useEstablishEventChannel = (token, user, partnership_id) => {
             window.channelData = { userId: user.id, partnership_id: partnership_id, channel };
             setChannel(channel)
 
+            /* window.addEventListener('unload', function (e) {
+                channel.stopListening("Broadcasting.UserReceivedEvent");
+                echo.leave("partnerships");
+            }); */
 
-            /*   return () => {
-                  channel.stopListening("Broadcasting.UserReceivedEvent");
-                  echo.leave("partnerships");
-              }; */
+
+            return () => {
+                channel.stopListening("Broadcasting.UserReceivedEvent");
+                echo.leave("partnerships");
+            };
 
         }
 
 
     }, [token, user, partnership_id])
+
+
+    useEffect(() => {
+
+    })
 
     return channel
 }
