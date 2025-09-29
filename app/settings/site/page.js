@@ -1,5 +1,6 @@
 
 import Iframe from '@/components/Iframe/Iframe'
+import s from './site.module.scss';
 
 export const metadata = {
   title: "Настройки"
@@ -8,8 +9,12 @@ export const metadata = {
 export default async function Settings() {
   const src = process.env.REACT_APP_URL_SETTINGS_SITE;
   const id = 'root_settings_site'
-  
+
   return (
-    <Iframe src={src} id={id} />
+    <div className={s.root}>
+      <div className={s.block}></div>
+      <Iframe src={src} id={id} noPartner={true} />
+    </div>
+
   );
 }

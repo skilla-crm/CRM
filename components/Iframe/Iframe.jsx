@@ -10,7 +10,7 @@ import SkeletonСounterparties from '../Skeletons/SkeletonСounterparties/Skelet
 import SkeletonSettings from '../Skeletons/SkeletonSettings/SkeletonSettings';
 import SkeletonLogs from '../Skeletons/SkeletonLogs/SkeletonLogs';
 
-const Iframe = ({ src, id }) => {
+const Iframe = ({ src, id, noPartner }) => {
     const { activeCompanyId } = useContext(MenuContext);
     const [load, setLoad] = useState(true)
     const [anim, setAnim] = useState(false)
@@ -73,7 +73,7 @@ const Iframe = ({ src, id }) => {
             <iframe
                 loading="eager"
                 className={classNames(s.iframe, hiddenIframeMenu && s.iframe_hidden)}
-                src={`${src}${`/?cur_partnership=${activeCompanyId}`}`}
+                src={`${src}${noPartner ? '' : `/?cur_partnership=${activeCompanyId}`}`}
                 id={id}
             ></iframe>
         </div>
