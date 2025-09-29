@@ -195,7 +195,7 @@ export const menuItemTest = [
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
     { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
-    { id: 11, name: 'Настройки', icon: settings, link: '/options' },
+    { id: 11, name: 'Настройки', icon: settings, link: '/options', sublinks: ['/companies', '/employees', '/telephony'] },
 
 ]
 
