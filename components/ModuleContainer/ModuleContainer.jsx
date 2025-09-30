@@ -103,11 +103,11 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       router.push(path)
       return
     }
-
+/* 
    if (path.includes('/options/')) {
       router.push(path)
       return
-    }
+    } */
 
   }, [path])
 
