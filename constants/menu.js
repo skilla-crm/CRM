@@ -44,7 +44,7 @@ export const menuItemAccountan = [
 ]
 
 export const menuItemAccountanTest = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orderstest' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
     { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
     { id: 3, name: 'Банк', icon: bank, link: '/bank' },
     { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
@@ -143,7 +143,7 @@ export const menuItem = [
 
 export const menuItemTest = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
-    { id: 2, name: 'Заказы', icon: orders, link: '/orderstest', sublinks: ['order_detail'] },
+    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     {
         id: 3,
         name: 'Заказчики',
@@ -195,13 +195,13 @@ export const menuItemTest = [
     { id: 8, name: 'Поддержка', icon: support, link: '/support/chat' },
     { id: 9, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
     { id: 10, name: 'Календарь событий', icon: calendar, link: '/calendar' },
-    { id: 11, name: 'Настройки', icon: settings, link: '/options', sublinks: ['/companies', '/employees', '/telephony'] },
+    { id: 11, name: 'Настройки', icon: settings, link: '/settings', sublinks: ['/companies', '/employees', '/telephony'] },
 
 ]
 
 
 export const menuItemOperator = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orderstest' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
     { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' },

@@ -23,18 +23,17 @@ export default function middleware(req) {
     const token = req.cookies.get('token')
     const partnership_id = req.cookies.get('partnership_id')
     const role = req.cookies.get('role')
-    const isOperatorTest = role?.value === 'operator' && testTokens.includes(partnership_id.value)
 
-    /* if (!token) {
+    if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
     }
 
-    if (role.value !== 'director' && role.value !== 'accountant' && role.value !== 'supervisor' && !isOperatorTest) {
+    if (role.value !== 'director' && role.value !== 'accountant' && role.value !== 'supervisor' && role.value !== 'operator') {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
 
     if (isBlocked?.value === '1' && protectedRoutes.some(el => req.nextUrl.pathname.includes(el))) {
         return NextResponse.redirect("https://lk.skilla.ru/new/pay");
-    } */
+    }
 }
 
