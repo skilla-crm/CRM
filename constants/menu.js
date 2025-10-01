@@ -22,7 +22,7 @@ import IconFaq from '@/public/icons/menu/iconFaq.svg';
 
 
 export const menuItemAccountan = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
     { id: 3, name: 'Банк', icon: bank, link: '/bank' },
     { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
@@ -44,7 +44,7 @@ export const menuItemAccountan = [
 ]
 
 export const menuItemAccountanTest = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
     { id: 3, name: 'Банк', icon: bank, link: '/bank' },
     { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
@@ -201,7 +201,7 @@ export const menuItemTest = [
 
 
 export const menuItemOperator = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders' },
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' },
