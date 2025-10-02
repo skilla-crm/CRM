@@ -8,7 +8,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 108;
+  const version = 109;
 
 
   useEffect(() => {
