@@ -19,14 +19,14 @@ const FunctionBlock = ({ company, isLoading, hiddenMenu, test, role }) => {
         <div className={s.root}>
             <div className={s.blur}></div>
             <div className={s.container}>
-                <Subscription company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} />
+                <Subscription company={company} isLoading={isLoading} hiddenMenu={hiddenMenu} role={role}/>
                 <MultiFunctionButton hiddenMenu={hiddenMenu} test={test} role={role} />
             </div>
         </div>
     )
 };
 
-const Subscription = ({ company, isLoading, hiddenMenu }) => {
+const Subscription = ({ company, isLoading, hiddenMenu, role }) => {
     const [payState, setPayState] = useState('');
     const router = useRouter()
     const dateNow = dayjs().locale('ru')
