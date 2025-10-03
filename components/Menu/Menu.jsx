@@ -168,9 +168,8 @@ const Menu = ({ setActiveCompanyId }) => {
 
 
     useEffect(() => {
-        if ((dayDiff < 0 && company?.paid_to) || (dayDiff > 0 && dayNow < 6 && dayDiff < 25)) {
+        if (((dayDiff < 0 && company?.paid_to) || (dayDiff > 0 && dayNow < 6 && dayDiff < 25)) && (role === 'director' || role === 'accountant')) {
             setDopBlock(true)
-
         } else {
             setDopBlock(false)
         }
