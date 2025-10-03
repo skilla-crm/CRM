@@ -36,12 +36,12 @@ const Subscription = ({ company, isLoading, hiddenMenu }) => {
 
 
     useEffect(() => {
-        if (dayDiff < 0 && company?.paid_to) {
+        if (dayDiff < 0 && company?.paid_to && (role === 'director' || 'accountant')) {
             setPayState('button')
             return
         }
 
-        if (dayDiff >= 0 && dayNow < 6 && dayDiff < 25) {
+        if (dayDiff >= 0 && dayNow < 6 && dayDiff < 25 && (role === 'director' || 'accountant')) {
             setPayState('info')
         } else {
             setPayState('')
