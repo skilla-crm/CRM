@@ -73,7 +73,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
