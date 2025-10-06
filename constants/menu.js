@@ -70,7 +70,7 @@ export const menuItemSupervisor = [
     { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
     { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
     { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
-    { id: 5, name: 'Сверка', icon: iconReconciliation, link: '/workers/reconciliation' },
+    { id: 5, name: 'Сверка', icon: iconReconciliation, link: '/workers/revise' },
     { id: 6, name: 'Группы', icon: iconGroup, link: '/workers/groups' },
     { id: 7, name: 'Сделки', icon: iconDeal, link: '/workers/smz' },
     { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
@@ -92,11 +92,11 @@ export const menuItem = [
 
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
-            /*    { id: 2, name: 'Задолженность', link: '/' }, */
+            /*  { id: 2, name: 'Задолженность', link: '/debts' }, */
             { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
             { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
-            /*  { id: 5, name: 'Акты сверок', link: '/' }, */
+            /*  { id: 6, name: 'Акты сверок', link: '/reconciliation' }, */
         ]
     },
 
@@ -111,7 +111,7 @@ export const menuItem = [
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
             { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/update/', '/create/'] },
-            { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
+            { id: 6, name: 'Сверка', link: '/workers/revise' },
         ]
     },
 
@@ -151,11 +151,12 @@ export const menuItemTest = [
 
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
-            /*    { id: 2, name: 'Задолженность', link: '/' }, */
-            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
-            { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
-            { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
-            /*  { id: 5, name: 'Акты сверок', link: '/' }, */
+        /*     { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
+            { id: 3, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] }, */
+            { id: 4, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
+            { id: 5, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 6, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
+
         ]
     },
 
@@ -165,12 +166,12 @@ export const menuItemTest = [
         icon: workers,
 
         submenu: [
-            { id: 1, name: 'Все исполнители', link: '/performers', sublinks: ['/detail/'] },
+            { id: 1, name: 'Все исполнители', link: '/performers', sublinks: ['performers/detail/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
             { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/update/', '/create/'] },
-            { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
+            { id: 6, name: 'Сверка', link: '/workers/revise' },
         ]
     },
 
