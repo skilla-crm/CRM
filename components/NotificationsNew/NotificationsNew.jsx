@@ -107,7 +107,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             newestOnTop
             /*  pauseOnHover */
             /*     pauseOnFocusLoss */
-            limit={5}
+            limit={3}
             transition={Slide}
             stacked
         />
