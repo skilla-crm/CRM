@@ -23,7 +23,17 @@ import IconFaq from '@/public/icons/menu/iconFaq.svg';
 
 export const menuItemAccountan = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
-    { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' },
+    {
+        id: 2,
+        name: 'Заказчики',
+        icon: counterparties,
+
+        submenu: [
+            { id: 1, name: 'Все заказчики', link: '/counterparties' },
+            { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
+            { id: 3, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
+        ]
+    },
     { id: 3, name: 'Банк', icon: bank, link: '/bank' },
     { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
     {
@@ -102,11 +112,11 @@ export const menuItem = [
 
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
-            /*  { id: 2, name: 'Задолженность', link: '/debts' }, */
+            { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
             { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
-            /*  { id: 6, name: 'Акты сверок', link: '/reconciliation' }, */
+            { id: 6, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
         ]
     },
 
@@ -162,10 +172,10 @@ export const menuItemTest = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties' },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
-            { id: 3, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
-            { id: 4, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
-            { id: 5, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
-            { id: 6, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
+            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
+            { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
+            { id: 6, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
 
         ]
     },
