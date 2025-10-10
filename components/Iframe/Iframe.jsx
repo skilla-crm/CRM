@@ -54,7 +54,6 @@ const Iframe = ({ src, id, noPartner }) => {
     useEffect(() => {
         setLoad(true)
         /*   if (activeCompanyId) {
-              console.log('тут', activeCompanyId)
               setLink(`/?cur_partnership=${activeCompanyId}`)
           } else {
               setLink('')

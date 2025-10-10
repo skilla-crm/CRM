@@ -37,7 +37,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const hidemenu = cookies.get('hidemenuNew')
     const avatar_mini = cookies.get('avatar_mini')
     const name = cookies.get('name') ? decodeURI(cookies.get('name')).replace(/\+/g, ' ') : 'нет имени'
-    const date = cookies.get('date')
+   /*  const date = cookies.get('date') */
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
     const token = cookies.get('token')
@@ -65,6 +65,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const phone = menuData?.phone;
     const email = menuData?.email;
     const isBlocked = company?.is_blocked;
+    const date = menuData?.date;
     const dateNow = dayjs(date).locale('ru')
     const dayNow = dayjs(date).date()
     const paidTo = dayjs(company?.paid_to).locale('ru');
@@ -73,9 +74,9 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-    /* useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
     if (role === 'accountant' && test) {
