@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 //hooks
 import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
 import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
+import useEstablishCallChannel from '@/hooks/useEstablishCallChannel';
 //icons
 import chatIcon from '@/public/icons/chatIcon.svg';
 //components
@@ -16,7 +17,16 @@ import { handleNotificationAccesses } from '@/utils/handleNotificationAccesses';
 const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, setEventsLinks }) => {
     const channelEvents = useEstablishEventChannel(token, user, partnership_id);
     const channelChat = useEstablishChatChannel(token, user);
+    const channelCall = useEstablishCallChannel(token);
     const path = usePathname();
+
+    useEffect(() => {
+        if (channelCall) {
+            channelCall.onmessage = function (event) {
+                console.log("Сообщение от сервера: ", JSON.parse(event.data));
+            };
+        }
+    }, [channelCall])
 
     useEffect(() => {
 
