@@ -11,6 +11,7 @@ import useEstablishCallChannel from '@/hooks/useEstablishCallChannel';
 import chatIcon from '@/public/icons/chatIcon.svg';
 //components
 import CustomToast from '../CustomToast/CustomToast';
+import CallToast from '../CallToast/CallToast';
 //utils
 import { handleNotificationAccesses } from '@/utils/handleNotificationAccesses';
 
@@ -24,8 +25,28 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
         if (channelCall) {
             channelCall.onmessage = function (event) {
                 console.log("Сообщение от сервера: ", JSON.parse(event.data));
+               
             };
+
+
         }
+
+         toast(
+                    ({ closeToast }) => (
+                        <CallToast
+                            closeToast={closeToast}
+                            buttonClose={true}
+                            person={null}
+                            icon={null}
+                            type="success"
+                        />
+                    ),
+                    {
+                        autoClose: false,
+                        closeButton: false,
+                        position: "bottom-right"
+                    }
+                );
     }, [channelCall])
 
     useEffect(() => {
