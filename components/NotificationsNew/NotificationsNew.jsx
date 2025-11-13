@@ -24,29 +24,36 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     useEffect(() => {
         if (channelCall) {
             channelCall.onmessage = function (event) {
-                console.log("Сообщение от сервера: ", JSON.parse(event.data));
-               
+                const { action, phone, name, company, city } = JSON.parse(event.data)
+
+                toast(
+                    ({ closeToast }) => {
+                        action === 'connected' && closeToast()
+                        return <CallToast
+                            closeToast={closeToast}
+                            buttonClose={true}
+                            person={null}
+                            icon={null}
+                            action={action}
+                            phone={phone}
+                            name={name}
+                            company={company}
+                            city={city}
+                            type="success"
+                        />
+                    },
+                    {
+                        autoClose: 30000,
+                        closeButton: false,
+                        position: "bottom-right"
+                    }
+                );
             };
 
 
         }
 
-         toast(
-                    ({ closeToast }) => (
-                        <CallToast
-                            closeToast={closeToast}
-                            buttonClose={true}
-                            person={null}
-                            icon={null}
-                            type="success"
-                        />
-                    ),
-                    {
-                        autoClose: false,
-                        closeButton: false,
-                        position: "bottom-right"
-                    }
-                );
+
     }, [channelCall])
 
     useEffect(() => {
@@ -70,6 +77,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             />
                         ),
                         {
+                            position: "top-center",
                             autoClose: person?.id !== user.id ? 5500 : 2500,
                             closeButton: false,
                         }
@@ -132,15 +140,12 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
 
     return (
         <ToastContainer
-            position="top-center"
             hideProgressBar
             closeOnClick
             newestOnTop
-            /*  pauseOnHover */
-            /*     pauseOnFocusLoss */
             limit={3}
             transition={Slide}
-            stacked
+        /*  stacked */
         />
     )
 };
