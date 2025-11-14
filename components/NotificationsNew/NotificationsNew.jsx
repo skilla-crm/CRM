@@ -18,7 +18,7 @@ import { handleNotificationAccesses } from '@/utils/handleNotificationAccesses';
 const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, setEventsLinks }) => {
     const channelEvents = useEstablishEventChannel(token, user, partnership_id);
     const channelChat = useEstablishChatChannel(token, user);
-    const channelCall = useEstablishCallChannel(token);
+    const channelCall = useEstablishCallChannel(user);
     const path = usePathname();
 
     useEffect(() => {
@@ -28,7 +28,6 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
 
                 toast(
                     ({ closeToast }) => {
-                        action === 'connected' && closeToast()
                         return <CallToast
                             closeToast={closeToast}
                             buttonClose={true}
