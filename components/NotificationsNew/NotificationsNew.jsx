@@ -24,7 +24,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     useEffect(() => {
         if (channelCall) {
             channelCall.onmessage = function (event) {
-                const { action, phone, name, company, city } = JSON.parse(event.data)
+                const data = JSON.parse(event.data)
 
                 toast(
                     ({ closeToast }) => {
@@ -33,11 +33,11 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             buttonClose={true}
                             person={null}
                             icon={null}
-                            action={action}
-                            phone={phone}
-                            name={name}
-                            company={company}
-                            city={city}
+                            action={data?.action}
+                            phone={data?.phone}
+                            name={data?.name}
+                            company={data?.company}
+                            city={data?.city}
                             type="success"
                         />
                     },

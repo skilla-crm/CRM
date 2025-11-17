@@ -3,7 +3,7 @@ import IconPhone from '@/public/icons/iconPhone.svg';
 import Point from '@/public/icons/point.svg';
 import IconClose from '@/public/icons/iconCloseGrey.svg';
 
-const CallToast = ({ closeToast, action, phone, name, company, city }) => {
+const CallToast = ({ phone, name, company, city }) => {
 
     return (
         <div className={s.root}>
@@ -13,9 +13,9 @@ const CallToast = ({ closeToast, action, phone, name, company, city }) => {
                     <p className={s.first}>Входящий вызов</p>
                 </div>
 
-                <p className={s.first}>{name} {phone}</p>
+                <p className={s.first}>{name ? name : ''} {phone ? phone : ''}</p>
                 <div className={s.bottom}>
-                    <p className={s.second}>{company.split('<br>').shift()}<span> • </span>{city}</p>
+                    <p className={s.second}>{company?.includes('<br>') ? company?.split('<br>')?.shift() : company}<span> • </span>{city}</p>
                 </div>
 
             </div>
