@@ -15,7 +15,7 @@ const CallToast = ({ phone, name, company, city }) => {
 
                 <p className={s.first}>{name ? name : ''} {phone ? phone : ''}</p>
                 <div className={s.bottom}>
-                    <p className={s.second}>{company?.includes('<br>') ? company?.split('<br>')?.shift() : company}<span> • </span>{city}</p>
+                    <p className={s.second}>{company?.includes('<br>') ? company?.split('<br>')?.shift() : company}<span> {city ? '• ' : ''}</span>{city}</p>
                 </div>
 
             </div>

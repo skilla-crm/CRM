@@ -26,7 +26,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             channelCall.onmessage = function (event) {
                 const data = JSON.parse(event.data)
 
-                toast(
+                data?.action === 'connection' && toast(
                     ({ closeToast }) => {
                         return <CallToast
                             closeToast={closeToast}
