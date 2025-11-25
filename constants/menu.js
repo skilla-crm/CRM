@@ -170,7 +170,7 @@ export const menuItemTest = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterparties' },
+            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew' },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
@@ -189,7 +189,7 @@ export const menuItemTest = [
             { id: 1, name: 'Все исполнители', link: '/performers', sublinks: ['performers/detail/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
-            { id: 4, name: 'Планирование', link: '/workers/planning' },
+            { id: 4, name: 'Планирование', link: '/workers/planningnew' },
             { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/update/', '/create/'] },
             { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
         ]
