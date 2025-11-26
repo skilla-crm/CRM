@@ -8,7 +8,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 135;
+  const version = 137;
 
 
   useEffect(() => {
@@ -103,12 +103,6 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       router.push(path)
       return
     }
-
-    if (path.includes('counterpartiesnew')) {
-      router.push(path)
-      return
-    }
-
   }, [path])
 
   useEffect(() => {
