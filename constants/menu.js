@@ -170,7 +170,7 @@ export const menuItemTest = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew' },
+            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['/details/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
