@@ -25,8 +25,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
         if (channelCall) {
             channelCall.onmessage = function (event) {
                 const data = JSON.parse(event.data)
-                console.log(data)
-
+          
                 data?.action === 'connection' && toast(
                     ({ closeToast }) => {
                         return <CallToast
@@ -62,7 +61,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
                 (e) => {
-                    console.log(e)
+        
                     const { description, description_short, person, type, supervisor_id, action } = e;
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(

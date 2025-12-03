@@ -7,7 +7,7 @@ require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
 import { create } from '@/actions';
 import { fetchWithToken, fetchTokenChat, newMessageAttention } from '@/api/api';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation'
 import classNames from 'classnames';
 import s from './Menu.module.scss';
@@ -37,7 +37,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const hidemenu = cookies.get('hidemenuNew')
     const avatar_mini = cookies.get('avatar_mini')
     const name = cookies.get('name') ? decodeURI(cookies.get('name')).replace(/\+/g, ' ') : 'нет имени'
-   /*  const date = cookies.get('date') */
+    /*  const date = cookies.get('date') */
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
     const token = cookies.get('token')
@@ -56,6 +56,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const [loadMenu, setLoadMenu] = useState(role === 'operator' ? true : false)
     const router = useRouter()
     const path = usePathname();
+    const searchParams = useSearchParams()
+    const search = searchParams.get('block')
     const user = menuData?.user;
     const company = menuData?.partnership;
     const partnerships = menuData?.partnerships_contract_to;
@@ -74,7 +76,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-    /* useEffect(() => {
+   /*  useEffect(() => {
         create()
     }, []) */
 
@@ -105,7 +107,7 @@ const Menu = ({ setActiveCompanyId }) => {
             setLoadMenu(false)
             const operatorMenu = handleOperatorAccess(user)
             setOperatorMenu(operatorMenu)
-        } 
+        }
     }, [user])
 
 
@@ -180,6 +182,9 @@ const Menu = ({ setActiveCompanyId }) => {
         openCompanyProfile ? setOpenCompanyProfile(false) : setOpenCompanyProfile(true)
     }
     const handleBack = (links) => {
+        if (path.includes('/counterpartiesnew/details/contract')) {
+            window.push.back('/new/counterpartiesnew')
+        }
         if (links?.find(el => path.includes(el))) {
             window.history.back()
             return

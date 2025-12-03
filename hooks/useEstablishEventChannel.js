@@ -4,7 +4,7 @@ import Pusher from "pusher-js";
 
 const useEstablishEventChannel = (token, user, partnership_id) => {
     const [channel, setChannel] = useState(null);
-    console.log('вызов подключения к сокету')
+
     useEffect(() => {
         if (user?.id && token) {
             const echo = new Echo({
