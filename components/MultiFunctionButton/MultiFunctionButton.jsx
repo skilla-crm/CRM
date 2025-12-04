@@ -11,7 +11,7 @@ import Purchase from '@/public/icons/purchase.svg';
 import Worker from '@/public/icons/worker.svg';
 import Customer from '@/public/icons/customer.svg';
 
-const MultiFunctionButton = ({ hiddenMenu, role }) => {
+const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
     const [openMenu, setOpenMenu] = useState(false)
     const listRef = useRef()
     const buttonRef = useRef()
@@ -42,7 +42,7 @@ const MultiFunctionButton = ({ hiddenMenu, role }) => {
         <>
             {role === 'director' &&
                 <div className={classNames(s.multi)}>
-                    {role === 'director' && <Link href={'/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                    {role === 'director' && <Link href={test ? 'test/orders/create' : '/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                         <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
                         <p className={s.add_text}>Новый заказ</p>
                     </Link>}

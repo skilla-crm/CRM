@@ -1,19 +1,17 @@
-
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
-
+import { ModuleContainer } from '@/components/ModuleContainer/ModuleContainer';
 
 export const metadata = {
-  title: "Заказы"
+  title: "Заказ"
 };
-
 
 const DynamicModuleContainer = dynamic(() =>
   import('@/components/ModuleContainer/ModuleContainer')
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Orders() {
+export default async function Details() {
   const id = "root_orders_dir"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
@@ -22,7 +20,9 @@ export default async function Orders() {
 
   return (
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-       <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS2} srcCss={process.env.REACT_APP_URL_ORDERS_CSS2} id={id} />
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDERS} srcCss={process.env.REACT_APP_URL_ORDERS_CSS} id={id} />
     </div>
+
+
   );
 }
