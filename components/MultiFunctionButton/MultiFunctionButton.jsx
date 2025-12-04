@@ -2,6 +2,7 @@ import s from './MultiFunctionButton.module.scss';
 import classNames from "classnames";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 //icons
 import Chewron from '@/public/icons/menu/iconChewron.svg';
 import Plus from '@/public/icons/menu/iconPlus.svg';
@@ -12,6 +13,7 @@ import Worker from '@/public/icons/worker.svg';
 import Customer from '@/public/icons/customer.svg';
 
 const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
+     const path = usePathname();
     const [openMenu, setOpenMenu] = useState(false)
     const listRef = useRef()
     const buttonRef = useRef()
@@ -42,7 +44,7 @@ const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
         <>
             {role === 'director' &&
                 <div className={classNames(s.multi)}>
-                    {role === 'director' && <Link href={test ? 'test/orders/create' : '/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                    {role === 'director' && <Link replace={true} href={test ? '/test/orders/create' : '/orders/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                         <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
                         <p className={s.add_text}>Новый заказ</p>
                     </Link>}

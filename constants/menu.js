@@ -163,7 +163,7 @@ export const menuItem = [
 
 export const menuItemTest = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
-    { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
+    { id: 2, name: 'Заказы', icon: orders, link: '/test/orders', sublinks: ['order_detail'] },
     {
         id: 3,
         name: 'Заказчики',
