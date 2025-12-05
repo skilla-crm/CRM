@@ -172,9 +172,9 @@ export const menuItemTest = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['/details/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
-            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
-            { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
-            { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
+            { id: 3, name: 'Счета', link: '/test/bills', sublinks: ['bills/detail', 'bills/create'] },
+            { id: 4, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 5, name: 'Акты', link: '/test/act', sublinks: ['act/detail'] },
             { id: 6, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
 
         ]
