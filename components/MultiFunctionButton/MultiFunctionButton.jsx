@@ -12,8 +12,8 @@ import Purchase from '@/public/icons/purchase.svg';
 import Worker from '@/public/icons/worker.svg';
 import Customer from '@/public/icons/customer.svg';
 
-const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
-     const path = usePathname();
+const MultiFunctionButton = ({ hiddenMenu, role, test }) => {
+    const path = usePathname();
     const [openMenu, setOpenMenu] = useState(false)
     const listRef = useRef()
     const buttonRef = useRef()
@@ -54,9 +54,9 @@ const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
                     </div>
 
                     <ul ref={listRef} className={classNames(s.menu, openMenu && s.menu_open)}>
-                        <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>
-                        <Link onClick={handleCloseMenu} href={'/act/create'}><li><Docs /> Создать Акт</li></Link>
-                        <Link onClick={handleCloseMenu} href={'/bills/create'}><li><Docs /> Выставить счет</li></Link>
+                        <Link onClick={handleCloseMenu} href={test ? '/test/upd/create' : '/upd/create'}><li><Docs /> Создать УПД</li></Link>
+                        <Link onClick={handleCloseMenu} href={test ? '/test/act/create' : '/act/create'}><li><Docs /> Создать Акт</li></Link>
+                        <Link onClick={handleCloseMenu} href={test ? '/test/bills/create' : '/bills/create'}><li><Docs /> Выставить счет</li></Link>
                         {<div></div>}
                         <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
                         {role === 'director' && <Link onClick={handleCloseMenu} href={'/performers/add'}><li><Worker /> Добавить исполнителя</li></Link>}
@@ -65,7 +65,7 @@ const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
             }
 
             {role === 'accountant' && <div className={classNames(s.multi)}>
-                <Link href={'/bills/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
+                <Link href={test ? '/test/bills/create' : '/bills/create'} className={classNames(s.button, hiddenMenu && s.button_hidden)}>
                     <div className={classNames(s.icon, hiddenMenu && s.icon_hidden)}><Plus /></div>
                     <p className={s.add_text3}>Новый счет</p>
                 </Link>
@@ -75,9 +75,9 @@ const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
                 </div>
 
                 <ul ref={listRef} className={classNames(s.menu, openMenu && s.menu_open)}>
-                    <Link onClick={handleCloseMenu} href={'/upd/create'}><li><Docs /> Создать УПД</li></Link>
-                    <Link onClick={handleCloseMenu} href={'/act/create'}><li><Docs /> Создать Акт</li></Link>
-                    <Link onClick={handleCloseMenu} href={'/bills/create'}><li><Docs /> Выставить счет</li></Link>
+                    <Link onClick={handleCloseMenu} href={test ? '/test/upd/create' : '/upd/create'}><li><Docs /> Создать УПД</li></Link>
+                    <Link onClick={handleCloseMenu} href={test ? '/test/act/create' : '/act/create'}><li><Docs /> Создать Акт</li></Link>
+                    <Link onClick={handleCloseMenu} href={test ? '/test/bills/create' : '/bills/create'}><li><Docs /> Выставить счет</li></Link>
                     {<div></div>}
                     <Link onClick={handleCloseMenu} href={'/purchases/create'}><li><Purchase /> Создать закупку</li></Link>
 
@@ -92,7 +92,7 @@ const MultiFunctionButton = ({ hiddenMenu, role, test}) => {
             }
 
             {role === 'operator' &&
-                <Link href={'/orders/create'} className={classNames(s.button, s.button_simple, hiddenMenu && s.button_hidden)}>
+                <Link href={test ? '/test/orders/create' : '/orders/create'} className={classNames(s.button, s.button_simple, hiddenMenu && s.button_hidden)}>
                     <div className={classNames(s.icon, s.icon_3, hiddenMenu && s.icon_hidden)}><Plus /></div>
                     <p className={s.add_text}>Новый заказ</p>
                 </Link>
