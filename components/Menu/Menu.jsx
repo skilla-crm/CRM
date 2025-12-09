@@ -28,7 +28,7 @@ import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 import NotificationsNew from '../NotificationsNew/NotificationsNew';
 //utils
-import { handleOperatorAccess } from '@/utils/handleOperatorAccess';
+import { handleOperatorAccess, handleOperatorAccessTest } from '@/utils/handleOperatorAccess';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Menu = ({ setActiveCompanyId }) => {
@@ -76,9 +76,9 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-    /* useEffect(() => {
+    useEffect(() => {
         create()
-    }, []) */
+    }, [])
 
 
     if (role === 'accountant' && test) {
@@ -103,9 +103,15 @@ const Menu = ({ setActiveCompanyId }) => {
 
     useEffect(() => {
         role === 'operator' && setLoadMenu(true)
-        if (role === 'operator' && user) {
+        if (role === 'operator' && user && !test) {
             setLoadMenu(false)
             const operatorMenu = handleOperatorAccess(user)
+            setOperatorMenu(operatorMenu)
+        }
+
+        if (role === 'operator' && user && test) {
+            setLoadMenu(false)
+            const operatorMenu = handleOperatorAccessTest(user)
             setOperatorMenu(operatorMenu)
         }
     }, [user])

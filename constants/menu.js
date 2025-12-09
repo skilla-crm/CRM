@@ -54,28 +54,28 @@ export const menuItemAccountan = [
 ]
 
 export const menuItemAccountanTest = [
-    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
+    { id: 1, name: 'Заказы', icon: orders, link: '/test/orders', sublinks: ['order_detail'] },
     {
         id: 2,
         name: 'Заказчики',
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterparties' },
+            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['counterpartiesnew/details/', 'counterpartiesnew/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
         ]
     },
-    { id: 3, name: 'Банк', icon: bank, link: '/bank' },
-    { id: 4, name: 'Счета', icon: bill, link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
+    { id: 3, name: 'Банк', icon: bank, link: '/test/bank' },
+    { id: 4, name: 'Счета', icon: bill, link: '/test/bills', sublinks: ['bills/detail', 'bills/create'] },
     {
         id: 5,
         name: 'Продажа',
         icon: sell,
 
         submenu: [
-            { id: 1, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
-            { id: 2, name: 'Акты', link: '/act', sublinks: ['act/detail'] },
+            { id: 1, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 2, name: 'Акты', link: '/test/act', sublinks: ['act/detail'] },
         ]
     },
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
@@ -100,6 +100,20 @@ export const menuItemSupervisor = [
     { id: 12, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] }
 ]
 
+export const menuItemSupervisorTest = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/test/orders', sublinks: ['order_detail'] },
+    { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
+    { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planningnew' },
+    { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
+    { id: 5, name: 'Сверка', icon: iconReconciliation, link: '/workers/reconciliation' },
+    { id: 6, name: 'Группы', icon: iconGroup, link: '/workers/groups' },
+    { id: 7, name: 'Сделки', icon: iconDeal, link: '/workers/smz' },
+    { id: 8, name: 'Уведомления', icon: iconNotification, link: '/reports/notifications' },
+    { id: 9, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
+    { id: 10, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    { id: 11, name: 'Поддержка', icon: support, link: '/support/chat' },
+    { id: 12, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] }
+]
 
 
 export const menuItem = [
@@ -170,7 +184,7 @@ export const menuItemTest = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['/details/'] },
+            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['counterpartiesnew/details/', 'counterpartiesnew/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Счета', link: '/test/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
@@ -190,7 +204,7 @@ export const menuItemTest = [
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planningnew' },
-            { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/update/', '/create/'] },
+            { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/groups/update/', '/groups/create/'] },
             { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
         ]
     },
@@ -223,6 +237,14 @@ export const menuItemTest = [
 
 export const menuItemOperator = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
+    { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
+    { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' },
+    { id: 11, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
+]
+
+export const menuItemOperatorTest = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/test/orders', sublinks: ['order_detail'] },
     { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
     { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' },
