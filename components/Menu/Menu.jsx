@@ -28,7 +28,8 @@ import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
 import NotificationsNew from '../NotificationsNew/NotificationsNew';
 //utils
-import { handleOperatorAccess, handleOperatorAccessTest } from '@/utils/handleOperatorAccess';
+import { handleOperatorAccess } from '@/utils/handleOperatorAccess';
+import { handleOperatorAccessTest } from '@/utils/handleOperatorAccessTest';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Menu = ({ setActiveCompanyId }) => {
@@ -76,7 +77,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-  /*   useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
