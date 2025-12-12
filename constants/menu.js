@@ -200,7 +200,7 @@ export const menuItemTest = [
         icon: workers,
 
         submenu: [
-            { id: 1, name: 'Все исполнители', link: '/performers', sublinks: ['performers/detail/'] },
+            { id: 1, name: 'Все исполнители', link: '/test/performers', sublinks: ['performers/detail/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
             { id: 4, name: 'Планирование', link: '/workers/planningnew' },
