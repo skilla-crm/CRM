@@ -1,9 +1,9 @@
+
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
-import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: "Контрагенты"
+  title: "Планирование"
 };
 
 const DynamicModuleContainer = dynamic(() =>
@@ -11,18 +11,18 @@ const DynamicModuleContainer = dynamic(() =>
     .then((module) => module.ModuleContainer)
 )
 
-export default async function СounterpartiesNew() {
+export default async function Orders() {
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-  const id = "root_counterparties"
 
   return (
-
-    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_COUNTERPARTIES_NEW} srcCss={process.env.REACT_APP_URL_COUNTERPARTIES_NEW_CSS} id={id} />
+    <div id="root_planning" ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_PLANNING} srcCss={process.env.REACT_APP_URL_PLANNING_CSS} id={'planning-page'} />
     </div>
+
+
 
 
   );
