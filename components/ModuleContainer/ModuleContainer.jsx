@@ -8,7 +8,7 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
-  const version = 152;
+  const version = 154;
 
 
   useEffect(() => {
@@ -56,11 +56,6 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
     if (searchParamsDate && id === 'root_order-create') {
       router.push(`${path}?date=${searchParamsDate}`)
-      return
-    }
-
-    if (path === '/orders') {
-      router.push(path)
       return
     }
 

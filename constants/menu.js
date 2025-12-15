@@ -29,7 +29,7 @@ export const menuItemAccountan = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterparties' },
+            { id: 1, name: 'Все заказчики', link: '/counterparties', sublinks: ['counterparties/details/', 'counterparties/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
         ]
@@ -125,7 +125,7 @@ export const menuItem = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterparties' },
+            { id: 1, name: 'Все заказчики', link: '/counterparties', sublinks: ['counterparties/details/', 'counterparties/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
