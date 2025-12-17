@@ -54,7 +54,8 @@ const Menu = ({ setActiveCompanyId }) => {
     const [visButton, setVisButton] = useState(false)
     const [activeCompany, setActiveCompany] = useState({});
     const [operatorMenu, setOperatorMenu] = useState(menuItemOperator);
-    const [loadMenu, setLoadMenu] = useState(role === 'operator' ? true : false)
+    const [loadMenu, setLoadMenu] = useState(role === 'operator' ? true : false);
+    const [logoError, setLogoError] = useState(false);
     const router = useRouter()
     const path = usePathname();
     const searchParams = useSearchParams()
@@ -77,9 +78,10 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-  /*   useEffect(() => {
-        create()
-    }, []) */
+
+    /*  useEffect(() => {
+         create()
+     }, []) */
 
 
     if (role === 'accountant' && test) {
@@ -146,6 +148,16 @@ const Menu = ({ setActiveCompanyId }) => {
 
 
     }, [token, role])
+
+
+    useEffect(() => {
+        const img = document.createElement('img');
+        img.src = `https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`
+        img.onerror = function () {
+            setLogoError(true)
+        };
+
+    }, [brand])
 
 
 
@@ -259,7 +271,8 @@ const Menu = ({ setActiveCompanyId }) => {
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
                 <div onClick={handleHidenMenu} className={s.header}>
-                    {(brand !== '0' && brand) ?
+
+                    {(brand !== '0' && brand && !logoError) ?
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
                             src={`https://lk.skilla.ru/documents/brands/${brand}/logo_new.png`}
                         />
