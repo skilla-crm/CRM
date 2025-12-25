@@ -1,23 +1,30 @@
-import Iframe from '@/components/Iframe/Iframe';
-import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
 
+import { cookies } from 'next/headers'
+import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: "Дашборд"
+  title: "События"
 };
 
-export default async function Dashboar() {
-  const cookieStore = await cookies()
-  const role = cookieStore.get('role')
-  const src = process.env.REACT_APP_URL_DASHBOARD;
-  const id = 'root_dashboard'
+const DynamicModuleContainer = dynamic(() =>
+  import('@/components/ModuleContainer/ModuleContainer')
+    .then((module) => module.ModuleContainer)
+)
 
-  if (role?.value === 'accountant') {
-    redirect('/orders')
-  }
+export default async function Dashboard() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get('token')
+  const role = cookieStore.get('role')
+  const ispro = cookieStore.get('is_pro')
+  const id = "root_dashboard"
 
   return (
-    <Iframe src={src} id={id} />
+
+    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+
+      <DynamicModuleContainer src={process.env.REACT_APP_URL_DASHBOARD} srcCss={process.env.REACT_APP_URL_DASHBOARD_CSS} id={id} />
+    </div>
+
+
   );
 }
