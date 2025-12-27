@@ -5,7 +5,7 @@ import iconCall from '@/public/icons/menu/iconCall.svg'
 
 export const handleOperatorAccessTest = (user) => {
     const { accounting_module, option_bank_access, option_counterparties_access } = user;
-    const customer = { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterpartiesnew' }
+    const customer = { id: 2, name: 'Заказчики', icon: counterparties, link: '/counterparties' }
     const bank = { id: 3, name: 'Банк', icon: bankIcon, link: '/test/bank' }
     const calls = { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' }
 

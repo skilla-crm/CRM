@@ -79,7 +79,7 @@ const Menu = ({ setActiveCompanyId }) => {
     let menuIList = [];
 
 
-    /*  useEffect(() => {
+   /*   useEffect(() => {
          create()
      }, []) */
 

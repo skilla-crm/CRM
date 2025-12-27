@@ -61,7 +61,7 @@ export const menuItemAccountanTest = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['counterpartiesnew/details/', 'counterpartiesnew/create/'] },
+            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['counterparties/details/', 'counterparties/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
         ]
@@ -103,7 +103,7 @@ export const menuItemSupervisor = [
 export const menuItemSupervisorTest = [
     { id: 1, name: 'Заказы', icon: orders, link: '/test/orders', sublinks: ['order_detail'] },
     { id: 2, name: 'Исполнители', icon: workers, link: '/performers', sublinks: ['/detail/', '/add'] },
-    { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planningnew' },
+    { id: 3, name: 'Планирование', icon: iconPlan, link: '/workers/planning' },
     { id: 4, name: 'Расчеты', icon: iconPayments, link: '/workers/payments' },
     { id: 5, name: 'Сверка', icon: iconReconciliation, link: '/workers/reconciliation' },
     { id: 6, name: 'Группы', icon: iconGroup, link: '/workers/groups' },
@@ -184,7 +184,7 @@ export const menuItemTest = [
         icon: counterparties,
 
         submenu: [
-            { id: 1, name: 'Все заказчики', link: '/counterpartiesnew', sublinks: ['counterpartiesnew/details/', 'counterpartiesnew/create/'] },
+            { id: 1, name: 'Все заказчики', link: '/counterparties', sublinks: ['counterparties/details/', 'counterparties/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
             { id: 3, name: 'Счета', link: '/test/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
@@ -203,7 +203,8 @@ export const menuItemTest = [
             { id: 1, name: 'Все исполнители', link: '/test/performers', sublinks: ['performers/detail/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
-            { id: 4, name: 'Планирование', link: '/workers/planningnew' },
+            { id: 3, name: 'Расчеты новые', link: '/workers/paymentsnew' },
+            { id: 4, name: 'Планирование', link: '/workers/planning' },
             { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/groups/update/', '/groups/create/'] },
             { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
         ]
