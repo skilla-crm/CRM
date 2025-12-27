@@ -203,7 +203,7 @@ export const menuItemTest = [
             { id: 1, name: 'Все исполнители', link: '/test/performers', sublinks: ['performers/detail/'] },
             { id: 2, name: 'Выплаты СМЗ', link: '/workers/smz' },
             { id: 3, name: 'Расчеты', link: '/workers/payments' },
-            { id: 3, name: 'Расчеты новые', link: '/workers/paymentsnew' },
+            { id: 3, name: 'Расчеты (ТЕСТ)', link: '/workers/paymentsnew' },
             { id: 4, name: 'Планирование', link: '/workers/planning' },
             { id: 5, name: 'Группы', link: '/workers/groups', sublinks: ['/groups/update/', '/groups/create/'] },
             { id: 6, name: 'Сверка', link: '/workers/reconciliation' },
