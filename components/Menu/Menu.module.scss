@@ -1,5 +1,6 @@
 .root {
     position: relative;
+    z-index: 12;
     transform: translateX(-250px);
     transition: all 0.3s ease-in-out;
 
@@ -33,7 +34,7 @@
 
 .overlay {
     position: absolute;
-    z-index: 7;
+    z-index: 77;
     left: 0;
     top: 0;
     width: 100%;

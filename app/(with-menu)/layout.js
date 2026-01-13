@@ -24,8 +24,11 @@ export default async function RootLayout({ children, params }) {
       <html lang="ru">
         <body className={inter.className}>
           <main className={s.main}>
-            {<Menu />}
-            {children}
+            <Menu />
+            <div className={s.container}>
+              {children}
+            </div>
+
           </main>
 
         </body>

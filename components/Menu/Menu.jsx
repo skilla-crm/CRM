@@ -32,7 +32,7 @@ import { handleOperatorAccessTest } from '@/utils/handleOperatorAccessTest';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Menu = () => {
-    const [anim, setAnim] = useState(true);
+    const [anim, setAnim] = useState(false);
     const hiddenButtonRef = useRef();
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenuNew')

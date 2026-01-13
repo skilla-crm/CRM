@@ -2,6 +2,8 @@
 import s from './LoginForm.module.scss';
 import { createCookies } from '@/actions';
 import { redirect } from 'next/navigation';
+//components
+import LoginOverlay from '../LoginOverlay/LoginOverlay';
 
 const LoginForm = () => {
     const handleLogin = async () => {
@@ -9,8 +11,12 @@ const LoginForm = () => {
         redirect('/dashboard')
     }
     return (
-        <div>
-            <button onClick={handleLogin}>Войти</button>
+        <div className={s.root}>
+            <LoginOverlay />
+            <div className={s.form}>
+                <button onClick={handleLogin}>Войти</button>
+            </div>
+
         </div>
     )
 };
