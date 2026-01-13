@@ -17,11 +17,7 @@ export const metadata = {
 };
 
 const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 'swap' })
-
-
 export default async function RootLayout({ children, params }) {
-  console.log(params)
-
 
   return (
     <CookiesProvider>

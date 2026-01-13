@@ -5,7 +5,6 @@ import useSWR from 'swr'
 import dayjs from 'dayjs';
 require('dayjs/locale/ru')
 import { Scrollbar } from 'react-scrollbars-custom';
-import { create } from '@/actions';
 import { fetchWithToken, fetchTokenChat, newMessageAttention } from '@/api/api';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation'
@@ -33,12 +32,12 @@ import { handleOperatorAccessTest } from '@/utils/handleOperatorAccessTest';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Menu = () => {
-    const hiddenButtonRef = useRef()
+    const [anim, setAnim] = useState(true);
+    const hiddenButtonRef = useRef();
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenuNew')
     const avatar_mini = cookies.get('avatar_mini')
     const name = cookies.get('name') ? decodeURI(cookies.get('name')).replace(/\+/g, ' ') : 'нет имени'
-    /*  const date = cookies.get('date') */
     const brand = cookies.get('brand')
     const ispro = cookies.get('is_pro')
     const token = cookies.get('token')
@@ -78,11 +77,9 @@ const Menu = () => {
     const oneCity = !oneCityTokens.some(el => el === token)
     let menuIList = [];
 
-
-    /*  useEffect(() => {
-         create()
-     }, []) */
-
+    useEffect(() => {
+        setAnim(true)
+    }, [])
 
     if (role === 'accountant' && test) {
         menuIList = menuItemAccountanTest
@@ -237,7 +234,7 @@ const Menu = () => {
 
 
     return (
-        <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={s.root}>
+        <div onMouseEnter={handleVisButton} onMouseLeave={handleHiddenButton} className={classNames(s.root, token && anim && s.root_anim)}>
             <NotificationsNew token={token} user={user} partnership_id={partnership_id} role={role} refetchEvents={mutate} setEventsLinks={setEventsLinks} />
 
             <button ref={hiddenButtonRef} onClick={handleHidenMenu} className={classNames(s.button_hide, hiddenMenu && !openCompanyProfile && s.button_hide_active, visButton && s.button_hide_vis)}>
@@ -267,7 +264,7 @@ const Menu = () => {
 
             <div className={classNames(s.menu, hiddenMenu && s.menu_hidden)}>
                 <div className={classNames(s.overlay, openCompanyProfile && s.overlay_open)}></div>
-                <div onClick={handleHidenMenu} className={s.header}>
+                <div onClick={handleHidenMenu} className={classNames(s.header, isLoading && s.header_hidden)}>
 
                     {(brand !== '0' && brand && !logoError) ?
                         <img className={classNames(s.logo, hiddenMenu && s.logo_hidden)}
