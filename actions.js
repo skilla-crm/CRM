@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers'
 /* 350|AzgciLV9wnUGymn4vpCMuG8gGWJRtcvEHfZuNgi7 accountant*/
 /* 17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo */
-export async function create() {
+export async function createCookies() {
     const cookieStore = await cookies()
     cookieStore.set('token', "Bearer 2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg")
     cookieStore.set('role', "director")
@@ -14,4 +14,8 @@ export async function create() {
     cookieStore.set('is_pro', "1")
     cookieStore.set('is_blocked', "0")
     cookieStore.set('partnership_id', "17")
+}
+
+export async function deleteCookies() {
+    cookies().delete('token');
 }

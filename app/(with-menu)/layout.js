@@ -1,13 +1,12 @@
 import { Inter } from 'next/font/google'
-import { Viewport } from 'next'
 import { CookiesProvider } from 'next-client-cookies/server';
-import "./globals.scss";
+import "../globals.scss";
 import s from './layout.module.scss';
 //components
-import { Providers } from '../Providers/Providers';
+import Menu from "@/components/Menu/Menu";
 
 
- 
+
 export const viewport = {
   width: '1900',
   initialScale: 0,
@@ -20,14 +19,17 @@ export const metadata = {
 const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 'swap' })
 
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ children, params }) {
+  console.log(params)
+
 
   return (
     <CookiesProvider>
       <html lang="ru">
         <body className={inter.className}>
           <main className={s.main}>
-            <Providers>{children}</Providers>
+            {<Menu />}
+            {children}
           </main>
 
         </body>

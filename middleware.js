@@ -1,39 +1,38 @@
-import { NextResponse } from "next/server";
-export const testTokens = ['17', '200', '1001', '443', '1076', '1036', '1336', '1322', '1327', '127', '1083', '1122', '1335', '8']
+import { NextResponse } from 'next/server'
 
+const publicRoutes = ['/login']
+const partnerRoles = ['director', 'accountant', 'supervisor', 'operator']
 
-const protectedRoutes = [
-    "/orders",
-    "/workers",
-    "/payments",
-    "/purchases",
-    "/company-results",
-    "/counterparties",
-    "/dashboard",
-    "/notifications",
-    "/results",
-    "/settings",
-    "/stock",
-    "/worker"
-];
-
-
-export default function middleware(req) {
-    const isBlocked = req.cookies.get('is_blocked')
+export default async function middleware(req) {
     const token = req.cookies.get('token')
-    const partnership_id = req.cookies.get('partnership_id')
     const role = req.cookies.get('role')
-
-   /*  if (!token) {
-        return NextResponse.redirect("https://lk.skilla.ru/login");
+    const isBlocked = req.cookies.get('is_blocked')
+    const path = req.nextUrl.pathname
+    const isProtectedRoute = !publicRoutes.includes(path)
+    const isPublicRoute = publicRoutes.includes(path)
+    if (isProtectedRoute && !token) {
+        return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
 
-    if (role.value !== 'director' && role.value !== 'accountant' && role.value !== 'supervisor' && role.value !== 'operator') {
-        return NextResponse.redirect("https://lk.skilla.ru")
+    if (isBlocked?.value === '1') {
+        return NextResponse.redirect(new URL('/pay', req.nextUrl))
     }
 
-    if (isBlocked?.value === '1' && protectedRoutes.some(el => req.nextUrl.pathname.includes(el))) {
-        return NextResponse.redirect("https://lk.skilla.ru/new/pay");
-    } */
+    /*  if (!partnerRoles.includes(role?.value)) {
+         return NextResponse.redirect(new URL('/team', req.nextUrl))
+     } */
+
+    if (
+        isPublicRoute &&
+        token &&
+        !req.nextUrl.pathname.startsWith('/dashboard')
+    ) {
+        return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    }
+
+    return NextResponse.next()
 }
 
+export const config = {
+    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+}

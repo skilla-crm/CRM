@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: '/new',
-    async redirects() {
+    /* async redirects() {
         return [
             {
                 source: '/',
@@ -9,7 +8,7 @@ const nextConfig = {
                 permanent: true,
             },
         ]
-    },
+    }, */
 
   /*   async rewrites() {
         return [

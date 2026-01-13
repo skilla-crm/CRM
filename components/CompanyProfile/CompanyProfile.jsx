@@ -2,6 +2,7 @@ import s from './CompanyProfile.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
+import { deleteCookies } from '@/actions';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
@@ -24,7 +25,7 @@ import IncomeSupervisor from '../IncomeSupervisor/IncomeSupervisor';
 
 
 const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, company, partnerships, persons, city,
-    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role, setActiveCompanyId, partnership_id }) => {
+    phone, email, partnershipsDop, isLoading, activeCompany, setActiveCompany, details, role, partnership_id }) => {
     const path = usePathname();
     const [allCompanies, setAllCompanies] = useState([]);
     const [openModal, setOpenModal] = useState(false)
@@ -61,10 +62,13 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
         setOpenModal(true)
     }
 
-    const handleLogOut = () => {
-        localStorage.clear();
+    const handleLogOut = async () => {
+        await deleteCookies()
 
-        redirect('https://lk.skilla.ru/login/logout.php')
+        redirect('/login')
+        /*  localStorage.clear();
+ 
+         redirect('https://lk.skilla.ru/login/logout.php') */
     }
 
     const closeModal = (e) => {
@@ -100,7 +104,6 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
                         partnershipsDop={partnershipsDop}
                         activeCompany={activeCompany}
                         setActiveCompany={setActiveCompany}
-                        setActiveCompanyId={setActiveCompanyId}
                     />
                     }
                 </div>

@@ -8,7 +8,7 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Done from '@/public/icons/iconDone.svg';
 import LoaderButton from '../LoaderButton/LoaderButton';
 
-const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, activeCompany, setActiveCompany, setActiveCompanyId }) => {
+const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, activeCompany, setActiveCompany }) => {
     const [open, setOpen] = useState(false);
     const [disabled, setDisabled] = useState(false)
     const listRef = useRef();
@@ -44,7 +44,6 @@ const CompanyList = ({ company, allCompanies, partnerships, partnershipsDop, act
         localStorage.setItem('filterCompanys', JSON.stringify(item?.id ? [item?.id] : []))
         localStorage.setItem('', JSON.stringify(item))
         localStorage.setItem('activeCompany', JSON.stringify(item))
-        setActiveCompanyId(item?.id ? item?.id : 0)
         setOpen(false)
         setTimeout(() => {
             window.location.reload();

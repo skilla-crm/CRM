@@ -32,7 +32,7 @@ import { handleOperatorAccess } from '@/utils/handleOperatorAccess';
 import { handleOperatorAccessTest } from '@/utils/handleOperatorAccessTest';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const Menu = ({ setActiveCompanyId }) => {
+const Menu = () => {
     const hiddenButtonRef = useRef()
     const cookies = useCookies();
     const hidemenu = cookies.get('hidemenuNew')
@@ -79,7 +79,7 @@ const Menu = ({ setActiveCompanyId }) => {
     let menuIList = [];
 
 
-   /*   useEffect(() => {
+    /*  useEffect(() => {
          create()
      }, []) */
 
@@ -126,10 +126,8 @@ const Menu = ({ setActiveCompanyId }) => {
 
         if (active?.id) {
             setActiveCompany(active)
-            setActiveCompanyId(active?.id)
         } else {
             setActiveCompany({})
-            setActiveCompanyId(0)
         }
 
     }, [token])
@@ -264,7 +262,6 @@ const Menu = ({ setActiveCompanyId }) => {
                 setActiveCompany={setActiveCompany}
                 details={menuData?.partnerships_details}
                 role={role}
-                setActiveCompanyId={setActiveCompanyId}
                 partnership_id={partnership_id}
             />
 

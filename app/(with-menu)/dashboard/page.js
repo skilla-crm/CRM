@@ -13,7 +13,7 @@ const DynamicModuleContainer = dynamic(() =>
 
 export default async function Dashboard() {
   const cookieStore = await cookies()
-  const token = cookieStore.get('token')
+  const token = cookieStore?.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
   const id = "root_dashboard"
