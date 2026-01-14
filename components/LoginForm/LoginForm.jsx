@@ -14,7 +14,7 @@ const LoginForm = () => {
         <div className={s.root}>
             <LoginOverlay />
             <div className={s.form}>
-                <button onClick={handleLogin}>Войти</button>
+                <button onClick={handleLogin}>Войти dfg dfg dg dfg</button>
             </div>
 
         </div>
