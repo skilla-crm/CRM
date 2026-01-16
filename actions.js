@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 /* 17|ZLcO2bSQBbExVhlHVsPq6onXF441I4lU2WpHZTGo */
 export async function create() {
     const cookieStore = await cookies()
-    cookieStore.set('token', "Bearer 2109|7d9OHVhjO02gY9rrbjV5rTfCpFs4iVShk6TtSrCg")
+    cookieStore.set('token', "3238|00B2BquSTSDQCPt1pyGBwzSEYuKYMygIBpcRM95U")
     cookieStore.set('role', "director")
     cookieStore.set('avatar_mini', "")
     cookieStore.set('name', "%D0%98%D0%B3%D0%BE%D1%80%D1%8C+")
@@ -13,5 +13,5 @@ export async function create() {
     cookieStore.set('brand', "3")
     cookieStore.set('is_pro', "1")
     cookieStore.set('is_blocked', "0")
-    cookieStore.set('partnership_id', "17")
+    cookieStore.set('partnership_id', "1367")
 }

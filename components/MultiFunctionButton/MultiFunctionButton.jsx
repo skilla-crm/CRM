@@ -91,7 +91,7 @@ const MultiFunctionButton = ({ hiddenMenu, role, test }) => {
                 </Link>
             }
 
-            {role === 'operator' &&
+            {(role === 'operator' || role === 'mainoperator') &&
                 <Link href={test ? '/test/orders/create' : '/orders/create'} className={classNames(s.button, s.button_simple, hiddenMenu && s.button_hidden)}>
                     <div className={classNames(s.icon, s.icon_3, hiddenMenu && s.icon_hidden)}><Plus /></div>
                     <p className={s.add_text}>Новый заказ</p>

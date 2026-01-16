@@ -244,6 +244,11 @@ export const menuItemOperator = [
     { id: 11, name: 'База знаний', icon: IconFaq, link: '/support/faq', sublinks: ['/news/', '/kb/'] },
 ]
 
+export const menuItemMainOperator = [
+    { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
+    { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
+]
+
 export const menuItemOperatorTest = [
     { id: 1, name: 'Заказы', icon: orders, link: '/test/orders', sublinks: ['order_detail'] },
     { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },

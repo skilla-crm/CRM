@@ -21,8 +21,8 @@ import Arrow from '@/public/icons/menu/arrow.svg';
 import Chewron from '@/public/icons/iconChewronForward.svg';
 import BadgePro from '@/public/icons/badgePro.svg';
 //constants
-import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest, menuItemOperator } from '@/constants/menu';
-import { oneCityTokens, testTokens } from '@/constants/exceptions';
+import { menuItem, menuItemTest, menuItemAccountan, menuItemSupervisor, menuItemAccountanTest, menuItemOperator, menuItemMainOperator } from '@/constants/menu';
+import { oneCityPartnerships, testTokens } from '@/constants/exceptions';
 //components
 import FunctionBlock from '../FunctionBlock/FunctionBlock';
 import CompanyProfile from '../CompanyProfile/CompanyProfile';
@@ -75,13 +75,12 @@ const Menu = ({ setActiveCompanyId }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
     const test = testTokens.includes(partnership_id)
-    const oneCity = !oneCityTokens.some(el => el === token)
+    const oneCity = !oneCityPartnerships.includes(partnership_id);
     let menuIList = [];
 
-
-   /*   useEffect(() => {
-         create()
-     }, []) */
+   /*  useEffect(() => {
+        create()
+    }, []) */
 
 
     if (role === 'accountant' && test) {
@@ -102,6 +101,10 @@ const Menu = ({ setActiveCompanyId }) => {
 
     if (role === 'supervisor') {
         menuIList = menuItemSupervisor
+    }
+
+    if (role === 'mainoperator') {
+        menuIList = menuItemMainOperator
     }
 
     useEffect(() => {
@@ -257,7 +260,7 @@ const Menu = ({ setActiveCompanyId }) => {
                 city={city}
                 phone={phone}
                 email={email}
-                partnerships={oneCity && role === 'director' ? partnerships : []}
+                partnerships={!oneCity && role === 'director' ? partnerships : []}
                 partnershipsDop={partnershipsDop}
                 isLoading={isLoading}
                 activeCompany={activeCompany}
