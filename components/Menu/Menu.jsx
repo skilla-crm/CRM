@@ -75,10 +75,10 @@ const Menu = ({ setActiveCompanyId }) => {
     const paidTo = dayjs(company?.paid_to).locale('ru');
     const dayDiff = paidTo.diff(dateNow, 'day');
     const test = testTokens.includes(partnership_id)
-    const oneCity = !oneCityPartnerships.includes(partnership_id);
+    const oneCity = oneCityPartnerships.includes(Number(partnership_id));
     let menuIList = [];
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
