@@ -11,7 +11,7 @@ const IncomeSupervisor = ({ data }) => {
         <div className={s.root}>
             {Object.values(data)?.map((el, i) => {
                 return <div className={s.item} key={i}>
-                    <p className={s.day}>{i === 0 ? 'Вчера' : 'Сегодня'}</p>
+                    <p className={s.day}>{i === 1 ? 'Вчера' : 'Сегодня'}</p>
                     <div className={s.summ}><IconPercent /> {el.brig_percent ? `${addSpaceNumber(el.brig_percent)} ₽` : '-'}</div>
                     <div className={s.count}><Orders /> {el.orders_count} заказов</div>
                 </div>
