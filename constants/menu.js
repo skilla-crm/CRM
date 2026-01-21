@@ -247,6 +247,7 @@ export const menuItemOperator = [
 export const menuItemMainOperator = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
+    { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' }
 ]
 
 export const menuItemOperatorTest = [

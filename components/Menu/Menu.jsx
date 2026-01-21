@@ -78,10 +78,10 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = oneCityPartnerships.includes(Number(partnership_id));
     let menuIList = [];
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
-    }, [])
- */
+    }, []) */
+
 
     if (role === 'accountant' && test) {
         menuIList = menuItemAccountanTest
@@ -261,7 +261,7 @@ const Menu = ({ setActiveCompanyId }) => {
                 phone={phone}
                 email={email}
                 partnerships={!oneCity && role === 'director' ? partnerships : []}
-                partnershipsDop={partnershipsDop}
+                partnershipsDop={role === 'mainoperator' ? [] : partnershipsDop}
                 isLoading={isLoading}
                 activeCompany={activeCompany}
                 setActiveCompany={setActiveCompany}
