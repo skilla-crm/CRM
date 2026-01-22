@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import useEstablishEventChannel from '@/hooks/useEstablishEventChannel';
 import useEstablishChatChannel from '@/hooks/useEstablishChatChannel';
 import useEstablishCallChannel from '@/hooks/useEstablishCallChannel';
+import useEstablishContactCenterChannel from '@/hooks/useEstablishContactCenterChannel';
 //icons
 import chatIcon from '@/public/icons/chatIcon.svg';
 //components
@@ -19,14 +20,73 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     const channelEvents = useEstablishEventChannel(token, user, partnership_id);
     const channelChat = useEstablishChatChannel(token, user);
     const channelCall = useEstablishCallChannel(user);
+    const channelContactCenter = useEstablishContactCenterChannel(user);
     const path = usePathname();
+
+
+    useEffect(() => {
+        if (channelContactCenter) {
+            channelContactCenter.onmessage = function (event) {
+                const data = JSON.parse(event.data)
+                const handleCloseToast = () => { toast.dismiss('KC') };
+
+                if (data.action === "newCall") {
+                   toast(
+                        () => {
+                            return <CallToast
+                                version={'KC'}
+                                closeToast={handleCloseToast}
+                                buttonClose={false}
+                                person={null}
+                                icon={null}
+                                action={data.action}
+                                phone={"+7 (000) 000-00-00"}
+                                name={"Неизвестно"}
+                                company={null}
+                                city={'Иваново'}
+                                type="success"
+                            />
+                        },
+                        {
+                            toastId: 'KC',
+                            autoClose: false,
+                            closeButton: false,
+                            position: "bottom-right",
+                            closeOnClick: false
+                        }
+                    );
+                }
+
+
+                if (data.action === "connected") {
+                    toast.update('KC', {
+                        render: () => <CallToast
+                            version={'KC'}
+                            closeToast={handleCloseToast}
+                            buttonClose={false}
+                            person={null}
+                            icon={null}
+                            action={data.action}
+                            phone={"+7 (000) 000-00-00"}
+                            name={"Неизвестно"}
+                            company={null}
+                            city={'Иваново'}
+                            type="success"
+                        />
+                    })
+                }
+            }
+        }
+    }, [channelContactCenter])
+
+
 
     useEffect(() => {
         if (channelCall) {
             channelCall.onmessage = function (event) {
                 const data = JSON.parse(event.data)
-          
-                data?.action === 'connection' && toast(
+
+                data?.action === 'newCall' && toast(
                     ({ closeToast }) => {
                         return <CallToast
                             closeToast={closeToast}
@@ -61,7 +121,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             channelEvents.listen(
                 "Broadcasting.UserReceivedEvent",
                 (e) => {
-        
+
                     const { description, description_short, person, type, supervisor_id, action } = e;
 
                     ((description && person?.id !== user.id) || (description_short && person?.id == user.id)) && handleNotificationAccesses(role, person, type, action, description, supervisor_id, user) && toast(

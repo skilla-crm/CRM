@@ -40,3 +40,57 @@ export const newMessageAttention = (token) =>
         .then((res) => {
             return res.data
         });
+
+
+export const sendContact = () =>
+    axios
+        .post(`https://lk.skilla.ru/orders/api/sendContactsEmail`,
+            {
+                body: {
+                    email: "alexholm200@gmail.com",
+                    partnership_id: "200",
+                    call_id: "000000",
+                    entry_id: "000001",
+                    phone: "+7 (000) 000-00-00"
+
+                }
+            })
+        .then((res) => {
+            return res.data
+        });
+
+
+export const sendRequsites = () =>
+    axios
+        .post(`https://lk.skilla.ru/orders/api/sendRequisitesEmail`,
+            {
+                body: {
+                    email: "alexholm200@gmail.com",
+                    partnership_id: "200",
+                    call_id: "000000",
+                    entry_id: "000001",
+                    phone: "+7 (000) 000-00-00"
+
+                }
+            })
+        .then((res) => {
+            return res.data
+        });
+
+
+export const sendComment = () =>
+    axios
+        .post(`https://lk.skilla.ru/orders/api/sendMessage`,
+            {
+                body: {
+                    message: "fsdfs",
+                    partnership_id: "200",
+                    call_id: "000000",
+                    entry_id: "000001",
+                    name: "Неизвестно",
+                    phone: "+7 (000) 000-00-00"
+                }
+            })
+        .then((res) => {
+            return res.data
+        });

@@ -11,7 +11,7 @@
     border-radius: 4px;
     background: #fff;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
-    padding: 12px;
+    padding: 12px 12px 20px;
     opacity: 1;
     transition: opacity 0.15s ease-in-out;
 }
@@ -21,14 +21,26 @@
     margin-bottom: 4px;
 }
 
-.block  {
+.block {
     display: flex;
     flex-direction: column;
+
+    &_kc {
+        background-color: #f8fafd;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 12px;
+        color: black;
+        margin-top: 12px;
+
+    }
 }
 
 .first {
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     line-height: 20px;
     color: #121922;
 }
@@ -41,7 +53,7 @@
 
 .second {
     color: #71869d;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
@@ -49,6 +61,7 @@
 
 .close {
     position: absolute;
+    cursor: pointer;
     top: 12px;
     right: 12px;
     transition: all 0.15s;
@@ -61,3 +74,104 @@
 .bottom {
     display: flex;
 }
+
+.actions {
+    width: 700px;
+    overflow: hidden;
+    display: flex;
+    height: fit-content;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.35s ease-in-out;
+
+    &_open {
+        opacity: 1;
+        max-height: 300px;
+    }
+}
+
+.button {
+    width: fit-content;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    border-radius: 16px;
+    color: #f8fafd;
+    background-color: #002CFB;
+    transition: all 0.15s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #0024cb;
+    }
+
+    &_second {
+        background-color: rgba(255, 255, 255, 0);
+        color: #0024cb;
+
+        &:hover {
+            background-color: #0025cb00;
+            color: #0024cb;
+        }
+    }
+
+    &:disabled {
+        background-color: #f1f4f9;
+        color: #8e9aa8;
+        pointer-events: none;
+    }
+
+}
+
+.slider {
+    width: 320px;
+    overflow: hidden;
+    margin-top: 12px;
+
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    transition: all 0.25s ease-in-out;
+
+    span {
+        height: 16px;
+        color: #71869d;
+        align-self: flex-start;
+    }
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 320px;
+    min-height: 140px;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 6px;
+    transition: all 0.15s;
+
+    &_hidden {
+        opacity: 0;
+    }
+}
+
+/* .second {
+    width: 320px;
+    flex-shrink: 0;
+} */
+
+.buttons {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
