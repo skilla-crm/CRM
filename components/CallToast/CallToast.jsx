@@ -1,6 +1,7 @@
 import s from './CallToast.module.scss';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import IconPhone from '@/public/icons/iconPhone.svg';
 import Point from '@/public/icons/point.svg';
 import IconClose from '@/public/icons/iconCloseGrey.svg';
@@ -11,12 +12,13 @@ import { sendContact, sendRequsites, sendComment } from '@/api/api';
 import InputEmail from '../InputEmail/InputEmail';
 import TextArea from '../TextArea/TextArea';
 
-const CallToast = ({ phone, name, company, city, version, action, closeToast }) => {
+const CallToast = ({ userName, phone, name, company, companyId, city, version, action, partnership, closeToast }) => {
     const [activeFunction, setActiveFunction] = useState(0);
     const [email, setEmail] = useState('');
     const [validateEmail, setValidateEmail] = useState(false);
     const [comment, setComment] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         if ((activeFunction == 1 || activeFunction == 2) && !validateEmail) {
@@ -61,7 +63,15 @@ const CallToast = ({ phone, name, company, city, version, action, closeToast }) 
         }
     }
 
-   
+    const handleCreate = () => {
+        const params = new URLSearchParams();
+        params.set('partnershipId', partnership?.id);
+        params.set('companyId', companyId);
+        params.set('phone', phone);
+        params.set('name', name);
+        router.push(`/orders/create?${params}`)
+    }
+
 
     const handleBack = () => {
         setActiveFunction(0)
@@ -79,11 +89,14 @@ const CallToast = ({ phone, name, company, city, version, action, closeToast }) 
 
                 <p className={s.first}>{name ? name : ''} {phone ? phone : ''}</p>
                 <div className={s.bottom}>
-                    <p className={s.second}>{company?.includes('<br>') ? company?.split('<br>')?.shift() : company}<span> {city ? '• ' : ''}</span>{city}</p>
+                    <p className={s.second}>{city} <span> {company ? '• ' : ''}</span>{company?.includes('<br>') ? company?.split('<br>')?.shift() : company}</p>
+
+                    {version === 'KC' && <p className={s.second}>{partnership?.name}</p>}
                 </div>
 
                 {version === 'KC' && <div className={classNames(s.block, s.block_kc)}>
-                    {<p>Улыбайтесь во время разговора</p>}
+                    {action === 'newCall' ? <p>Менеджер {userName}, здравствуйте</p> :
+                        <p>Улыбайтесь во время разговора!</p>}
 
                 </div>}
 
@@ -92,6 +105,8 @@ const CallToast = ({ phone, name, company, city, version, action, closeToast }) 
                     <div className={s.slider}>
                         <div style={{ transform: `translateX(${activeFunction > 0 ? -320 : 0}px)` }} className={classNames(classNames(s.actions, action === 'connected' && s.actions_open))}>
                             <div className={classNames(s.slide, activeFunction > 0 && s.slide_hidden)}>
+
+                                <button onClick={handleCreate} className={s.button}>Создать заказ</button>
                                 <button id={1} onClick={handleSelectFunction} className={s.button}>Отправить Email с контактами</button>
 
                                 <button id={2} onClick={handleSelectFunction} className={s.button}>Отправить Email с реквизитами</button>
@@ -122,7 +137,7 @@ const CallToast = ({ phone, name, company, city, version, action, closeToast }) 
                                         />
                                     }
 
-                        
+
 
                                     {activeFunction > 0 && <div className={s.buttons}>
                                         <button onClick={handleBack} className={classNames(s.button, s.button_second)}> Назад</button>

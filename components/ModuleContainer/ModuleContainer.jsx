@@ -12,10 +12,10 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
 
 
   useEffect(() => {
-    if (path === '/orders/create') {
+   /*  if (path === '/orders/create') {
       router.push(path)
       return
-    }
+    } */
 
     if (path.includes('/orders/edit')) {
       router.push(path)

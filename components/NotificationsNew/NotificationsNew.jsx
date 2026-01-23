@@ -22,7 +22,9 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     const channelCall = useEstablishCallChannel(user);
     const channelContactCenter = useEstablishContactCenterChannel(user);
     const path = usePathname();
+    let callData = {}
 
+    console.log(user)
 
     useEffect(() => {
         if (channelContactCenter) {
@@ -30,8 +32,10 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                 const data = JSON.parse(event.data)
                 const handleCloseToast = () => { toast.dismiss('KC') };
 
+
                 if (data.action === "newCall") {
-                   toast(
+                    callData = data.data;
+                    toast(
                         () => {
                             return <CallToast
                                 version={'KC'}
@@ -40,11 +44,13 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                                 person={null}
                                 icon={null}
                                 action={data.action}
-                                phone={"+7 (000) 000-00-00"}
-                                name={"Неизвестно"}
-                                company={null}
-                                city={'Иваново'}
-                                type="success"
+                                userName={user?.name}
+                                phone={data.data.phone}
+                                name={data.data.name}
+                                company={'ООО грузчик'}
+                                companyId={data.data.client_id}
+                                city={data.data.city}
+                                partnership={data.data.partner_data}
                             />
                         },
                         {
@@ -67,13 +73,20 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             person={null}
                             icon={null}
                             action={data.action}
-                            phone={"+7 (000) 000-00-00"}
-                            name={"Неизвестно"}
-                            company={null}
-                            city={'Иваново'}
-                            type="success"
+                            userName={user?.name}
+                            phone={callData.phone}
+                            name={callData.name}
+                            company={'ООО грузчик'}
+                            companyId={callData.client_id}
+                            city={callData.city}
+                            partnership={callData.partner_data}
+
                         />
                     })
+                }
+
+                if (data.action === "disconnect") {
+                    handleCloseToast()
                 }
             }
         }

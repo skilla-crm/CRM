@@ -24,11 +24,11 @@ export default function middleware(req) {
     const partnership_id = req.cookies.get('partnership_id')
     const role = req.cookies.get('role')
 
-    /* if (!token) {
+   /*  if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
     }
 
-    if (role.value !== 'director' && role.value !== 'accountant' && role.value !== 'supervisor' && role.value !== 'operator') {
+    if (role.value !== 'director' && role.value !== 'accountant' && role.value !== 'supervisor' && role.value !== 'operator' ) {
         return NextResponse.redirect("https://lk.skilla.ru")
     }
 
