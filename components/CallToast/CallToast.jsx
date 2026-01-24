@@ -1,10 +1,11 @@
 import s from './CallToast.module.scss';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import IconPhone from '@/public/icons/iconPhone.svg';
 import Point from '@/public/icons/point.svg';
 import IconClose from '@/public/icons/iconCloseGrey.svg';
+import IconColapse from '@/public/icons/iconChewronForward.svg';
 //Api
 import { sendContact, sendRequsites, sendComment } from '@/api/api';
 
@@ -12,13 +13,21 @@ import { sendContact, sendRequsites, sendComment } from '@/api/api';
 import InputEmail from '../InputEmail/InputEmail';
 import TextArea from '../TextArea/TextArea';
 
-const CallToast = ({ userName, phone, name, company, companyId, city, version, action, partnership, closeToast }) => {
+const CallToast = ({ userName, phone, name, company, companyId, city, version, action, partnership, closeToast, /* handleColapse, colapse  */ }) => {
+    const path = usePathname();
     const [activeFunction, setActiveFunction] = useState(0);
     const [email, setEmail] = useState('');
     const [validateEmail, setValidateEmail] = useState(false);
     const [comment, setComment] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [colapse, setColapse] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        if (path === '/orders/create') {
+            setColapse(true)
+        }
+    }, [path])
 
     useEffect(() => {
         if ((activeFunction == 1 || activeFunction == 2) && !validateEmail) {
@@ -34,6 +43,10 @@ const CallToast = ({ userName, phone, name, company, companyId, city, version, a
         setButtonDisabled(false)
 
     }, [activeFunction, email, validateEmail, comment])
+
+    const handleColapse = () => {
+        setColapse(!colapse)
+    }
 
     const handleSelectFunction = (e) => {
         const id = e.currentTarget.id;
@@ -103,10 +116,10 @@ const CallToast = ({ userName, phone, name, company, companyId, city, version, a
 
                 {version === 'KC' &&
                     <div className={s.slider}>
-                        <div style={{ transform: `translateX(${activeFunction > 0 ? -320 : 0}px)` }} className={classNames(classNames(s.actions, action === 'connected' && s.actions_open))}>
+                        <div style={{ transform: `translateX(${activeFunction > 0 ? -320 : 0}px)` }} className={classNames(classNames(s.actions, action === 'connected' && !colapse && s.actions_open))}>
                             <div className={classNames(s.slide, activeFunction > 0 && s.slide_hidden)}>
 
-                                <button onClick={handleCreate} className={s.button}>Создать заказ</button>
+                                {path !== '/orders/create' && <button onClick={handleCreate} className={s.button}>Создать заказ</button>}
                                 <button id={1} onClick={handleSelectFunction} className={s.button}>Отправить Email с контактами</button>
 
                                 <button id={2} onClick={handleSelectFunction} className={s.button}>Отправить Email с реквизитами</button>
@@ -152,9 +165,13 @@ const CallToast = ({ userName, phone, name, company, companyId, city, version, a
             </div>
 
 
-
-            <div onClick={closeToast} className={s.close}>
-                <IconClose className={s.close} />
+            <div className={s.buttons_top}>
+                {version === 'KC' && action === 'connected' && <div onClick={handleColapse} className={classNames(s.collapse, colapse && s.collapse_hidden)}>
+                    <IconColapse />
+                </div>}
+                <div onClick={closeToast} className={s.close}>
+                    <IconClose className={s.close} />
+                </div>
             </div>
         </div>
     )

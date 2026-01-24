@@ -71,6 +71,28 @@
     }
 }
 
+
+.collapse {
+    position: absolute;
+    cursor: pointer;
+    top: 19px;
+    right: 42px;
+    transform: rotate(-90deg);
+    transition: all 0.3s;
+
+    svg path {
+        fill: #BFCBE0;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &_hidden {
+        transform: rotate(90deg)
+    }
+}
+
 .bottom {
     display: flex;
     flex-direction: column;
@@ -176,4 +198,3 @@
     display: flex;
     justify-content: space-between;
 }
-

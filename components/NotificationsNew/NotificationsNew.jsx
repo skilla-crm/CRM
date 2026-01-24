@@ -31,6 +31,27 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
             channelContactCenter.onmessage = function (event) {
                 const data = JSON.parse(event.data)
                 const handleCloseToast = () => { toast.dismiss('KC') };
+                const handleColapse = () => {
+                    toast.update('KC', {
+                        render: () => <CallToast
+                            version={'KC'}
+                            closeToast={handleCloseToast}
+                            buttonClose={false}
+                            person={null}
+                            icon={null}
+                            action={data.action}
+                            userName={user?.name}
+                            phone={callData.phone}
+                            name={callData.name}
+                            company={'ООО грузчик'}
+                            companyId={callData.client_id}
+                            city={callData.city}
+                            partnership={callData.partner_data}
+                          
+
+                        />
+                    })
+                }
 
 
                 if (data.action === "newCall") {
@@ -51,6 +72,8 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                                 companyId={data.data.client_id}
                                 city={data.data.city}
                                 partnership={data.data.partner_data}
+                           /*      handleColapse={handleColapse} */
+
                             />
                         },
                         {
@@ -80,6 +103,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             companyId={callData.client_id}
                             city={callData.city}
                             partnership={callData.partner_data}
+                         /*    handleColapse={handleColapse} */
 
                         />
                     })

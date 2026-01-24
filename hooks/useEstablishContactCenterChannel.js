@@ -5,7 +5,7 @@ const useEstablishContactCenterChannel = (user) => {
     const [channel, setChannel] = useState(null);
 
     async function handleEstablish() {
-        const socket = new WebSocket(`wss://lk.skilla.ru:8010/?token=ivoperator1`);
+        const socket = new WebSocket(`wss://lk.skilla.ru:8010/?token=nastyakop`);
         setChannel(socket)
 
     }
