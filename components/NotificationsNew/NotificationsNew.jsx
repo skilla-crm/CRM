@@ -47,7 +47,9 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             companyId={callData.client_id}
                             city={callData.city}
                             partnership={callData.partner_data}
-                          
+                            call_id={callData?.call_id}
+                            entry_id={callData?.entry_id}
+
 
                         />
                     })
@@ -72,7 +74,8 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                                 companyId={data.data.client_id}
                                 city={data.data.city}
                                 partnership={data.data.partner_data}
-                           /*      handleColapse={handleColapse} */
+                                call_id={data.data?.call_id}
+                                entry_id={data.data?.entry_id}
 
                             />
                         },
@@ -103,7 +106,9 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             companyId={callData.client_id}
                             city={callData.city}
                             partnership={callData.partner_data}
-                         /*    handleColapse={handleColapse} */
+                            call_id={callData?.call_id}
+                            entry_id={callData?.entry_id}
+                        /*    handleColapse={handleColapse} */
 
                         />
                     })

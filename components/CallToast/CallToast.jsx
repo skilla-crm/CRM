@@ -13,7 +13,7 @@ import { sendContact, sendRequsites, sendComment } from '@/api/api';
 import InputEmail from '../InputEmail/InputEmail';
 import TextArea from '../TextArea/TextArea';
 
-const CallToast = ({ userName, phone, name, company, companyId, city, version, action, partnership, closeToast, /* handleColapse, colapse  */ }) => {
+const CallToast = ({ userName, phone, name, call_id, entry_id, company, companyId, city, version, action, partnership, closeToast, /* handleColapse, colapse  */ }) => {
     const path = usePathname();
     const [activeFunction, setActiveFunction] = useState(0);
     const [email, setEmail] = useState('');
@@ -55,23 +55,25 @@ const CallToast = ({ userName, phone, name, company, companyId, city, version, a
 
     const handleSend = () => {
         if (activeFunction == 1) {
-            const res = sendContact()
+            const partnership_id = partnership?.id
+            const res = sendContact(email, partnership_id, call_id, entry_id, phone)
             res && closeToast()
             console.log(res)
             return
         }
 
         if (activeFunction == 2) {
-            const res = sendRequsites()
+            const partnership_id = partnership?.id
+            const res = sendRequsites(email, partnership_id, call_id, entry_id, phone)
             res && closeToast()
             console.log(res)
             return
         }
 
         if (activeFunction == 3) {
-            const res = sendComment()
+               const partnership_id = partnership?.id
+            const res = sendComment(comment, partnership_id, call_id, entry_id, name, phone)
             res && closeToast()
-            console.log(res)
             return
         }
     }

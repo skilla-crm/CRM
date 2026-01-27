@@ -42,16 +42,16 @@ export const newMessageAttention = (token) =>
         });
 
 
-export const sendContact = () =>
+export const sendContact = (email, partnership_id, call_id, entry_id, phone) =>
     axios
         .post(`https://lk.skilla.ru/orders/api/sendContactsEmail`,
             {
                 body: {
-                    email: "alexholm200@gmail.com",
-                    partnership_id: "200",
-                    call_id: "000000",
-                    entry_id: "000001",
-                    phone: "+7 (000) 000-00-00"
+                    email,
+                    partnership_id,
+                    call_id,
+                    entry_id,
+                    phone
 
                 }
             })
@@ -60,16 +60,16 @@ export const sendContact = () =>
         });
 
 
-export const sendRequsites = () =>
+export const sendRequsites = (email, partnership_id, call_id, entry_id, phone) =>
     axios
         .post(`https://lk.skilla.ru/orders/api/sendRequisitesEmail`,
             {
                 body: {
-                    email: "alexholm200@gmail.com",
-                    partnership_id: "200",
-                    call_id: "000000",
-                    entry_id: "000001",
-                    phone: "+7 (000) 000-00-00"
+                    email,
+                    partnership_id,
+                    call_id,
+                    entry_id,
+                    phone
 
                 }
             })
@@ -78,17 +78,17 @@ export const sendRequsites = () =>
         });
 
 
-export const sendComment = () =>
+export const sendComment = (message, partnership_id, call_id, entry_id, name, phone) =>
     axios
         .post(`https://lk.skilla.ru/orders/api/sendMessage`,
             {
                 body: {
-                    message: "fsdfs",
-                    partnership_id: "200",
-                    call_id: "000000",
-                    entry_id: "000001",
-                    name: "Неизвестно",
-                    phone: "+7 (000) 000-00-00"
+                    message,
+                    partnership_id,
+                    call_id,
+                    entry_id,
+                    name,
+                    phone
                 }
             })
         .then((res) => {
