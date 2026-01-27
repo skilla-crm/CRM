@@ -27,7 +27,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     console.log(user)
 
     useEffect(() => {
-        if (channelContactCenter) {
+        if (channelContactCenter && role === 'mainoperator') {
             channelContactCenter.onmessage = function (event) {
                 const data = JSON.parse(event.data)
                 const handleCloseToast = () => { toast.dismiss('KC') };
