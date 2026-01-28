@@ -9,18 +9,12 @@ const useEstablishContactCenterChannel = (user) => {
             const socket = new WebSocket(`wss://lk.skilla.ru:8010/?token=${user?.login}`);
             setChannel(socket)
         }
-
-
     }
-
 
     useEffect(() => {
         if (user) {
             handleEstablish()
         }
-
-
-
     }, [user])
 
     return channel

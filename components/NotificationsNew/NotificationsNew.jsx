@@ -22,40 +22,14 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
     const channelCall = useEstablishCallChannel(user);
     const channelContactCenter = useEstablishContactCenterChannel(user);
     const path = usePathname();
-    let callData = {}
-
-    console.log(user)
+    let callData = {};
 
     useEffect(() => {
         if (channelContactCenter && role === 'mainoperator') {
             channelContactCenter.onmessage = function (event) {
                 const data = JSON.parse(event.data)
                 const handleCloseToast = () => { toast.dismiss('KC') };
-                const handleColapse = () => {
-                    toast.update('KC', {
-                        render: () => <CallToast
-                            version={'KC'}
-                            closeToast={handleCloseToast}
-                            buttonClose={false}
-                            person={null}
-                            icon={null}
-                            action={data.action}
-                            userName={user?.name}
-                            phone={callData.phone}
-                            name={callData.name}
-                            company={'ООО грузчик'}
-                            companyId={callData.client_id}
-                            city={callData.city}
-                            partnership={callData.partner_data}
-                            call_id={callData?.call_id}
-                            entry_id={callData?.entry_id}
-
-
-                        />
-                    })
-                }
-
-
+               
                 if (data.action === "newCall") {
                     callData = data.data;
                     toast(
@@ -70,7 +44,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                                 userName={user?.name}
                                 phone={data.data.phone}
                                 name={data.data.name}
-                                company={'ООО грузчик'}
+                                company={data?.company}
                                 companyId={data.data.client_id}
                                 city={data.data.city}
                                 partnership={data.data.partner_data}
@@ -102,7 +76,7 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                             userName={user?.name}
                             phone={callData.phone}
                             name={callData.name}
-                            company={'ООО грузчик'}
+                            company={data?.company}
                             companyId={callData.client_id}
                             city={callData.city}
                             partnership={callData.partner_data}
@@ -114,9 +88,6 @@ const NotificationsNew = ({ token, user, partnership_id, role, refetchEvents, se
                     })
                 }
 
-                if (data.action === "disconnect") {
-                    handleCloseToast()
-                }
             }
         }
     }, [channelContactCenter])
