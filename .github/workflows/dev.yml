@@ -16,11 +16,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install dependencies # 3. Устанавливаем зависимости
+      - name: Install dependencies
         run: npm install
         
-      - name: Build frontend # 4. Собираем фронтенд
-        run: npm run build # Команда сборки вашего проекта (например, React, Vue, Angular)
+      - name: Build frontend
+        run: npm run build
         env:
           NODE_ENV: development
           CI: false
@@ -31,8 +31,10 @@ jobs:
           host: ${{ secrets.SERVER_HOST_DEV }}
           username: ${{ secrets.SERVER_USERNAME_DEV }}
           key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
-          source: ".", "!node_modules","!.git", "!.github"
+          source: "."
           target: "/var/www/fastuser/data/www/lk.dev.skilla.ru/"
+          strip_components: 1
+          rm: true
 
       - name: Restart app with PM2
         uses: appleboy/ssh-action@master
