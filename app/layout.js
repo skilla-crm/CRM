@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import { CookiesProvider } from 'next-client-cookies/server';
-import "../globals.scss";
+import "./globals.scss";
 import s from './layout.module.scss';
 //components
 import Menu from "@/components/Menu/Menu";
