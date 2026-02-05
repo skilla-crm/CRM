@@ -44,6 +44,7 @@ export const menuItemAccountan = [
         submenu: [
             { id: 1, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
             { id: 2, name: 'Акты', link: '/act', sublinks: ['act/detail', 'act/create'] },
+            { id: 3, name: 'Авансовые с-ф', link: '/advance', sublinks: ['advance/detail', 'advance/create'] },
         ]
     },
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
@@ -130,7 +131,8 @@ export const menuItem = [
             { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
             { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail', 'act/create'] },
-            { id: 6, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
+            { id: 6, name: 'Авансовые с-ф', link: '/advance', sublinks: ['advance/detail', 'advance/create'] },
+            { id: 7, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
         ]
     },
 
@@ -189,7 +191,8 @@ export const menuItemTest = [
             { id: 3, name: 'Счета', link: '/test/bills', sublinks: ['bills/detail', 'bills/create'] },
             { id: 4, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
             { id: 5, name: 'Акты', link: '/test/act', sublinks: ['act/detail', 'act/create'] },
-            { id: 6, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
+            { id: 6, name: 'Авансовые с-ф', link: '/test/advance', sublinks: ['advance/detail', 'advance/create'] },
+            { id: 7, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
 
         ]
     },
@@ -248,7 +251,7 @@ export const menuItemMainOperator = [
     { id: 1, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
     { id: 12, name: 'Звонки', icon: iconCall, link: '/reports/calls' },
     { id: 7, name: 'Закупки', icon: purchases, link: '/purchases', sublink: 'purchases' },
-/*     { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' }, */
+    /*     { id: 10, name: 'Поддержка', icon: support, link: '/support/chat' }, */
 ]
 
 export const menuItemOperatorTest = [

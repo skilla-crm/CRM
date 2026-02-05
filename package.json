@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prod": "env-cmd -f .env.production next dev",
-    "dev": "env-cmd -f .env.development next dev",
-    "build_dev": "env-cmd -f .env.development next build",
-    "build": "next build",
-    "start": "next start",
+    "prod": "env-cmd -f .env.production next dev --webpack",
+    "dev": "env-cmd -f .env.development next dev --webpack",
+    "build_dev": "env-cmd -f .env.development next build --webpack",
+    "build": "next build --webpack",
+    "start": "next start --webpack",
     "lint": "next lint"
   },
   "dependencies": {

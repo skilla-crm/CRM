@@ -18,13 +18,13 @@ const protectedRoutes = [
 ];
 
 
-export default function middleware(req) {
+export default function proxy(req) {
     const isBlocked = req.cookies.get('is_blocked')
     const token = req.cookies.get('token')
     const partnership_id = req.cookies.get('partnership_id')
     const role = req.cookies.get('role')
 
-    if (!token) {
+   /*  if (!token) {
         return NextResponse.redirect("https://lk.skilla.ru/login");
     }
 
@@ -34,6 +34,6 @@ export default function middleware(req) {
 
     if (isBlocked?.value === '1' && protectedRoutes.some(el => req.nextUrl.pathname.includes(el))) {
         return NextResponse.redirect("https://lk.skilla.ru/new/pay");
-    }
+    } */
 }
 
