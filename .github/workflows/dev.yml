@@ -28,11 +28,14 @@ jobs:
           host: ${{ secrets.SERVER_HOST_DEV }}
           username: ${{ secrets.SERVER_USERNAME_DEV }}
           key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
-          source: ".", "!node_modules", "!.git", "!.github"
+          source: "."
           target: "/var/www/fastuser/data/www/lk.dev.skilla.ru/"
           strip_components: 1
           rm: true
-
+          ignore: |
+            node_modules/
+            git/
+            github/
       - name: Restart app with PM2
         uses: appleboy/ssh-action@master
         with:
