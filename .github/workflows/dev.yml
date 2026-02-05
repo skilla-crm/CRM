@@ -1,31 +1,45 @@
 name: Deploy Fronted CRM dev
+
 on:
   push:
     branches: [ dev ]
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Install & Build
-      run: |
-        npm install
-        npm run build
-    - name: Copy files via SSH
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ secrets.SERVER_HOST_DEV }}
-        username: ${{ secrets.SERVER_USERNAME_DEV }}
-        key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
-        source: ".", "!node_modules"
-        target: "/var/www/fastuser/data/www/lk.dev.skilla.ru/"
-    - name: Restart Application
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd /var/www/fastuser/data/www/lk.dev.skilla.ru/
-          npm install --production
-           
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies # 3. Устанавливаем зависимости
+        run: npm install
+        
+      - name: Build frontend # 4. Собираем фронтенд
+        run: npm run build # Команда сборки вашего проекта (например, React, Vue, Angular)
+        env:
+          NODE_ENV: development
+          CI: false
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST_DEV }}
+          username: ${{ secrets.SERVER_USERNAME_DEV }}
+          key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
+          source: ".", "!node_modules","!.git", "!.github"
+          target: "/var/www/fastuser/data/www/lk.dev.skilla.ru/"
+
+      - name: Restart app with PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST_DEV }}
+          username: ${{ secrets.SERVER_USERNAME_DEV }}
+          key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
+          script: |
+            cd /var/www/fastuser/data/www/lk.dev.skilla.ru/
+            npm install --production
