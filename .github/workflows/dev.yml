@@ -1,0 +1,31 @@
+name: Deploy Fronted CRM dev
+on:
+  push:
+    branches: [ dev ]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST_DEV }}
+          username: ${{ secrets.SERVER_USERNAME_DEV }}
+          key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
+          source: ".", "!node_modules"
+          target: "/var/www/fastuser/data/www/lk.dev.skilla.ru/"
+      - name: Restart Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/fastuser/data/www/lk.dev.skilla.ru/
+            npm install --production
+           
