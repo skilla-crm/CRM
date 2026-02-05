@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST_DEV }}
           username: ${{ secrets.SERVER_USERNAME_DEV }}
           key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
-          source: "."
+          source: ".", "!node_modules", "!.git", "!.github"
           target: "/var/www/fastuser/data/www/lk.dev.skilla.ru/"
           strip_components: 1
           rm: true
@@ -41,4 +41,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
           script: |
             cd /var/www/fastuser/data/www/lk.dev.skilla.ru/
-            npm install --production
+            npm install --production --legacy-peer-deps
