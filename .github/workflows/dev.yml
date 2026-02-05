@@ -42,3 +42,4 @@ jobs:
           script: |
             cd /var/www/fastuser/data/www/lk.dev.skilla.ru/
             npm install --production --legacy-peer-deps
+            sudo supervisorctl restart lk.dev.skilla.ru.next ||  sudo supervisorctl start lk.dev.skilla.ru.next
