@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
     async redirects() {
         return [
             {
@@ -32,6 +33,7 @@ const nextConfig = {
     /*  experimental: {
          nextScriptWorkers: true,
      }, */
+         
 };
 
 

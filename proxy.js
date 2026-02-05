@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 const publicRoutes = ['/login']
 const partnerRoles = ['director', 'accountant', 'supervisor', 'operator']
 
-export default async function middleware(req) {
+export default async function proxy(req) {
     const token = req.cookies.get('token')
     const role = req.cookies.get('role')
     const isBlocked = req.cookies.get('is_blocked')

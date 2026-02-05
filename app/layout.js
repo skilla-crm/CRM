@@ -20,8 +20,6 @@ const inter = Inter({ variable: '--font-inter', subsets: ['cyrillic'], display: 
 
 
 export default async function RootLayout({ children, params }) {
-  console.log(params)
-
 
   return (
     <CookiesProvider>

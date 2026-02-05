@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prod": "env-cmd -f .env.production next dev",
-    "dev": "env-cmd -f .env.development next dev",
-    "build_dev": "env-cmd -f .env.development next build",
-    "start": "next start",
+    "prod": "env-cmd -f .env.production next dev --webpack",
+    "dev": "env-cmd -f .env.development next dev --webpack",
+    "build_dev": "env-cmd -f .env.development next build --webpack",
+    "start": "next start --webpack --webpack",
     "lint": "next lint"
   },
   "dependencies": {
@@ -18,14 +18,14 @@
     "dayjs": "^1.11.13",
     "env-cmd": "^11.0.0",
     "laravel-echo": "^2.2.0",
-    "next": "15.3.1",
+    "next": "^16.1.6",
     "next-client-cookies": "^2.1.0",
     "next-extra": "^0.6.2",
     "pusher-js": "^8.4.0",
-    "react": "^19.0.0",
+    "react": "^19.2.4",
     "react-cookie": "^8.0.1",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^19.0.0",
+    "react-dom": "^19.2.4",
     "react-scrollbars-custom": "^4.1.1",
     "react-toastify": "^11.0.5",
     "sass": "^1.86.3",
@@ -37,6 +37,6 @@
     "@nuxtjs/partytown": "^1.6.0",
     "@svgr/webpack": "^8.1.0",
     "eslint": "^9",
-    "eslint-config-next": "15.3.1"
+    "eslint-config-next": "^16.1.6"
   }
 }
