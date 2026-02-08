@@ -13,7 +13,7 @@ const DynamicModuleContainer = dynamic(() =>
 
 export default async function Dashboard() {
   const cookieStore = await cookies()
-  const token = cookieStore.get('token')
+  const token = cookieStore?.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
   const id = "root_dashboard"
@@ -22,7 +22,11 @@ export default async function Dashboard() {
 
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
 
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_DASHBOARD} srcCss={process.env.REACT_APP_URL_DASHBOARD_CSS} id={id} />
+      <DynamicModuleContainer
+        src={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/js/mainDashboard.js`}
+        srcCss={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/css/mainDashboard.css`}
+        id={id}
+      />
     </div>
 
 

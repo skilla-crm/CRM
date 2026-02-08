@@ -40,3 +40,11 @@ export const newMessageAttention = (token) =>
         .then((res) => {
             return res.data
         });
+
+export async function sendRequest(url, { arg }) {
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(arg),
+        headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json())
+}

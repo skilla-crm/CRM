@@ -22,7 +22,11 @@ export default async function Dashboard() {
 
     <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
 
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_DASHBOARD} srcCss={process.env.REACT_APP_URL_DASHBOARD_CSS} id={id} />
+      <DynamicModuleContainer
+        src={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/js/mainDashboard.js`}
+        srcCss={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/css/mainDashboard.css`}
+        id={id}
+      />
     </div>
 
 

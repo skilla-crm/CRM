@@ -13,7 +13,7 @@ export async function createCookies() {
     cookieStore.set('brand', "5")
     cookieStore.set('is_pro', "1")
     cookieStore.set('is_blocked', "0")
-    cookieStore.set('partnership_id', "17")
+    cookieStore.set('partnership_id', "18")
 }
 
 export async function deleteCookies() {
