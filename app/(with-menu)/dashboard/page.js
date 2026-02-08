@@ -1,6 +1,8 @@
 
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
+//utils
+import { firstUpper } from '@/utils/firstUpper';
 
 export const metadata = {
   title: "Дашборд"
@@ -16,16 +18,16 @@ export default async function Dashboard() {
   const token = cookieStore?.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-  const id = "root_dashboard"
+  const id = "dashboard"
 
   return (
 
-    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+    <div id={`root_${id}`} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
 
       <DynamicModuleContainer
-        src={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/js/mainDashboard.js`}
-        srcCss={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/css/mainDashboard.css`}
-        id={id}
+        src={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_${id}/js/main${firstUpper(id)}.js`}
+        srcCss={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_${id}/css/main${firstUpper(id)}.css`}
+        id={`root_${id}`}
       />
     </div>
 
