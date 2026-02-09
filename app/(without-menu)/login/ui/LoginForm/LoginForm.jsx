@@ -12,24 +12,43 @@ import InputText from '../InputText/InputText';
 import { useState } from 'react';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const LoginForm = ({cookieStore}) => {
+const LoginForm = ({ cookieStore }) => {
     const { trigger, isMutating } = useSWRMutation(`${baseURL}login`, sendRequest)
     const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('');
+    const [passwordValidate, setPasswordValidate] = useState(false)
 
-    const handleLogin = /* async */ () => {
-        Cookies.set('token', '234234', {
-            expires: 365,
-            httpOnly: false, // доступно только для JavaScript
-          });
-      /*  const res = await trigger({ login, password })
-       console.log(res) */
+    const handleLogin = async () => {
+
+        const res = await trigger({ login, password })
+        const data = res.data;
+        const success = res.success;
+        console.log(data)
+        if (success) {
+
+            if(data.is_moderator) {
+                console.log('это модератор')
+                return
+            }
+
+            Cookies.set('token', data.token, {
+                expires: 365,
+                httpOnly: false
+            });
+
+            Cookies.set('role', 'director', {
+                expires: 365,
+                httpOnly: false
+            });
+
+            redirect('/dashboard')
+        }
     }
 
     const getCookie = () => {
         const username = Cookies.get('token');
         console.log(username);
-      };
+    };
 
     /*    isMutating && redirect('/dashboard') */
 
@@ -38,7 +57,7 @@ const LoginForm = ({cookieStore}) => {
             <LoginOverlay />
             <div className={s.form}>
                 <InputText text={login} setText={setLogin} />
-                <InputPassword password={password} setPassword={setPassword} />
+                <InputPassword password={password} setPassword={setPassword} setValidate={setPasswordValidate} />
                 <button onClick={handleLogin}>Войти</button>
                 <button onClick={getCookie}>Вой2222ти</button>
             </div>

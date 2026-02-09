@@ -1,14 +1,18 @@
 'use client'
 import { useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { firstUpperLetter } from "@/utils/firstUpperLetter";
 
 
-export const ModuleContainer = ({ src, srcCss, id }) => {
+export const ModuleContainer = ({ id }) => {
   const router = useRouter();
   const path = usePathname();
   const searchParamsType = useSearchParams().get('type');
   const searchParamsDate = useSearchParams().get('date');
   const version = 160;
+
+  const src = `${process.env.NEXT_PUBLIC_STATIC_URL}/static_${id}/js/main${firstUpperLetter(id)}.js`
+  const srcCss = `${process.env.NEXT_PUBLIC_STATIC_URL}/static_${id}/css/main${firstUpperLetter(id)}.css`
 
 
   useEffect(() => {
@@ -22,44 +26,44 @@ export const ModuleContainer = ({ src, srcCss, id }) => {
       return
     }
 
-      if (path.includes('/orders2/edit')) {
+    if (path.includes('/orders2/edit')) {
       router.push(path)
       return
     }
 
-    if (path.includes('/orders/order_detail/') && id === 'root_order-create') {
+    if (path.includes('/orders/order_detail/') && id === 'order-create') {
       router.push(path)
       return
     }
 
-     if (path.includes('/orders2/order_detail/') && id === 'root_order-create') {
+    if (path.includes('/orders2/order_detail/') && id === 'order-create') {
       router.push(path)
       return
     }
-  
+
     if (path.includes('/orders/repeat/')) {
       router.push(path)
       return
     }
 
-      if (path.includes('/orders2/repeat/')) {
+    if (path.includes('/orders2/repeat/')) {
       router.push(path)
       return
     }
 
 
 
-    if (searchParamsType && id === 'root_order-create') {
+    if (searchParamsType && id === 'order-create') {
       router.push(`${path}?type=preorder&date=${searchParamsDate}`)
       return
     }
 
-    if (searchParamsDate && id === 'root_order-create') {
+    if (searchParamsDate && id === 'order-create') {
       router.push(`${path}?date=${searchParamsDate}`)
       return
     }
 
-    
+
     if (path === '/orders2') {
       router.push(path)
       return
