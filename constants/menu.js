@@ -75,8 +75,9 @@ export const menuItemAccountanTest = [
         icon: sell,
 
         submenu: [
-            { id: 1, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
-            { id: 2, name: 'Акты', link: '/test/act', sublinks: ['act/detail', 'act/create'] },
+            { id: 1, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 2, name: 'Акты', link: '/act', sublinks: ['act/detail', 'act/create'] },
+            { id: 3, name: 'Авансовые с-ф', link: '/advance', sublinks: ['advance/detail', 'advance/create'] },
         ]
     },
     { id: 6, name: 'Покупка', icon: iconDocumentIn, link: '/documents_in' },
@@ -188,9 +189,9 @@ export const menuItemTest = [
         submenu: [
             { id: 1, name: 'Все заказчики', link: '/counterparties', sublinks: ['counterparties/details/', 'counterparties/create/'] },
             { id: 2, name: 'Задолженность', link: '/debts', sublinks: ['/debts/'] },
-            { id: 3, name: 'Счета', link: '/test/bills', sublinks: ['bills/detail', 'bills/create'] },
-            { id: 4, name: 'УПД', link: '/test/upd', sublinks: ['upd/detail', 'upd/create'] },
-            { id: 5, name: 'Акты', link: '/test/act', sublinks: ['act/detail', 'act/create'] },
+            { id: 3, name: 'Счета', link: '/bills', sublinks: ['bills/detail', 'bills/create'] },
+            { id: 4, name: 'УПД', link: '/upd', sublinks: ['upd/detail', 'upd/create'] },
+            { id: 5, name: 'Акты', link: '/act', sublinks: ['act/detail', 'act/create'] },
             { id: 6, name: 'Авансовые с-ф', link: '/advance', sublinks: ['advance/detail', 'advance/create'] },
             { id: 7, name: 'Акты сверок', link: '/reconciliation', sublinks: ['reconciliation/detail', 'reconciliation/create'] },
 
