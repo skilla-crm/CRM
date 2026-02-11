@@ -13,5 +13,5 @@ export async function create() {
     cookieStore.set('brand', "3")
     cookieStore.set('is_pro', "1")
     cookieStore.set('is_blocked', "0")
-    cookieStore.set('partnership_id', "1041")
+    cookieStore.set('partnership_id', "17")
 }
