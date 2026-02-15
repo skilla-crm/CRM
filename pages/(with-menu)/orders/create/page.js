@@ -1,9 +1,8 @@
-
 import { cookies } from 'next/headers'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: "Дашборд"
+  title: "Создание заказа"
 };
 
 const DynamicModuleContainer = dynamic(() =>
@@ -11,24 +10,22 @@ const DynamicModuleContainer = dynamic(() =>
     .then((module) => module.ModuleContainer)
 )
 
-export default async function Dashboard() {
+export default async function Create() {
   const cookieStore = await cookies()
   const token = cookieStore?.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
-  const id = "root_dashboard"
+  const id = "order_create"
 
   return (
 
-    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-
-      <DynamicModuleContainer
-        src={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/js/mainDashboard.js`}
-        srcCss={`${process.env.NEXT_PUBLIC_STATIC_URL}/static_dashboard/css/mainDashboard.css`}
-        id={id}
-      />
+    <div id={`root_${id}`} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+      <DynamicModuleContainer id={id} />
     </div>
 
 
   );
 }
+
+
+

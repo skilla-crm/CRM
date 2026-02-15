@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import { NextFederationPlugin } from '@module-federation/nextjs-mf'; 
+
 const nextConfig = {
 
     async redirects() {
@@ -11,15 +13,6 @@ const nextConfig = {
         ]
     },
 
-  /*   async rewrites() {
-        return [
-            {
-                source: '/orders1',
-                destination: `http://react.skilla.ru/lexa.html`,
-            },
-        ]
-
-    }, */
     reactStrictMode: true,
     webpack(config) {
         config.module.rules.push({
@@ -27,13 +20,28 @@ const nextConfig = {
             use: ['@svgr/webpack'],
         },
         );
+
+           config.plugins.push(
+               new NextFederationPlugin({
+                   name: 'CRM', 
+                   filename: 'static/chunks/remoteEntry.js',
+                   remotes: {
+                    
+                       dashboard: `dashboard@http://localhost:3001/static/chunks/remoteEntry.js`,
+                      
+                   },
+                   shared: {
+                    
+                   },
+                   extraOptions: {
+                       enableImageLoaderFix: true, 
+                       enableUrlLoaderFix: true,    
+                       exposePages: true
+                   },
+               })
+           );
         return config;
     },
-
-    /*  experimental: {
-         nextScriptWorkers: true,
-     }, */
-         
 };
 
 

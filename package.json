@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prod": "env-cmd -f .env.production next dev --webpack",
+    "prod": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev --webpack",
     "dev": "env-cmd -f .env.development next dev --webpack",
     "build_dev": "env-cmd -f .env.development next build --webpack",
     "build": "env-cmd -f .env.production next build --webpack",
@@ -36,9 +36,13 @@
   "devDependencies": {
     "@builder.io/partytown": "^0.10.3",
     "@eslint/eslintrc": "^3",
+    "@module-federation/nextjs-mf": "^8.8.56",
     "@nuxtjs/partytown": "^1.6.0",
     "@svgr/webpack": "^8.1.0",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
-    "eslint-config-next": "^16.1.6"
+    "eslint-config-next": "^16.1.6",
+    "webpack": "^5.105.2",
+    "webpack-cli": "^6.0.1"
   }
 }

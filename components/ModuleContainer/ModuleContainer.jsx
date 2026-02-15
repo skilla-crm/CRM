@@ -107,6 +107,7 @@ export const ModuleContainer = ({ id }) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = `${src}?v=${version}`;
+    script.rel = 'modulepreload'
     script.defer = true;
     const link = document.createElement('link');
     link.href = `${srcCss}?v=${version}`;
