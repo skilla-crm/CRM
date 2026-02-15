@@ -9,6 +9,6 @@ export default async function DocumentsIn() {
   const id = 'documents_in'
 
   return (
-    <Iframe src={src} id={id} />
+  <div>тут будут закупки/покупки</div>
   );
 }

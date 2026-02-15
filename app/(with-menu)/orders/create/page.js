@@ -12,16 +12,16 @@ const DynamicModuleContainer = dynamic(() =>
 )
 
 export default async function Create() {
-  const id = "root_order-create"
+  const id = "order_create"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
   const ispro = cookieStore.get('is_pro')
 
   return (
-    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-      <DynamicModuleContainer src={process.env.REACT_APP_URL_ORDER_CREATE} srcCss={process.env.REACT_APP_URL_ORDER_CREATE_CSS} id={id} />
-    </div>
+    <div id={`root_${id}`} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
+    <DynamicModuleContainer id={id}/>
+  </div>
 
 
   );
