@@ -1,4 +1,4 @@
-import Iframe from '@/components/Iframe/Iframe'
+
 
 export const metadata = {
   title: "Покупка"
