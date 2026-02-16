@@ -1,27 +1,9 @@
-
-import { cookies } from 'next/headers'
-import dynamic from 'next/dynamic'
+import ModuleConnection from '@/components/ModuleConnection/ModuleConnection';
 
 export const metadata = {
-  title: "УПД"
+  title: "УПД",
 };
 
+const Upd = () => <ModuleConnection id={'upd'} />
 
-const DynamicModuleContainer = dynamic(() =>
-  import('@/components/ModuleContainer/ModuleContainer')
-    .then((module) => module.ModuleContainer)
-)
-
-export default async function Upd() {
-  const id = "root_upd"
-  const cookieStore = await cookies()
-  const token = cookieStore.get('token')
-  const role = cookieStore.get('role')
-  const ispro = cookieStore.get('is_pro')
-
-  return (
-    <div id={id} ispro={ispro?.value} role={role?.value} token={`Bearer ${token?.value}`}>
-       <DynamicModuleContainer src={process.env.REACT_APP_URL_UPD} srcCss={process.env.REACT_APP_URL_UPD_CSS} id={id} />
-    </div>
-  );
-}
+export default Upd;

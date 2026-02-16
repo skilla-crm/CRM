@@ -1,30 +1,9 @@
-
-import { cookies } from 'next/headers'
-import dynamic from 'next/dynamic'
+import ModuleConnection from '@/components/ModuleConnection/ModuleConnection';
 
 export const metadata = {
-  title: "Чат"
+  title: "Чат",
 };
 
-const DynamicModuleContainer = dynamic(() =>
-  import('@/components/ModuleContainer/ModuleContainer')
-    .then((module) => module.ModuleContainer)
-)
+const Chat = () => <ModuleConnection id={'chat'} />
 
-export default async function Chat() {
-  const id = "root_chat"
-  const cookieStore = await cookies()
-  const token = cookieStore.get('token')
-  const role = cookieStore.get('role')
-  const ispro = cookieStore.get('is_pro')
-  const partnership_id = cookieStore.get('partnership_id')
-  const data = await fetch(`https://lk.skilla.ru/chatv2/?token_tmp=${token.value}`)
-  const token2 = await data.json()
-
-
-  return (
-    <div id={id} ispro={ispro?.value} role={role?.value} token={token2.token} version={'director'}>
-      <DynamicModuleContainer src={partnership_id.value == 17 ? process.env.REACT_APP_URL_CHAT2 : process.env.REACT_APP_URL_CHAT} srcCss={partnership_id.value == 17 ? process.env.REACT_APP_URL_CHAT2_CSS : process.env.REACT_APP_URL_CHAT_CSS} id={id} />
-    </div>
-  );
-}
+export default Chat;
