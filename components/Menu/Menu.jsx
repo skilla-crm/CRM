@@ -78,7 +78,7 @@ const Menu = ({ setActiveCompanyId }) => {
     const oneCity = oneCityPartnerships.includes(Number(partnership_id));
     let menuIList = [];
 
-   /*  useEffect(() => {
+    /* useEffect(() => {
         create()
     }, []) */
 
