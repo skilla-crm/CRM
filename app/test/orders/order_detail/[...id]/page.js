@@ -12,7 +12,7 @@ const DynamicModuleContainer = dynamic(() =>
 )
 
 export default async function Details() {
-  const id = "root_orders_dir"
+  const id = "root_orders"
   const cookieStore = await cookies()
   const token = cookieStore.get('token')
   const role = cookieStore.get('role')
