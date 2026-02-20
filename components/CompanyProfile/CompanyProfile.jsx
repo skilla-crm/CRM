@@ -1,8 +1,9 @@
+'use client'
 import s from './CompanyProfile.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation'
-import { deleteCookies } from '@/actions';
+import Cookies from 'js-cookie'
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
@@ -63,12 +64,11 @@ const CompanyProfile = ({ open, setOpen, hiddenMenu, hiddenButtonRef, user, comp
     }
 
     const handleLogOut = async () => {
-        await deleteCookies()
+        console.log('удаляем куки')
+        Cookies.remove('token');
 
         redirect('/login')
-        /*  localStorage.clear();
- 
-         redirect('https://lk.skilla.ru/login/logout.php') */
+
     }
 
     const closeModal = (e) => {

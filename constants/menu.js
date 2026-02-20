@@ -74,7 +74,7 @@ export const menuItemSupervisor = [
 export const menuItem = [
     { id: 1, name: 'Дашборд', icon: dashbord, link: '/dashboard' },
     { id: 2, name: 'Заказы', icon: orders, link: '/orders', sublinks: ['order_detail'] },
-    { id: 2, name: 'Проекты', icon: orders, link: '/projects', sublinks: ['detail', 'create'] },
+    { id: 3, name: 'Проекты', icon: orders, link: '/projects', sublinks: ['detail', 'create'] },
     {
         id: 3,
         name: 'Заказчики',

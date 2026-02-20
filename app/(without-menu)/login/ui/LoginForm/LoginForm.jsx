@@ -12,7 +12,7 @@ import InputText from '../InputText/InputText';
 import { useState } from 'react';
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const LoginForm = ({ cookieStore }) => {
+const LoginForm = () => {
     const { trigger, isMutating } = useSWRMutation(`${baseURL}login`, sendRequest)
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +23,6 @@ const LoginForm = ({ cookieStore }) => {
         const res = await trigger({ login, password })
         const data = res.data;
         const success = res.success;
-        console.log(data)
         if (success) {
 
             if(data.is_moderator) {
@@ -44,14 +43,6 @@ const LoginForm = ({ cookieStore }) => {
             redirect('/dashboard')
         }
     }
-
-    const getCookie = () => {
-        const username = Cookies.get('token');
-        console.log(username);
-    };
-
-    /*    isMutating && redirect('/dashboard') */
-
     return (
         <div className={s.root}>
             <LoginOverlay />
@@ -59,7 +50,7 @@ const LoginForm = ({ cookieStore }) => {
                 <InputText text={login} setText={setLogin} />
                 <InputPassword password={password} setPassword={setPassword} setValidate={setPasswordValidate} />
                 <button onClick={handleLogin}>Войти</button>
-                <button onClick={getCookie}>Вой2222ти</button>
+                
             </div>
 
         </div>
